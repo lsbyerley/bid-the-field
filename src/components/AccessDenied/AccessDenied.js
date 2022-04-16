@@ -1,4 +1,3 @@
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { ExclamationCircleIcon } from '@heroicons/react/outline';
 
@@ -14,16 +13,8 @@ const AccessDenied = () => {
           <span>Access denied. You must signin to view this page</span>
         </div>
         <div className='flex-none'>
-          <Link href='/api/auth/signin'>
-            <a
-              className='btn btn-sm'
-              onClick={(e) => {
-                e.preventDefault();
-                signIn();
-              }}
-            >
-              Signin
-            </a>
+          <Link href='/auth/signin'>
+            <a className='btn btn-sm'>Signin</a>
           </Link>
         </div>
       </div>

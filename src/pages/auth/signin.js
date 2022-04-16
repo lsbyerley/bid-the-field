@@ -10,7 +10,10 @@ export default function SignIn({ providers }) {
       <div className='flex items-center justify-center px-8 py-8 mt-4 rounded bg-content bg-base-200'>
         {Object.values(providers).map((provider) => (
           <div key={provider.name}>
-            <button className='btn' onClick={() => signIn(provider.id)}>
+            <button
+              className='btn'
+              onClick={() => signIn(provider.id, { callbackUrl: '/' })}
+            >
               Sign in with {provider.name}
             </button>
           </div>

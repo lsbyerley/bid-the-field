@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 // https://www.masters.com/en_US/scores/feeds/2022/scores.json
 import { supabase } from '../util/supabaseClient';
 
@@ -49,16 +48,8 @@ export default function Home({ auctions = [] }) {
                   <p>{a?.description || '-'}</p>
                   <div className='justify-end card-actions'>
                     {!session && (
-                      <Link href='/api/auth/signin'>
-                        <a
-                          className='btn btn-ghost'
-                          onClick={(e) => {
-                            e.preventDefault();
-                            signIn();
-                          }}
-                        >
-                          Sign In To Bid
-                        </a>
+                      <Link href='/auth/signin'>
+                        <a className='btn btn-ghost'>Sign In To Bid</a>
                       </Link>
                     )}
                     {session && (

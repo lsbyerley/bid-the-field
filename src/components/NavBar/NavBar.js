@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { MenuAlt1Icon } from '@heroicons/react/outline';
 import ThemeSwitch from '../ThemeSwitch';
 
@@ -40,14 +40,7 @@ const NavBar = () => {
         <ThemeSwitch />
         {!sessionLoading && !session && (
           <div>
-            <a
-              href={`/api/auth/signin`}
-              className='ml-4 btn btn-sm'
-              onClick={(e) => {
-                e.preventDefault();
-                signIn();
-              }}
-            >
+            <a href={`/auth/signin`} className='ml-4 btn btn-sm'>
               Sign in
             </a>
           </div>
