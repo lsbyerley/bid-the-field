@@ -1,7 +1,12 @@
 import { getOwnerWinningBids, getPlayerFromBid } from '../../util/auctionUtils';
+import useAsyncReference from '../../util/useAsyncReference';
 
 const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
-  const winningBids = getOwnerWinningBids(bids, session?.user?.email);
+  const asyncBids = useAsyncReference(bids, true);
+  const winningBids = getOwnerWinningBids(
+    asyncBids.current,
+    session?.user?.email
+  );
   const totalBidAmount = winningBids.reduce(
     (previousValue, currentValue) => previousValue + currentValue.amount,
     0

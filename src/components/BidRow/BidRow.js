@@ -1,5 +1,6 @@
 import { CashIcon } from '@heroicons/react/outline';
 import { getPlayerHighestBid } from '../../util/auctionUtils';
+import useAsyncReference from '../../util/useAsyncReference';
 
 const BidRow = ({
   player = {},
@@ -7,7 +8,8 @@ const BidRow = ({
   openBidModal = () => {},
   biddingDisabled = false,
 }) => {
-  const highestBid = getPlayerHighestBid(bids, player.id);
+  const asyncBids = useAsyncReference(bids, true);
+  const highestBid = getPlayerHighestBid(asyncBids.current, player.id);
 
   return (
     <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-200'>
