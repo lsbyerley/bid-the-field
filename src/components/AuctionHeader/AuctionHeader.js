@@ -46,12 +46,12 @@ const AuctionHeader = ({ auction, auctionOver }) => {
       <div className='card bg-base-200'>
         <div className='relative card-body'>
           {auctionOver && (
-            <div class='badge badge-error badge-outline absolute top-5 right-5'>
-              Complete
+            <div className='absolute badge badge-error badge-outline top-5 right-5'>
+              Bidding Over
             </div>
           )}
           {!auctionOver && (
-            <div class='badge badge-success badge-outline absolute top-5 right-5'>
+            <div className='absolute badge badge-success badge-outline top-5 right-5'>
               In Progress
             </div>
           )}

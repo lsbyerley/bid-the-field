@@ -21,7 +21,9 @@ const NavBar = () => {
             className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52'
           >
             <li>
-              <a>About</a>
+              <Link href='/about'>
+                <a>About</a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -32,7 +34,9 @@ const NavBar = () => {
       <div className='hidden navbar-center lg:flex'>
         <ul className='p-0 menu menu-horizontal'>
           <li>
-            <a>About</a>
+            <Link href='/about'>
+              <a>About</a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -40,9 +44,9 @@ const NavBar = () => {
         <ThemeSwitch />
         {!sessionLoading && !session && (
           <div>
-            <a href={`/auth/signin`} className='ml-4 btn btn-sm'>
-              Sign in
-            </a>
+            <Link href='/auth/signin'>
+              <a className='ml-4 btn btn-sm'>Sign in</a>
+            </Link>
           </div>
         )}
         {!sessionLoading && session && (
@@ -59,11 +63,12 @@ const NavBar = () => {
               tabIndex='0'
               className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52'
             >
-              <li className='disabled'>
-                <span className=''>{session.user.email}</span>
+              <li className='menu-title'>
+                <div>{session?.user?.email || 'no email'}</div>
               </li>
               <li>
                 <a
+                  className=' active:bg-gray-500'
                   href={`/api/auth/signout`}
                   onClick={(e) => {
                     e.preventDefault();
