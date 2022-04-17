@@ -56,3 +56,7 @@ export const getPlayerFromBid = (playersData, playerId) => {
   );
   return `${player?.first_name} ${player?.last_name}`;
 };
+
+export const isAuctionOver = (auction) => {
+  return new Date(auction?.end_date) < new Date();
+};

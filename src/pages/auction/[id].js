@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../util/supabaseClient';
 import playersData from '../../util/masters-2022.json';
 import { useIntervalWhen } from 'rooks';
+import { isAuctionOver } from '../../util/auctionUtils';
+import useAsyncReference from '../../util/useAsyncReference';
 
 // Components
 import Layout from '../../components/Layout';
@@ -51,15 +53,21 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
   const sessionLoading = sessionStatus === 'loading';
   const [isOpen, setIsOpen] = useState(false);
   const [activeBidPlayer, setActiveBidPlayer] = useState();
-  const [bids, setBids] = useState(bidsData);
+  const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useState(auctionData);
-  const [auctionOver, setAuctionOver] = useState(() => {
-    return new Date(auction?.end_date) < new Date();
-  });
+  const [auctionOver, setAuctionOver] = useState(() =>
+    isAuctionOver(auctionData)
+  );
 
   useIntervalWhen(
     () => {
-      console.log('LOG: interval check auction time left');
+      console.log(
+        'LOG: interval check auction time left',
+        isAuctionOver(auction)
+      );
+      if (isAuctionOver(auction)) {
+        setAuctionOver(true);
+      }
     },
     10000,
     !auctionOver,
@@ -68,23 +76,19 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
 
   useEffect(() => setMounted(true), []);
 
+  const handleUpdateBids = (payload) => {
+    if (payload?.eventType === 'INSERT') {
+      const newBids = [...bids.current, payload.new];
+      setBids(newBids);
+    }
+  };
+
   useEffect(() => {
     const bidsSubscription = supabase
-      .from(`Bids:auction_id=eq.${auction.id}`)
-      .on('*', (payload) => {
-        console.log('LOG: bids change!', payload?.eventType, payload);
-        if (payload?.eventType === 'INSERT') {
-          console.log('LOG: bid inserted', payload);
-          setBids([...bids, payload.new]);
-        }
-        if (payload?.eventType === 'UPDATE') {
-          const index = bids.indexOf(payload?.new?.id);
-          console.log('LOG: bids updated', index, payload);
-        }
-        if (payload?.eventType === 'DELETE') {
-          const index = bids.indexOf(payload?.new?.id);
-          console.log('LOG: bids deleted', index, payload);
-        }
+      .from(`Bids:auction_id=eq.${auction?.id}`)
+      .on('INSERT', (payload) => {
+        console.log('LOG: bid inserted', payload);
+        handleUpdateBids(payload);
       })
       .subscribe();
 
@@ -93,10 +97,12 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
 
   useEffect(() => {
     const auctionUpdateSubscription = supabase
-      .from(`Auctions:id=eq.${auction.id}`)
+      .from(`Auctions:id=eq.${auction?.id}`)
       .on('UPDATE', (payload) => {
-        console.log('LOG: auction updated', payload);
         setAuction({ ...auction, ...payload.new });
+        const isAuctionOver =
+          new Date(payload?.new?.end_date) < new Date() || false;
+        setAuctionOver(isAuctionOver);
       })
       .subscribe();
 
@@ -141,7 +147,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
   if (!auction) {
     return (
       <Layout>
-        <p>Auction Not Found. Check the id and try again</p>
+        <p className='py-6 text-center'>
+          Auction Not Found. Check the ID and try again
+        </p>
       </Layout>
     );
   }
@@ -153,7 +161,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
         <div className='lg:col-start-3 lg:col-span-1'>
           <OwnerWinningBids
-            bids={bids}
+            bids={bids.current}
             session={session}
             playersData={playersData}
           />
@@ -169,7 +177,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
                   key={p.id}
                   player={p}
                   openBidModal={openBidModal}
-                  bids={bids}
+                  bids={bids.current}
                   biddingDisabled={isOpen || auctionOver}
                 />
               );
