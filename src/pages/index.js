@@ -48,16 +48,16 @@ export default function Home({ auctions = [] }) {
               <div key={a.id} className='shadow card bg-base-200'>
                 <div className='card-body'>
                   <h2 className='card-title'>{a.name}</h2>
-                  <p>{a?.description || '-'}</p>
-                  <div className='justify-end card-actions'>
+                  <p className='py-6'>{a?.description || '-'}</p>
+                  <div className='justify-center card-actions'>
                     {!sessionLoading && !session && (
                       <Link href='/auth/signin'>
-                        <a className='btn btn-ghost'>Sign In To Bid</a>
+                        <a className='btn btn-outline btn-sm'>Sign In To Bid</a>
                       </Link>
                     )}
                     {!sessionLoading && session && (
                       <Link href={`/auction/${a.id}`}>
-                        <a className='btn btn-ghost'>View Auction</a>
+                        <a className='btn btn-outline btn-sm'>View Auction</a>
                       </Link>
                     )}
                   </div>
