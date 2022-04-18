@@ -42,7 +42,7 @@ export default function Home({ auctions = [] }) {
         </div>
       </div>
       <div className='max-w-2xl pt-8 pb-24 mx-auto sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <div className='grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4 md:gap-y-0 lg:gap-x-8'>
+        <div className='grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8'>
           {auctions.map((a) => {
             return (
               <div key={a.id} className='shadow card bg-base-200'>
