@@ -7,8 +7,6 @@ const NavBar = () => {
   const { data: session, status: sessionStatus } = useSession();
   const sessionLoading = sessionStatus === 'loading';
 
-  console.log('LOG: session', session);
-
   return (
     <div className='navbar bg-base-200'>
       <div className='navbar-start'>
@@ -35,7 +33,7 @@ const NavBar = () => {
         <ul className='p-0 menu menu-horizontal'>
           <li>
             <Link href='/about'>
-              <a>About</a>
+              <a className='btn btn-ghost'>About</a>
             </Link>
           </li>
         </ul>
