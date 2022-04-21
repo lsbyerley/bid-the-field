@@ -1,3 +1,5 @@
+import { differenceInSeconds, differenceInMinutes, isAfter } from 'date-fns';
+
 // Given an array of bids and a user, returns the user's winning bids
 export const getOwnerWinningBids = (bids, sessionUserEmail) => {
   const ownerBidsSorted = bids
@@ -58,5 +60,15 @@ export const getPlayerFromBid = (playersData, playerId) => {
 };
 
 export const isAuctionOver = (auction) => {
-  return new Date(auction?.end_date) < new Date();
+  return isAfter(new Date(), new Date(auction?.end_date));
+};
+
+export const secondsLeft = (auction) => {
+  const diff = differenceInSeconds(new Date(auction?.end_date), new Date());
+  return diff > -1 ? diff : 0;
+};
+
+export const minutesLeft = (auction) => {
+  const diff = differenceInMinutes(new Date(auction?.end_date), new Date());
+  return diff > -1 ? diff : 0;
 };

@@ -1,10 +1,15 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../util/supabaseClient';
 import playersData from '../../util/masters-2022.json';
-import { useIntervalWhen } from 'rooks';
-import { isAuctionOver } from '../../util/auctionUtils';
+import { useIntervalWhen, useCountdown } from 'rooks';
+import {
+  isAuctionOver,
+  secondsLeft,
+  minutesLeft,
+} from '../../util/auctionUtils';
 import useAsyncReference from '../../util/useAsyncReference';
+import { addMinutes } from 'date-fns';
 
 // Components
 import Layout from '../../components/Layout';
@@ -18,7 +23,7 @@ import BidRow from '../../components/BidRow';
 
 //TODO's
 // 1. order player list by highest bids
-// 2. update auctionOver when auction data changes from sub
+// 2. if player highest bid updates when modal open, update the required bid amount in the modal
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -54,18 +59,20 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeBidPlayer, setActiveBidPlayer] = useState();
   const [bids, setBids] = useAsyncReference(bidsData);
-  const [auction, setAuction] = useState(auctionData);
+  const [auction, setAuction] = useAsyncReference(auctionData);
   const [auctionOver, setAuctionOver] = useState(() =>
     isAuctionOver(auctionData)
   );
 
+  useEffect(() => setMounted(true), []);
+
   useIntervalWhen(
     () => {
       console.log(
-        'LOG: interval check auction time left',
-        isAuctionOver(auction)
+        'LOG: interval check auction is over',
+        isAuctionOver(auction.current)
       );
-      if (isAuctionOver(auction)) {
+      if (!auctionOver && isAuctionOver(auction.current)) {
         setAuctionOver(true);
       }
     },
@@ -74,20 +81,37 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
     true
   );
 
-  useEffect(() => setMounted(true), []);
-
   const handleUpdateBids = (payload) => {
     if (payload?.eventType === 'INSERT') {
-      const newBids = [...bids.current, payload.new];
-      setBids(newBids);
+      const updatedBids = [...bids.current, payload.new];
+      setBids(updatedBids);
     }
+    if (payload?.eventType === 'UPDATE') {
+      const updatedBids = [...bids.current];
+      const indexOfBidToUpdate = bids.current.findIndex(
+        (b) => b.id === payload.new.id
+      );
+      updatedBids.splice(indexOfBidToUpdate, 1, payload.new);
+      setBids(updatedBids);
+    }
+  };
+
+  const handleUpdateAuction = (payload) => {
+    setAuction({ ...auction.current, ...payload.new });
+    const isAuctionOver =
+      new Date(payload?.new?.end_date) < new Date() || false;
+    setAuctionOver(isAuctionOver);
   };
 
   useEffect(() => {
     const bidsSubscription = supabase
-      .from(`Bids:auction_id=eq.${auction?.id}`)
+      .from(`Bids:auction_id=eq.${auction.current?.id}`)
       .on('INSERT', (payload) => {
-        console.log('LOG: bid inserted', payload);
+        console.log('LOG: bids changed', payload);
+        handleUpdateBids(payload);
+      })
+      .on('UPDATE', (payload) => {
+        console.log('LOG: bids changed', payload);
         handleUpdateBids(payload);
       })
       .subscribe();
@@ -97,22 +121,32 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
 
   useEffect(() => {
     const auctionUpdateSubscription = supabase
-      .from(`Auctions:id=eq.${auction?.id}`)
+      .from(`Auctions:id=eq.${auction.current?.id}`)
       .on('UPDATE', (payload) => {
-        setAuction({ ...auction, ...payload.new });
-        const isAuctionOver =
-          new Date(payload?.new?.end_date) < new Date() || false;
-        setAuctionOver(isAuctionOver);
+        console.log('LOG: auction updated', payload);
+        handleUpdateAuction(payload);
       })
       .subscribe();
 
     return () => supabase.removeSubscription(auctionUpdateSubscription);
   }, []);
 
+  const updateAuctionEndTime = async (minutesToAdd) => {
+    const dateAddThreeMinutes = addMinutes(
+      new Date(auction.current?.end_date),
+      minutesToAdd
+    );
+    const { data: updateAuctionData, error: updateAuctionError } =
+      await supabase
+        .from(`Auctions`)
+        .update({ end_date: dateAddThreeMinutes })
+        .match({ id: auction.current?.id });
+  };
+
   const onSubmitBid = async (bidAmount, playerId) => {
     const { data, error } = await supabase.from('Bids').insert([
       {
-        auction_id: auction.id,
+        auction_id: auction.current?.id,
         player_id: playerId,
         amount: bidAmount,
         owner: session.user.email,
@@ -123,11 +157,18 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
       console.log('LOG: error submitting bid', error.message);
     }
 
+    const auctionSecondsLeft = secondsLeft(auction.current);
+    if (!error && auctionSecondsLeft > 0 && auctionSecondsLeft <= 180) {
+      console.log('LOG: add 3 minutes to auction', auctionSecondsLeft);
+      updateAuctionEndTime(3);
+    }
+
     setActiveBidPlayer();
     console.log('LOG: data', data);
   };
 
   const openBidModal = ({ player, highestBid }) => {
+    // TODO: #2 above
     setActiveBidPlayer({ ...player, highestBid });
     setIsOpen(true);
   };
@@ -144,7 +185,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
     );
   }
 
-  if (!auction) {
+  if (!auction.current) {
     return (
       <Layout>
         <p className='py-6 text-center'>
@@ -156,7 +197,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
 
   return (
     <Layout>
-      <AuctionHeader auction={auction} auctionOver={auctionOver} />
+      <AuctionHeader auction={auction.current} auctionOver={auctionOver} />
 
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
         <div className='lg:col-start-3 lg:col-span-1'>

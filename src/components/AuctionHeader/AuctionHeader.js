@@ -1,7 +1,10 @@
 import { ScaleIcon, CalendarIcon } from '@heroicons/react/outline';
 import { format } from 'date-fns';
+import useAsyncReference from '../../util/useAsyncReference';
 
 const AuctionHeader = ({ auction, auctionOver }) => {
+  const asyncAuction = useAsyncReference(auction, true);
+
   return (
     <div className='grid max-w-6xl grid-cols-1 gap-5 px-2 mx-auto mt-8 lg:max-w-7xl sm:grid-cols-2 lg:grid-cols-3'>
       <div className='card bg-base-200'>
@@ -14,7 +17,9 @@ const AuctionHeader = ({ auction, auctionOver }) => {
               <dl>
                 <dt className='text-sm font-medium truncate'>Auction</dt>
                 <dd>
-                  <div className='text-lg font-medium'>{auction.name}</div>
+                  <div className='text-lg font-medium'>
+                    {asyncAuction.current.name}
+                  </div>
                 </dd>
               </dl>
             </div>
@@ -35,7 +40,10 @@ const AuctionHeader = ({ auction, auctionOver }) => {
                 <dt className='text-sm font-medium truncate'>Start Date</dt>
                 <dd>
                   <div className='text-lg font-medium '>
-                    {format(new Date(auction.start_date), 'LLL d, h:mm aaa')}
+                    {format(
+                      new Date(asyncAuction.current.start_date),
+                      'LLL d, h:mm aaa'
+                    )}
                   </div>
                 </dd>
               </dl>
@@ -67,7 +75,10 @@ const AuctionHeader = ({ auction, auctionOver }) => {
                 <dt className='text-sm font-medium truncate'>End Date</dt>
                 <dd>
                   <div className='text-lg font-medium '>
-                    {format(new Date(auction.end_date), 'LLL d, h:mm aaa')}
+                    {format(
+                      new Date(asyncAuction.current.end_date),
+                      'LLL d, h:mm aaa'
+                    )}
                   </div>
                 </dd>
               </dl>
