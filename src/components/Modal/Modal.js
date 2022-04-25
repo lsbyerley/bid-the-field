@@ -51,7 +51,7 @@ const Modal = () => {
               >
                 ✕
               </label>
-              <div className='pt-4 prose'>
+              <div className='mt-8 prose'>
                 <ReactMarkdown
                   children={modalContent}
                   remarkPlugins={[remarkGfm]}

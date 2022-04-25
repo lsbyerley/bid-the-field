@@ -39,6 +39,11 @@ export const getOwnerWinningBids = (bids, sessionUserEmail) => {
   return winningBids;
 };
 
+// Given an array of bids, returns the total amount of bids filtered by players
+export const getTotalPot = (bids) => {
+  return 'TBD';
+};
+
 // given an array of bids, returns the highest bid for the player id
 export const getPlayerHighestBid = (auctionBids, id) => {
   let highestBid = {};

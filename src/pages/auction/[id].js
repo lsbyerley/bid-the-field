@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../util/supabaseClient';
 import playersData from '../../util/masters-2022.json';
 import { useIntervalWhen, useCountdown } from 'rooks';
-import {
-  isAuctionOver,
-  secondsLeft,
-  minutesLeft,
-} from '../../util/auctionUtils';
+import { isAuctionOver, secondsLeft } from '../../util/auctionUtils';
 import useAsyncReference from '../../util/useAsyncReference';
 import { addMinutes } from 'date-fns';
 
@@ -16,6 +13,7 @@ import Layout from '../../components/Layout';
 import AccessDenied from '../../components/AccessDenied';
 import BidModal from '../../components/BidModal';
 import OwnerWinningBids from '../../components/OwnerWinningBids';
+import TotalPot from '../../components/TotalPot';
 import AuctionHeader from '../../components/AuctionHeader';
 import BidRow from '../../components/BidRow';
 
@@ -197,10 +195,14 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
 
   return (
     <Layout>
+      <Head>
+        <title>Bid The Field - {auction.current.name}</title>
+      </Head>
       <AuctionHeader auction={auction.current} auctionOver={auctionOver} />
 
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
         <div className='lg:col-start-3 lg:col-span-1'>
+          <TotalPot bids={bids.current} />
           <OwnerWinningBids
             bids={bids.current}
             session={session}
