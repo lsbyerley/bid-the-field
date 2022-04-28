@@ -58,6 +58,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
   const [activeBidPlayer, setActiveBidPlayer] = useState();
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
+  const [bidSubmitLoading, setBidSubmitLoading] = useState(false);
   const [auctionOver, setAuctionOver] = useState(() =>
     isAuctionOver(auctionData)
   );
@@ -142,6 +143,8 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
   };
 
   const onSubmitBid = async (bidAmount, playerId) => {
+    setBidSubmitLoading(true);
+
     const { data, error } = await supabase.from('Bids').insert([
       {
         auction_id: auction.current?.id,
@@ -161,6 +164,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
       updateAuctionEndTime(3);
     }
 
+    setBidSubmitLoading(false);
     setActiveBidPlayer();
     console.log('LOG: data', data);
   };
@@ -221,7 +225,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
                   player={p}
                   openBidModal={openBidModal}
                   bids={bids.current}
-                  biddingDisabled={isOpen || auctionOver}
+                  biddingDisabled={isOpen || bidSubmitLoading || auctionOver}
                 />
               );
             })}
