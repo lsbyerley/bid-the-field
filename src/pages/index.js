@@ -2,8 +2,10 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-// https://www.masters.com/en_US/scores/feeds/2022/scores.json
 import { supabase } from '../util/supabaseClient';
+import { isAuctionOver } from '../util/auctionUtils';
+
+// https://www.masters.com/en_US/scores/feeds/2022/scores.json
 
 export async function getServerSideProps({ params }) {
   const { data, error } = await supabase.from('Auctions').select();
@@ -44,8 +46,19 @@ export default function Home({ auctions = [] }) {
       <div className='max-w-2xl pt-8 pb-24 mx-auto sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
         <div className='grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8'>
           {auctions.map((a) => {
+            const auctionOver = isAuctionOver(a);
             return (
-              <div key={a.id} className='shadow card bg-base-200'>
+              <div key={a.id} className='relative shadow card bg-base-200'>
+                {auctionOver && (
+                  <div className='absolute badge badge-error badge-outline top-5 right-5'>
+                    Bidding Over
+                  </div>
+                )}
+                {!auctionOver && (
+                  <div className='absolute badge badge-success badge-outline top-5 right-5'>
+                    In Progress
+                  </div>
+                )}
                 <div className='card-body'>
                   <h2 className='card-title'>{a.name}</h2>
                   <p className='py-6'>{a?.description || '-'}</p>

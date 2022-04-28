@@ -15,7 +15,9 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
   return (
     <div className='card card-compact bg-base-200'>
       <div className='card-body'>
-        <div className='card-title'>Your Winning Bids ${totalBidAmount}</div>
+        <div className='card-title'>
+          Your Winning Bids: ${Number.parseFloat(totalBidAmount).toFixed(2)}
+        </div>
         <ul role='list' className='divide-y divide-gray-200'>
           {winningBids.map((bid) => (
             <li key={bid.id} className='px-2 py-3'>
