@@ -3,7 +3,7 @@ import useAsyncReference from '../../util/useAsyncReference';
 
 const TotalPot = ({ bids = [] }) => {
   const asyncBids = useAsyncReference(bids, true);
-  const totalPotAmount = getTotalPot(asyncBids);
+  const totalPotAmount = getTotalPot(asyncBids.current);
 
   return (
     <div className='mb-5 card card-compact bg-base-200'>

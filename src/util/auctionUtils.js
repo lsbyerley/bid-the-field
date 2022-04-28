@@ -1,9 +1,9 @@
 import { differenceInSeconds, differenceInMinutes, isAfter } from 'date-fns';
 
-// Given an array of bids and a user, returns the user's winning bids
-export const getOwnerWinningBids = (bids, sessionUserEmail) => {
+// Given an array of bids and a user id, returns the user's winning bids
+export const getOwnerWinningBids = (bids, userId) => {
   const ownerBidsSorted = bids
-    .filter((b) => b.owner === sessionUserEmail)
+    .filter((b) => b.owner === userId)
     .sort((a, b) => b.amount - a.amount);
 
   const ownerBidsSortedUnique = ownerBidsSorted.reduce((filter, current) => {
@@ -22,9 +22,7 @@ export const getOwnerWinningBids = (bids, sessionUserEmail) => {
   ownerBidsSortedUnique.forEach((ob) => {
     const bidPlayerId = ob.player_id;
     const otherBidsOnPlayerSorted = bids
-      .filter(
-        (b) => b.owner !== sessionUserEmail && b.player_id === bidPlayerId
-      )
+      .filter((b) => b.owner !== userId && b.player_id === bidPlayerId)
       .sort((a, b) => b.amount - a.amount);
 
     if (otherBidsOnPlayerSorted.length) {
@@ -39,9 +37,28 @@ export const getOwnerWinningBids = (bids, sessionUserEmail) => {
   return winningBids;
 };
 
+export const getAllOwnerBids = (bids, userId) => {
+  return 'TBD';
+};
+
 // Given an array of bids, returns the total amount of bids filtered by players
 export const getTotalPot = (bids) => {
-  return 'TBD';
+  let total = 0;
+
+  // sort the bids
+  const sortedBids = bids.sort((a, b) => b.amount - a.amount);
+
+  // add bids to map by player id
+  const bidsByPlayer = sortedBids.reduce((r, v, i, a, k = v.length) => {
+    return (r[v.player_id] || (r[v.player_id] = [])).push(v), r;
+  }, {});
+
+  // first obj player id by key in array is highest bid
+  Object.keys(bidsByPlayer).forEach((k) => {
+    total += bidsByPlayer[k][0].amount;
+  });
+
+  return total;
 };
 
 // given an array of bids, returns the highest bid for the player id
