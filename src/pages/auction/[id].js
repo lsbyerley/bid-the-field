@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../util/supabaseClient';
-import playersData from '../../util/masters-2022.json';
 import { useIntervalWhen, useCountdown } from 'rooks';
 import { isAuctionOver, secondsLeft } from '../../util/auctionUtils';
 import useAsyncReference from '../../util/useAsyncReference';
@@ -42,15 +41,23 @@ export async function getServerSideProps({ params }) {
     console.log('LOG: bidsError', bidsError.message);
   }
 
+  let players;
+  try {
+    players = await import(`../../util/${auction.data_filename}s.json`);
+  } catch (err) {
+    console.log('LOG: error importing players json file');
+  }
+
   return {
     props: {
       auctionData: auction,
       bidsData: bids,
+      playersData: players?.data || [],
     },
   };
 }
 
-const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
+const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [mounted, setMounted] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
   const sessionLoading = sessionStatus === 'loading';
@@ -205,7 +212,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
       <AuctionHeader auction={auction.current} auctionOver={auctionOver} />
 
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
-        <div className='lg:col-start-3 lg:col-span-1'>
+        <div className='space-y-6 lg:col-start-3 lg:col-span-1'>
           <TotalPot bids={bids.current} />
           <OwnerWinningBids
             bids={bids.current}
@@ -218,7 +225,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
             role='list'
             className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'
           >
-            {playersData.players.map((p) => {
+            {playersData.map((p) => {
               return (
                 <BidRow
                   key={p.id}
@@ -230,6 +237,30 @@ const AuctionPage = ({ auctionData = {}, bidsData = [] }) => {
               );
             })}
           </ul>
+          {!playersData ||
+            (playersData.length === 0 && (
+              <div className='shadow-lg alert'>
+                <div>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='flex-shrink-0 w-6 h-6 stroke-current'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
+                    />
+                  </svg>
+                  <span>
+                    Players data was not found for this auction! File:{' '}
+                    {auctionData?.data_filename}
+                  </span>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <BidModal
