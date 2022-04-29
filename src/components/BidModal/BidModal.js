@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 const BidModal = ({
@@ -6,13 +6,11 @@ const BidModal = ({
   setIsOpen = () => {},
   onSubmit = () => {},
   player = null,
+  highestBid = null,
 }) => {
   const [formInput, updateFormInput] = useState({
     bidAmount: '',
   });
-  /*let [isOpen, setIsOpen] = useState(true);
-  let submitBidButtonRef = useRef(null);*/
-
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -31,11 +29,8 @@ const BidModal = ({
       alert(`Bid must be higher than $0`);
       return;
     }
-    if (
-      player?.highestBid?.amount &&
-      Number(bidAmount) <= Number(player.highestBid.amount)
-    ) {
-      alert(`Bid must be higher than $${player.highestBid.amount}`);
+    if (highestBid?.amount && Number(bidAmount) <= Number(highestBid.amount)) {
+      alert(`Bid must be higher than $${highestBid.amount}`);
       return;
     }
     onSubmit(bidAmount, player.id);
@@ -81,7 +76,7 @@ const BidModal = ({
                     htmlFor='bidAmount'
                     className='block text-sm font-medium'
                   >
-                    Enter Bid more than ${player?.highestBid?.amount || 0}
+                    Enter Bid more than ${highestBid?.amount || 0}
                   </label>
                   <div className='relative mt-1 rounded-md shadow-sm'>
                     <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
@@ -114,12 +109,7 @@ const BidModal = ({
               </div>
 
               <div className='modal-action'>
-                <button
-                  //ref={buttonRef || null}
-                  type='button'
-                  className='btn'
-                  onClick={submitBid}
-                >
+                <button type='button' className='btn' onClick={submitBid}>
                   Place Bid
                 </button>
               </div>
