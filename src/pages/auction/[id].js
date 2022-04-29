@@ -10,7 +10,6 @@ import { addMinutes } from 'date-fns';
 // Components
 import Layout from '../../components/Layout';
 import AccessDenied from '../../components/AccessDenied';
-import BidModal from '../../components/BidModal';
 import OwnerWinningBids from '../../components/OwnerWinningBids';
 import TotalPot from '../../components/TotalPot';
 import AuctionHeader from '../../components/AuctionHeader';
@@ -20,7 +19,6 @@ import BidRow from '../../components/BidRow';
 
 //TODO's
 // 1. order player list by highest bids
-// 2. if player highest bid updates when modal open, update the required bid amount in the modal
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -61,8 +59,6 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [mounted, setMounted] = useState(false);
   const { data: session, status: sessionStatus } = useSession();
   const sessionLoading = sessionStatus === 'loading';
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeBidPlayer, setActiveBidPlayer] = useState();
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [bidSubmitLoading, setBidSubmitLoading] = useState(false);
@@ -172,14 +168,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
     }
 
     setBidSubmitLoading(false);
-    setActiveBidPlayer();
     console.log('LOG: data', data);
-  };
-
-  const openBidModal = ({ player, highestBid }) => {
-    // TODO: #2 above
-    setActiveBidPlayer({ ...player, highestBid });
-    setIsOpen(true);
   };
 
   // When rendering client side don't display anything until loading is complete
@@ -230,9 +219,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
                 <BidRow
                   key={p.id}
                   player={p}
-                  openBidModal={openBidModal}
                   bids={bids.current}
-                  biddingDisabled={isOpen || bidSubmitLoading || auctionOver}
+                  biddingDisabled={bidSubmitLoading || auctionOver}
+                  onSubmitBid={onSubmitBid}
                 />
               );
             })}
@@ -263,12 +252,6 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
             ))}
         </div>
       </div>
-      <BidModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onSubmit={onSubmitBid}
-        player={activeBidPlayer}
-      />
     </Layout>
   );
 };

@@ -1,15 +1,22 @@
+import { useState } from 'react';
 import { CashIcon } from '@heroicons/react/outline';
 import { getPlayerHighestBid } from '../../util/auctionUtils';
 import useAsyncReference from '../../util/useAsyncReference';
+import BidModal from '../BidModal';
 
 const BidRow = ({
   player = {},
   bids = [],
-  openBidModal = () => {},
   biddingDisabled = false,
+  onSubmitBid = () => {},
 }) => {
   const asyncBids = useAsyncReference(bids, true);
   const highestBid = getPlayerHighestBid(asyncBids.current, player.id);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openBidModal = () => {
+    setIsOpen(true);
+  };
 
   return (
     <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-200'>
@@ -28,14 +35,21 @@ const BidRow = ({
       </div>
       <div className='flex items-center justify-center px-2 pb-2'>
         <button
-          disabled={biddingDisabled}
-          onClick={() => openBidModal({ player, highestBid })}
+          disabled={biddingDisabled || isOpen}
+          onClick={() => openBidModal()}
           className='btn btn-xs btn-ghost'
         >
           <CashIcon className='w-5 h-5 ' aria-hidden='true' />
           <span className='ml-3'>Bid</span>
         </button>
       </div>
+      <BidModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onSubmit={onSubmitBid}
+        player={player}
+        highestBid={highestBid}
+      />
     </li>
   );
 };

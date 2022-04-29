@@ -46,7 +46,7 @@ const Modal = () => {
             <div className='modal-box'>
               <label
                 for='my-modal-3'
-                class='btn btn-sm btn-circle absolute right-2 top-2'
+                className='absolute btn btn-sm btn-circle right-2 top-2'
                 onClick={() => closeModal()}
               >
                 ✕
