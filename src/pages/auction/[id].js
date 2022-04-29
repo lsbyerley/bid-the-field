@@ -43,7 +43,7 @@ export async function getServerSideProps({ params }) {
 
   let players;
   try {
-    players = await import(`../../util/${auction.data_filename}s.json`);
+    players = await import(`../../util/${auction.data_filename}.json`);
   } catch (err) {
     console.log('LOG: error importing players json file');
   }
