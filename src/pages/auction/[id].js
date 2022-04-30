@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../util/supabaseClient';
-import { useIntervalWhen, useCountdown } from 'rooks';
+import { useIntervalWhen } from 'rooks';
 import { isAuctionOver, secondsLeft } from '../../util/auctionUtils';
 import useAsyncReference from '../../util/useAsyncReference';
 import { addMinutes } from 'date-fns';
@@ -14,6 +14,11 @@ import OwnerWinningBids from '../../components/OwnerWinningBids';
 import TotalPot from '../../components/TotalPot';
 import AuctionHeader from '../../components/AuctionHeader';
 import BidRow from '../../components/BidRow';
+import Countdown from '../../components/Countdown';
+
+// CONSTANTS
+const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
+const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
 //https://github.com/nextauthjs/next-auth-example/blob/main/pages/server.tsx
 
@@ -65,6 +70,11 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [auctionOver, setAuctionOver] = useState(() =>
     isAuctionOver(auctionData)
   );
+  const [intervalCheck, setIntervalCheck] = useState(() => {
+    return secondsLeft(auction.current) <= 60
+      ? QUICK_INTERVAL_CHECK
+      : DEFAULT_INTERVAL_CHECK;
+  });
 
   useEffect(() => setMounted(true), []);
 
@@ -74,11 +84,18 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         'LOG: interval check auction is over',
         isAuctionOver(auction.current)
       );
+      // if 60 seconds or less are left in auction, set interval check to quick interval
+      if (
+        intervalCheck === DEFAULT_INTERVAL_CHECK &&
+        secondsLeft(auction.current) <= 60
+      ) {
+        setIntervalCheck(QUICK_INTERVAL_CHECK);
+      }
       if (!auctionOver && isAuctionOver(auction.current)) {
         setAuctionOver(true);
       }
     },
-    10000,
+    intervalCheck,
     !auctionOver,
     true
   );
@@ -146,6 +163,10 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   };
 
   const onSubmitBid = async (bidAmount, playerId) => {
+    if (auctionOver) {
+      alert('Too late! auction has ended!');
+      return;
+    }
     setBidSubmitLoading(true);
 
     const { data, error } = await supabase.from('Bids').insert([
@@ -203,6 +224,10 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
         <div className='space-y-6 lg:col-start-3 lg:col-span-1'>
           <TotalPot bids={bids.current} />
+          <Countdown
+            auction={auction.current}
+            setAuctionOver={setAuctionOver}
+          />
           <OwnerWinningBids
             bids={bids.current}
             session={session}

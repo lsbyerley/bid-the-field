@@ -15,25 +15,30 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
   return (
     <div className='card card-compact bg-base-200'>
       <div className='card-body'>
-        <div className='card-title'>
-          Your Winning Bids: ${Number.parseFloat(totalBidAmount).toFixed(2)}
-        </div>
-        <ul role='list' className='divide-y divide-gray-200'>
-          {winningBids.map((bid) => (
-            <li key={bid.id} className='px-2 py-3'>
-              <span>${bid.amount}</span>
-              <span className='ml-4'>
-                {getPlayerFromBid(playersData, bid.player_id)}
-              </span>
-            </li>
-          ))}
-          {!winningBids ||
-            (!winningBids?.length && (
-              <li className='px-2 py-3'>
-                <span className='text-red-500'>no winning bids</span>
-              </li>
+        <div>
+          <h3 className='text-lg font-medium '>
+            Winning Bids: ${Number.parseFloat(totalBidAmount).toFixed(2)}
+          </h3>
+          <dl className='mt-2 border-t border-b border-gray-200 divide-y divide-gray-200'>
+            {winningBids.map((bid) => (
+              <div
+                key={bid.id}
+                className='flex justify-between py-3 text-sm font-medium'
+              >
+                <dt className=''>
+                  {getPlayerFromBid(playersData, bid.player_id)}
+                </dt>
+                <dd className=''>${bid.amount}</dd>
+              </div>
             ))}
-        </ul>
+            {!winningBids ||
+              (!winningBids?.length && (
+                <div className='px-2 py-3'>
+                  <dt className='text-warning'>no winning bids</dt>
+                </div>
+              ))}
+          </dl>
+        </div>
       </div>
     </div>
   );

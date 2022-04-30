@@ -8,9 +8,12 @@ const TotalPot = ({ bids = [] }) => {
   return (
     <div className='mb-5 card card-compact bg-base-200'>
       <div className='card-body'>
-        <div className='card-title'>
-          Total Pot: ${Number.parseFloat(totalPotAmount).toFixed(2)}
-        </div>
+        <h3 className='text-lg font-medium'>
+          <span className='mr-2 text-sm'>Total Pot:</span>
+          <span className='text-success'>
+            ${Number.parseFloat(totalPotAmount).toFixed(2)}
+          </span>
+        </h3>
       </div>
     </div>
   );
