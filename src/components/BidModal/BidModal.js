@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 const BidModal = ({
@@ -8,6 +8,7 @@ const BidModal = ({
   player = null,
   highestBid = null,
 }) => {
+  let bidInputRef = useRef(null);
   const [formInput, updateFormInput] = useState({
     bidAmount: '',
   });
@@ -43,6 +44,7 @@ const BidModal = ({
         as='div'
         className='fixed inset-0 z-10 overflow-y-auto'
         onClose={closeModal}
+        initialFocus={bidInputRef}
       >
         <div className='modal modal-open'>
           <Transition.Child
@@ -83,6 +85,7 @@ const BidModal = ({
                       <span className='text-gray-500 sm:text-sm'>$</span>
                     </div>
                     <input
+                      ref={bidInputRef}
                       type='text'
                       name='bidAmount'
                       id='bidAmount'

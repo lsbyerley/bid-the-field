@@ -19,7 +19,9 @@ const BidRow = ({
   };
 
   const submitTenPercentBid = (player, highestBid) => {
-    const tenPercentIncrease = highestBid.amount * 0.1 + highestBid.amount;
+    const tenPercentIncrease = parseFloat(
+      highestBid.amount * 0.1 + highestBid.amount
+    ).toFixed(2);
     onSubmitBid(tenPercentIncrease, player.id);
   };
 

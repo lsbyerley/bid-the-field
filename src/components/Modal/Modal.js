@@ -1,10 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useAppContext } from '../../AppContext';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 const Modal = () => {
+  let closeButtonRef = useRef(null);
   const { modalOpen, setModalOpen, modalContent, setModalContent } =
     useAppContext();
 
@@ -20,6 +21,7 @@ const Modal = () => {
         as='div'
         className='fixed inset-0 z-10 overflow-y-auto'
         onClose={closeModal}
+        initialFocus={closeButtonRef}
       >
         <div className='modal modal-open'>
           <Transition.Child
@@ -44,13 +46,13 @@ const Modal = () => {
             leaveTo='opacity-0 scale-95'
           >
             <div className='modal-box'>
-              <label
-                for='my-modal-3'
+              <button
                 className='absolute btn btn-sm btn-circle right-2 top-2'
                 onClick={() => closeModal()}
+                ref={closeButtonRef}
               >
                 ✕
-              </label>
+              </button>
               <div className='mt-8 prose'>
                 <ReactMarkdown
                   children={modalContent}
