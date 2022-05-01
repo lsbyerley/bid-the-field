@@ -1,5 +1,5 @@
-import { getTotalPot } from '../../util/auctionUtils';
-import useAsyncReference from '../../util/useAsyncReference';
+import { getTotalPot } from '../../lib/auctionUtils';
+import useAsyncReference from '../../lib/useAsyncReference';
 
 const TotalPot = ({ bids = [] }) => {
   const asyncBids = useAsyncReference(bids, true);

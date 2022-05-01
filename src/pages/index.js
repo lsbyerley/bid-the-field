@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import { supabase } from '../util/supabaseClient';
-import { isAuctionOver } from '../util/auctionUtils';
+import { supabase } from '../lib/supabaseClient';
+import { isAuctionOver } from '../lib/auctionUtils';
 
 // https://www.masters.com/en_US/scores/feeds/2022/scores.json
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
-import { supabase } from '../../util/supabaseClient';
+import { supabase } from '../../lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
-import { isAuctionOver, secondsLeft } from '../../util/auctionUtils';
-import useAsyncReference from '../../util/useAsyncReference';
+import { isAuctionOver, secondsLeft } from '../../lib/auctionUtils';
+import useAsyncReference from '../../lib/useAsyncReference';
 import { addMinutes } from 'date-fns';
 
 // Components
@@ -46,7 +46,7 @@ export async function getServerSideProps({ params }) {
 
   let players;
   try {
-    players = await import(`../../util/${auction.data_filename}.json`);
+    players = await import(`../../lib/${auction.data_filename}.json`);
   } catch (err) {
     console.log('LOG: error importing players json file');
   }

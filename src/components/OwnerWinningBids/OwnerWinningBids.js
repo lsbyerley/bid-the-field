@@ -1,5 +1,5 @@
-import { getOwnerWinningBids, getPlayerFromBid } from '../../util/auctionUtils';
-import useAsyncReference from '../../util/useAsyncReference';
+import { getOwnerWinningBids, getPlayerFromBid } from '../../lib/auctionUtils';
+import useAsyncReference from '../../lib/useAsyncReference';
 
 const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
   const asyncBids = useAsyncReference(bids, true);

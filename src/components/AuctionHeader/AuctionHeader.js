@@ -1,6 +1,6 @@
 import { ScaleIcon, CalendarIcon } from '@heroicons/react/outline';
 import { format } from 'date-fns';
-import useAsyncReference from '../../util/useAsyncReference';
+import useAsyncReference from '../../lib/useAsyncReference';
 import { useAppContext } from '../../AppContext';
 
 const AuctionHeader = ({ auction, auctionOver }) => {
