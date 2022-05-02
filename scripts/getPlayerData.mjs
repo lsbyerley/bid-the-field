@@ -1,4 +1,6 @@
+import fetch from 'node-fetch';
 // -----------------------------------------
+// JSON structure { data: [playerObject] }
 // Player Object Structure
 // {
 //  id
@@ -45,7 +47,11 @@ export const fetchOpenChamp = async (url) => {
   const players = playerRes.items
     .filter((p) => p.isPlaying)
     .map((p) => {
-      return { ...p };
+      return {
+        id: p.id,
+        first_name: p.firstName,
+        last_name: p.lastName,
+      };
     });
   return players;
 };
@@ -61,7 +67,41 @@ export const fetchPlayersChamp = async (url) => {
   const players = playerRes.Tournament.Players.filter(
     (p) => p.isAlternate === 'No'
   ).map((p) => {
-    return { ...p };
+    return {
+      id: p.TournamentPlayerId,
+      first_name: p.PlayerFirstName,
+      last_name: p.PlayerLastName,
+    };
   });
   return players;
 };
+
+// -----------------------------------------
+// The PGA Championship Player Pool
+// found here: https://www.pgatour.com/tournaments/pga-championship.html
+// maybe here?: https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2022&format=json
+// last year https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2021&format=json
+// -----------------------------------------
+
+export const fetchPgaChamp = async (url) => {
+  const playerRes = await fetch(url).then((res) => res.json());
+  const players = playerRes.Tournament.Players.filter(
+    (p) => p.isAlternate === 'No'
+  ).map((p) => {
+    return {
+      id: p.TournamentPlayerId,
+      first_name: p.PlayerFirstName,
+      last_name: p.PlayerLastName,
+    };
+  });
+  return players;
+};
+
+const run = async () => {
+  const players = await fetchPgaChamp(
+    'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2021&format=json'
+  );
+
+  console.log(JSON.stringify(players));
+};
+run();
