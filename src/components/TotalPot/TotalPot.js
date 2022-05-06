@@ -6,7 +6,7 @@ const TotalPot = ({ bids = [] }) => {
   const totalPotAmount = getTotalPot(asyncBids.current);
 
   return (
-    <div className='mb-5 card card-compact bg-base-200'>
+    <div className='mb-5 rounded-lg card card-compact bg-base-200'>
       <div className='card-body'>
         <h3 className='text-lg font-medium'>
           <span className='mr-2 text-sm'>Total Pot:</span>

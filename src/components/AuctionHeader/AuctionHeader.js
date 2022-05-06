@@ -19,7 +19,7 @@ const AuctionHeader = ({ auction, auctionOver }) => {
 
   return (
     <div className='grid max-w-6xl grid-cols-1 gap-5 px-2 mx-auto mt-8 lg:max-w-7xl sm:grid-cols-2 lg:grid-cols-4'>
-      <div className='card compact bg-base-200'>
+      <div className='rounded-lg card compact bg-base-200'>
         <div className='justify-center card-body'>
           <div className='flex items-center'>
             <div className='flex-shrink-0'>
@@ -36,7 +36,7 @@ const AuctionHeader = ({ auction, auctionOver }) => {
           </div>
         </div>
       </div>
-      <div className='card compact bg-base-200'>
+      <div className='rounded-lg card compact bg-base-200'>
         <div className='justify-center card-body'>
           <div className='flex items-center'>
             <div className='flex-shrink-0'>
@@ -61,7 +61,7 @@ const AuctionHeader = ({ auction, auctionOver }) => {
           </div>
         </div>
       </div>
-      <div className='card compact bg-base-200'>
+      <div className='rounded-lg card compact bg-base-200'>
         <div className='relative justify-center card-body'>
           {auctionOver && (
             <div className='absolute badge badge-error badge-outline top-5 right-5'>
@@ -96,7 +96,7 @@ const AuctionHeader = ({ auction, auctionOver }) => {
           </div>
         </div>
       </div>
-      <div className='card compact bg-base-200'>
+      <div className='rounded-lg card compact bg-base-200'>
         <div className='justify-center card-body'>
           {auction.rules && (
             <button
