@@ -83,6 +83,12 @@ export const isAuctionOver = (auction) => {
   return isAfter(new Date(), new Date(auction?.end_date));
 };
 
+export const shouldDisableField = (auction) => {
+  // Return true when there are 30 minutes or less in the auction
+  const diff = differenceInMinutes(new Date(auction?.end_date), new Date());
+  return diff <= 29;
+};
+
 export const secondsLeft = (auction) => {
   const diff = differenceInSeconds(new Date(auction?.end_date), new Date());
   return diff > -1 ? diff : 0;

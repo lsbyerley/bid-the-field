@@ -3,7 +3,11 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
-import { isAuctionOver, secondsLeft } from '../../lib/auctionUtils';
+import {
+  isAuctionOver,
+  secondsLeft,
+  shouldDisableField,
+} from '../../lib/auctionUtils';
 import useAsyncReference from '../../lib/useAsyncReference';
 import { addMinutes } from 'date-fns';
 
@@ -70,6 +74,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [auctionOver, setAuctionOver] = useState(() =>
     isAuctionOver(auctionData)
   );
+  const [disableTheField, setDisableTheField] = useState(() =>
+    shouldDisableField(auctionData)
+  );
   const [intervalCheck, setIntervalCheck] = useState(() => {
     return secondsLeft(auction.current) <= 60
       ? QUICK_INTERVAL_CHECK
@@ -93,6 +100,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       }
       if (!auctionOver && isAuctionOver(auction.current)) {
         setAuctionOver(true);
+      }
+      if (!disableTheField && shouldDisableField(auctionData)) {
+        setDisableTheField(true);
       }
     },
     intervalCheck,
@@ -246,6 +256,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
                   player={p}
                   bids={bids.current}
                   biddingDisabled={bidSubmitLoading || auctionOver}
+                  disableTheField={disableTheField}
                   onSubmitBid={onSubmitBid}
                 />
               );

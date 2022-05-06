@@ -8,6 +8,7 @@ const BidRow = ({
   player = {},
   bids = [],
   biddingDisabled = false,
+  disableTheField = false,
   onSubmitBid = () => {},
 }) => {
   const asyncBids = useAsyncReference(bids, true);
@@ -25,6 +26,9 @@ const BidRow = ({
     onSubmitBid(tenPercentIncrease, player.id);
   };
 
+  const isPartOfField =
+    disableTheField && !highestBid?.amount && player?.id !== '999999';
+
   return (
     <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-200'>
       <div className='flex md:block'>
@@ -40,21 +44,28 @@ const BidRow = ({
           </div>
         </div>
         <div className='block p-3 md:flex md:justify-around md:items-center'>
-          <button
-            disabled={biddingDisabled || isOpen}
-            onClick={() => openBidModal()}
-            className='w-full btn btn-xs btn-ghost md:w-auto'
-          >
-            <CashIcon className='w-5 h-5 ' aria-hidden='true' />
-            <span className='ml-1'>Bid</span>
-          </button>
-          <button
-            disabled={biddingDisabled || isOpen || !highestBid?.amount}
-            onClick={() => submitTenPercentBid(player, highestBid)}
-            className='w-full btn btn-xs btn-ghost md:w-auto'
-          >
-            <span className='ml-1'>Bid 10%</span>
-          </button>
+          {isPartOfField && (
+            <div className='badge badge-warning badge-outline'>Field</div>
+          )}
+          {!isPartOfField && (
+            <>
+              <button
+                disabled={biddingDisabled || isOpen}
+                onClick={() => openBidModal()}
+                className='w-full btn btn-xs btn-ghost md:w-auto'
+              >
+                <CashIcon className='w-5 h-5 ' aria-hidden='true' />
+                <span className='ml-1'>Bid</span>
+              </button>
+              <button
+                disabled={biddingDisabled || isOpen || !highestBid?.amount}
+                onClick={() => submitTenPercentBid(player, highestBid)}
+                className='w-full btn btn-xs btn-ghost md:w-auto'
+              >
+                <span className='ml-1'>Bid 10%</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
       <BidModal
