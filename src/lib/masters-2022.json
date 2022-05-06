@@ -1,1005 +1,648 @@
 {
   "data": [
     {
-      "last_name": "Ancer",
-      "first_name": "Abraham",
       "id": "45526",
-      "countryName": "Mexico",
-      "countryCode": "MEX",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
+      "first_name": "Abraham",
+      "last_name": "Ancer",
+      "full_name": "Abraham Ancer",
+      "short_name": "A. Ancer"
     },
     {
-      "last_name": "Berger",
-      "first_name": "Daniel",
       "id": "40026",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "first_name": "Daniel",
+      "last_name": "Berger",
+      "full_name": "Daniel Berger",
+      "short_name": "D. Berger"
     },
     {
-      "last_name": "Bezuidenhout",
-      "first_name": "Christiaan",
       "id": "45522",
-      "countryName": "South Africa",
-      "countryCode": "RSA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
+      "first_name": "Christiaan",
+      "last_name": "Bezuidenhout",
+      "full_name": "Christiaan Bezuidenhout",
+      "short_name": "C. Bezuidenhout"
     },
     {
-      "last_name": "Burns",
-      "first_name": "Sam",
       "id": "47504",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
+      "first_name": "Sam",
+      "last_name": "Burns",
+      "full_name": "Sam Burns",
+      "short_name": "S. Burns"
     },
     {
-      "last_name": "Cantlay",
-      "first_name": "Patrick",
       "id": "35450",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Casey",
-      "first_name": "Paul",
-      "id": "25364",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Champ",
-      "first_name": "Cameron",
-      "id": "52372",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Cink",
-      "first_name": "Stewart",
-      "id": "20229",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Conners",
-      "first_name": "Corey",
-      "id": "39997",
-      "countryName": "Canada",
-      "countryCode": "CAN",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Couples",
-      "first_name": "Fred",
-      "id": "1226",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Davis",
-      "first_name": "Cameron",
-      "id": "45157",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "DeChambeau",
-      "first_name": "Bryson",
-      "id": "47959",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Finau",
-      "first_name": "Tony",
-      "id": "29725",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Fitzpatrick",
-      "first_name": "Matthew",
-      "id": "40098",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Fleetwood",
-      "first_name": "Tommy",
-      "id": "30911",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "García",
-      "first_name": "Sergio",
-      "id": "21209",
-      "countryName": "Spain",
-      "countryCode": "ESP",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Glover",
-      "first_name": "Lucas",
-      "id": "25900",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Gooch",
-      "first_name": "Talor",
-      "id": "46402",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Greaser",
-      "first_name": "Austin",
-      "id": "61143",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "1",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Hagestad",
-      "first_name": "Stewart",
-      "id": "51586",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "1",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Harman",
-      "first_name": "Brian",
-      "id": "27644",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Harrington",
-      "first_name": "Padraig",
-      "id": "20766",
-      "countryName": "Ireland",
-      "countryCode": "IRL",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Hatton",
-      "first_name": "Tyrrell",
-      "id": "34363",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Henley",
-      "first_name": "Russell",
-      "id": "34098",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Herbert",
-      "first_name": "Lucas",
-      "id": "39058",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Higgo",
-      "first_name": "Garrick",
-      "id": "54421",
-      "countryName": "South Africa",
-      "countryCode": "RSA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Higgs",
-      "first_name": "Harry",
-      "id": "33597",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Hoge",
-      "first_name": "Tom",
-      "id": "35532",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Homa",
-      "first_name": "Max",
-      "id": "39977",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Horschel",
-      "first_name": "Billy",
-      "id": "29420",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Hovland",
-      "first_name": "Viktor",
-      "id": "46717",
-      "countryName": "Norway",
-      "countryCode": "NOR",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Hughes",
-      "first_name": "Mackenzie",
-      "id": "35506",
-      "countryName": "Canada",
-      "countryCode": "CAN",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Im",
-      "first_name": "Sungjae",
-      "id": "39971",
-      "countryName": "Korea",
-      "countryCode": "KOR",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Jarvis",
-      "first_name": "Aaron",
-      "id": "61560",
-      "countryName": "Cayman Islands",
-      "countryCode": "CAY",
-      "Amateur": "1",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Johnson",
-      "first_name": "Dustin",
-      "id": "30925",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Johnson",
-      "first_name": "Zach",
-      "id": "24024",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Kanaya",
-      "first_name": "Takumi",
-      "id": "47917",
-      "countryName": "Japan",
-      "countryCode": "JPN",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Kim",
-      "first_name": "Si Woo",
-      "id": "37455",
-      "countryName": "Korea",
-      "countryCode": "KOR",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Kisner",
-      "first_name": "Kevin",
-      "id": "29478",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Koepka",
-      "first_name": "Brooks",
-      "id": "36689",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Kokrak",
-      "first_name": "Jason",
-      "id": "30944",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Langer",
-      "first_name": "Bernhard",
-      "id": "1666",
-      "countryName": "Germany",
-      "countryCode": "GER",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Lee",
-      "first_name": "Kyoung-Hoon",
-      "id": "32791",
-      "countryName": "Korea",
-      "countryCode": "KOR",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Lee",
-      "first_name": "Min Woo",
-      "id": "37378",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Leishman",
-      "first_name": "Marc",
-      "id": "26851",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "List",
-      "first_name": "Luke",
-      "id": "27129",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Lowry",
-      "first_name": "Shane",
-      "id": "33204",
-      "countryName": "Ireland",
-      "countryCode": "IRL",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Lyle",
-      "first_name": "Sandy",
-      "id": "1717",
-      "countryName": "Scotland",
-      "countryCode": "SCO",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "MacIntyre",
-      "first_name": "Robert",
-      "id": "52215",
-      "countryName": "Scotland",
-      "countryCode": "SCO",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Matsuyama",
-      "first_name": "Hideki",
-      "id": "32839",
-      "countryName": "Japan",
-      "countryCode": "JPN",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "McIlroy",
-      "first_name": "Rory",
-      "id": "28237",
-      "countryName": "N. Ireland",
-      "countryCode": "NIR",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Migliozzi",
-      "first_name": "Guido",
-      "id": "39834",
-      "countryName": "Italy",
-      "countryCode": "ITA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Mize",
-      "first_name": "Larry",
-      "id": "1823",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Molinari",
-      "first_name": "Francesco",
-      "id": "25198",
-      "countryName": "Italy",
-      "countryCode": "ITA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Morikawa",
-      "first_name": "Collin",
-      "id": "50525",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Na",
-      "first_name": "Kevin",
-      "id": "25396",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Nakajima",
-      "first_name": "Keita",
-      "id": "49228",
-      "countryName": "Japan",
-      "countryCode": "JPN",
-      "Amateur": "1",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Niemann",
-      "first_name": "Joaquin",
-      "id": "45486",
-      "countryName": "Chile",
-      "countryCode": "CHI",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Olazábal",
-      "first_name": "José María",
-      "id": "6373",
-      "countryName": "Spain",
-      "countryCode": "ESP",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Oosthuizen",
-      "first_name": "Louis",
-      "id": "26329",
-      "countryName": "South Africa",
-      "countryCode": "RSA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Palmer",
-      "first_name": "Ryan",
-      "id": "23320",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Pieters",
-      "first_name": "Thomas",
-      "id": "33293",
-      "countryName": "Belgium",
-      "countryCode": "BEL",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Piot",
-      "first_name": "James",
-      "id": "59164",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "1",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Power",
-      "first_name": "Séamus",
-      "id": "28252",
-      "countryName": "Ireland",
-      "countryCode": "IRL",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Rahm",
-      "first_name": "Jon",
-      "id": "46970",
-      "countryName": "Spain",
-      "countryCode": "ESP",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Reed",
       "first_name": "Patrick",
-      "id": "34360",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
+      "last_name": "Cantlay",
+      "full_name": "Patrick Cantlay",
+      "short_name": "P. Cantlay"
     },
     {
-      "last_name": "Rose",
-      "first_name": "Justin",
-      "id": "22405",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "id": "25364",
+      "first_name": "Paul",
+      "last_name": "Casey",
+      "full_name": "Paul Casey",
+      "short_name": "P. Casey"
     },
     {
-      "last_name": "Schauffele",
-      "first_name": "Xander",
-      "id": "48081",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Scheffler",
-      "first_name": "Scottie",
-      "id": "46046",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Schwartzel",
-      "first_name": "Charl",
-      "id": "26331",
-      "countryName": "South Africa",
-      "countryCode": "RSA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Scott",
-      "first_name": "Adam",
-      "id": "24502",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Shepherd",
-      "first_name": "Laird",
-      "id": "60371",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "1",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Simpson",
-      "first_name": "Webb",
-      "id": "29221",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Singh",
-      "first_name": "Vijay",
-      "id": "6567",
-      "countryName": "Fiji",
-      "countryCode": "FIJ",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Smith",
+      "id": "52372",
       "first_name": "Cameron",
-      "id": "35891",
-      "countryName": "Australia",
-      "countryCode": "AUS",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "last_name": "Champ",
+      "full_name": "Cameron Champ",
+      "short_name": "C. Champ"
     },
     {
-      "last_name": "Spaun",
-      "first_name": "J.J.",
-      "id": "39324",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
+      "id": "20229",
+      "first_name": "Stewart",
+      "last_name": "Cink",
+      "full_name": "Stewart Cink",
+      "short_name": "S. Cink"
     },
     {
-      "last_name": "Spieth",
-      "first_name": "Jordan",
-      "id": "34046",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
+      "id": "39997",
+      "first_name": "Corey",
+      "last_name": "Conners",
+      "full_name": "Corey Conners",
+      "short_name": "C. Conners"
     },
     {
-      "last_name": "Straka",
-      "first_name": "Sepp",
-      "id": "49960",
-      "countryName": "Austria",
-      "countryCode": "AUT",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
+      "id": "1226",
+      "first_name": "Fred",
+      "last_name": "Couples",
+      "full_name": "Fred Couples",
+      "short_name": "F. Couples"
     },
     {
-      "last_name": "Swafford",
-      "first_name": "Hudson",
-      "id": "34264",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "id": "45157",
+      "first_name": "Cameron",
+      "last_name": "Davis",
+      "full_name": "Cameron Davis",
+      "short_name": "C. Davis"
     },
     {
-      "last_name": "Thomas",
-      "first_name": "Justin",
-      "id": "33448",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "id": "47959",
+      "first_name": "Bryson",
+      "last_name": "DeChambeau",
+      "full_name": "Bryson DeChambeau",
+      "short_name": "B. DeChambeau"
     },
     {
-      "last_name": "van Rooyen",
-      "first_name": "Erik",
-      "id": "40006",
-      "countryName": "South Africa",
-      "countryCode": "RSA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
+      "id": "29725",
+      "first_name": "Tony",
+      "last_name": "Finau",
+      "full_name": "Tony Finau",
+      "short_name": "T. Finau"
     },
     {
-      "last_name": "Varner III",
-      "first_name": "Harold",
-      "id": "37189",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
-    },
-    {
-      "last_name": "Watson",
-      "first_name": "Bubba",
-      "id": "25804",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Weir",
-      "first_name": "Mike",
-      "id": "10423",
-      "countryName": "Canada",
-      "countryCode": "CAN",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Westwood",
-      "first_name": "Lee",
-      "id": "20396",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
-    },
-    {
-      "last_name": "Willett",
-      "first_name": "Danny",
-      "id": "32139",
-      "countryName": "England",
-      "countryCode": "ENG",
-      "Amateur": "",
-      "First": "",
-      "Past": "1",
-      "image": true
-    },
-    {
-      "last_name": "Wolff",
+      "id": "40098",
       "first_name": "Matthew",
-      "id": "56278",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
+      "last_name": "Fitzpatrick",
+      "full_name": "Matthew Fitzpatrick",
+      "short_name": "M. Fitzpatrick"
     },
     {
-      "last_name": "Woodland",
-      "first_name": "Gary",
-      "id": "31323",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "id": "30911",
+      "first_name": "Tommy",
+      "last_name": "Fleetwood",
+      "full_name": "Tommy Fleetwood",
+      "short_name": "T. Fleetwood"
     },
     {
-      "last_name": "Woods",
-      "first_name": "Tiger",
-      "id": "8793",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": true
+      "id": "21209",
+      "first_name": "Sergio",
+      "last_name": "García",
+      "full_name": "Sergio García",
+      "short_name": "S. García"
     },
     {
-      "last_name": "Young",
+      "id": "25900",
+      "first_name": "Lucas",
+      "last_name": "Glover",
+      "full_name": "Lucas Glover",
+      "short_name": "L. Glover"
+    },
+    {
+      "id": "46402",
+      "first_name": "Talor",
+      "last_name": "Gooch",
+      "full_name": "Talor Gooch",
+      "short_name": "T. Gooch"
+    },
+    {
+      "id": "61143",
+      "first_name": "Austin",
+      "last_name": "Greaser",
+      "full_name": "Austin Greaser",
+      "short_name": "A. Greaser"
+    },
+    {
+      "id": "51586",
+      "first_name": "Stewart",
+      "last_name": "Hagestad",
+      "full_name": "Stewart Hagestad",
+      "short_name": "S. Hagestad"
+    },
+    {
+      "id": "27644",
+      "first_name": "Brian",
+      "last_name": "Harman",
+      "full_name": "Brian Harman",
+      "short_name": "B. Harman"
+    },
+    {
+      "id": "20766",
+      "first_name": "Padraig",
+      "last_name": "Harrington",
+      "full_name": "Padraig Harrington",
+      "short_name": "P. Harrington"
+    },
+    {
+      "id": "34363",
+      "first_name": "Tyrrell",
+      "last_name": "Hatton",
+      "full_name": "Tyrrell Hatton",
+      "short_name": "T. Hatton"
+    },
+    {
+      "id": "34098",
+      "first_name": "Russell",
+      "last_name": "Henley",
+      "full_name": "Russell Henley",
+      "short_name": "R. Henley"
+    },
+    {
+      "id": "39058",
+      "first_name": "Lucas",
+      "last_name": "Herbert",
+      "full_name": "Lucas Herbert",
+      "short_name": "L. Herbert"
+    },
+    {
+      "id": "54421",
+      "first_name": "Garrick",
+      "last_name": "Higgo",
+      "full_name": "Garrick Higgo",
+      "short_name": "G. Higgo"
+    },
+    {
+      "id": "33597",
+      "first_name": "Harry",
+      "last_name": "Higgs",
+      "full_name": "Harry Higgs",
+      "short_name": "H. Higgs"
+    },
+    {
+      "id": "35532",
+      "first_name": "Tom",
+      "last_name": "Hoge",
+      "full_name": "Tom Hoge",
+      "short_name": "T. Hoge"
+    },
+    {
+      "id": "39977",
+      "first_name": "Max",
+      "last_name": "Homa",
+      "full_name": "Max Homa",
+      "short_name": "M. Homa"
+    },
+    {
+      "id": "29420",
+      "first_name": "Billy",
+      "last_name": "Horschel",
+      "full_name": "Billy Horschel",
+      "short_name": "B. Horschel"
+    },
+    {
+      "id": "46717",
+      "first_name": "Viktor",
+      "last_name": "Hovland",
+      "full_name": "Viktor Hovland",
+      "short_name": "V. Hovland"
+    },
+    {
+      "id": "35506",
+      "first_name": "Mackenzie",
+      "last_name": "Hughes",
+      "full_name": "Mackenzie Hughes",
+      "short_name": "M. Hughes"
+    },
+    {
+      "id": "39971",
+      "first_name": "Sungjae",
+      "last_name": "Im",
+      "full_name": "Sungjae Im",
+      "short_name": "S. Im"
+    },
+    {
+      "id": "61560",
+      "first_name": "Aaron",
+      "last_name": "Jarvis",
+      "full_name": "Aaron Jarvis",
+      "short_name": "A. Jarvis"
+    },
+    {
+      "id": "30925",
+      "first_name": "Dustin",
+      "last_name": "Johnson",
+      "full_name": "Dustin Johnson",
+      "short_name": "D. Johnson"
+    },
+    {
+      "id": "24024",
+      "first_name": "Zach",
+      "last_name": "Johnson",
+      "full_name": "Zach Johnson",
+      "short_name": "Z. Johnson"
+    },
+    {
+      "id": "47917",
+      "first_name": "Takumi",
+      "last_name": "Kanaya",
+      "full_name": "Takumi Kanaya",
+      "short_name": "T. Kanaya"
+    },
+    {
+      "id": "37455",
+      "first_name": "Si Woo",
+      "last_name": "Kim",
+      "full_name": "Si Woo Kim",
+      "short_name": "S. Kim"
+    },
+    {
+      "id": "29478",
+      "first_name": "Kevin",
+      "last_name": "Kisner",
+      "full_name": "Kevin Kisner",
+      "short_name": "K. Kisner"
+    },
+    {
+      "id": "36689",
+      "first_name": "Brooks",
+      "last_name": "Koepka",
+      "full_name": "Brooks Koepka",
+      "short_name": "B. Koepka"
+    },
+    {
+      "id": "30944",
+      "first_name": "Jason",
+      "last_name": "Kokrak",
+      "full_name": "Jason Kokrak",
+      "short_name": "J. Kokrak"
+    },
+    {
+      "id": "1666",
+      "first_name": "Bernhard",
+      "last_name": "Langer",
+      "full_name": "Bernhard Langer",
+      "short_name": "B. Langer"
+    },
+    {
+      "id": "32791",
+      "first_name": "Kyoung-Hoon",
+      "last_name": "Lee",
+      "full_name": "Kyoung-Hoon Lee",
+      "short_name": "K. Lee"
+    },
+    {
+      "id": "37378",
+      "first_name": "Min Woo",
+      "last_name": "Lee",
+      "full_name": "Min Woo Lee",
+      "short_name": "M. Lee"
+    },
+    {
+      "id": "26851",
+      "first_name": "Marc",
+      "last_name": "Leishman",
+      "full_name": "Marc Leishman",
+      "short_name": "M. Leishman"
+    },
+    {
+      "id": "27129",
+      "first_name": "Luke",
+      "last_name": "List",
+      "full_name": "Luke List",
+      "short_name": "L. List"
+    },
+    {
+      "id": "33204",
+      "first_name": "Shane",
+      "last_name": "Lowry",
+      "full_name": "Shane Lowry",
+      "short_name": "S. Lowry"
+    },
+    {
+      "id": "1717",
+      "first_name": "Sandy",
+      "last_name": "Lyle",
+      "full_name": "Sandy Lyle",
+      "short_name": "S. Lyle"
+    },
+    {
+      "id": "52215",
+      "first_name": "Robert",
+      "last_name": "MacIntyre",
+      "full_name": "Robert MacIntyre",
+      "short_name": "R. MacIntyre"
+    },
+    {
+      "id": "32839",
+      "first_name": "Hideki",
+      "last_name": "Matsuyama",
+      "full_name": "Hideki Matsuyama",
+      "short_name": "H. Matsuyama"
+    },
+    {
+      "id": "28237",
+      "first_name": "Rory",
+      "last_name": "McIlroy",
+      "full_name": "Rory McIlroy",
+      "short_name": "R. McIlroy"
+    },
+    {
+      "id": "39834",
+      "first_name": "Guido",
+      "last_name": "Migliozzi",
+      "full_name": "Guido Migliozzi",
+      "short_name": "G. Migliozzi"
+    },
+    {
+      "id": "1823",
+      "first_name": "Larry",
+      "last_name": "Mize",
+      "full_name": "Larry Mize",
+      "short_name": "L. Mize"
+    },
+    {
+      "id": "25198",
+      "first_name": "Francesco",
+      "last_name": "Molinari",
+      "full_name": "Francesco Molinari",
+      "short_name": "F. Molinari"
+    },
+    {
+      "id": "50525",
+      "first_name": "Collin",
+      "last_name": "Morikawa",
+      "full_name": "Collin Morikawa",
+      "short_name": "C. Morikawa"
+    },
+    {
+      "id": "25396",
+      "first_name": "Kevin",
+      "last_name": "Na",
+      "full_name": "Kevin Na",
+      "short_name": "K. Na"
+    },
+    {
+      "id": "49228",
+      "first_name": "Keita",
+      "last_name": "Nakajima",
+      "full_name": "Keita Nakajima",
+      "short_name": "K. Nakajima"
+    },
+    {
+      "id": "45486",
+      "first_name": "Joaquin",
+      "last_name": "Niemann",
+      "full_name": "Joaquin Niemann",
+      "short_name": "J. Niemann"
+    },
+    {
+      "id": "6373",
+      "first_name": "José María",
+      "last_name": "Olazábal",
+      "full_name": "José María Olazábal",
+      "short_name": "J. Olazábal"
+    },
+    {
+      "id": "26329",
+      "first_name": "Louis",
+      "last_name": "Oosthuizen",
+      "full_name": "Louis Oosthuizen",
+      "short_name": "L. Oosthuizen"
+    },
+    {
+      "id": "23320",
+      "first_name": "Ryan",
+      "last_name": "Palmer",
+      "full_name": "Ryan Palmer",
+      "short_name": "R. Palmer"
+    },
+    {
+      "id": "33293",
+      "first_name": "Thomas",
+      "last_name": "Pieters",
+      "full_name": "Thomas Pieters",
+      "short_name": "T. Pieters"
+    },
+    {
+      "id": "59164",
+      "first_name": "James",
+      "last_name": "Piot",
+      "full_name": "James Piot",
+      "short_name": "J. Piot"
+    },
+    {
+      "id": "28252",
+      "first_name": "Séamus",
+      "last_name": "Power",
+      "full_name": "Séamus Power",
+      "short_name": "S. Power"
+    },
+    {
+      "id": "46970",
+      "first_name": "Jon",
+      "last_name": "Rahm",
+      "full_name": "Jon Rahm",
+      "short_name": "J. Rahm"
+    },
+    {
+      "id": "34360",
+      "first_name": "Patrick",
+      "last_name": "Reed",
+      "full_name": "Patrick Reed",
+      "short_name": "P. Reed"
+    },
+    {
+      "id": "22405",
+      "first_name": "Justin",
+      "last_name": "Rose",
+      "full_name": "Justin Rose",
+      "short_name": "J. Rose"
+    },
+    {
+      "id": "48081",
+      "first_name": "Xander",
+      "last_name": "Schauffele",
+      "full_name": "Xander Schauffele",
+      "short_name": "X. Schauffele"
+    },
+    {
+      "id": "46046",
+      "first_name": "Scottie",
+      "last_name": "Scheffler",
+      "full_name": "Scottie Scheffler",
+      "short_name": "S. Scheffler"
+    },
+    {
+      "id": "26331",
+      "first_name": "Charl",
+      "last_name": "Schwartzel",
+      "full_name": "Charl Schwartzel",
+      "short_name": "C. Schwartzel"
+    },
+    {
+      "id": "24502",
+      "first_name": "Adam",
+      "last_name": "Scott",
+      "full_name": "Adam Scott",
+      "short_name": "A. Scott"
+    },
+    {
+      "id": "60371",
+      "first_name": "Laird",
+      "last_name": "Shepherd",
+      "full_name": "Laird Shepherd",
+      "short_name": "L. Shepherd"
+    },
+    {
+      "id": "29221",
+      "first_name": "Webb",
+      "last_name": "Simpson",
+      "full_name": "Webb Simpson",
+      "short_name": "W. Simpson"
+    },
+    {
+      "id": "6567",
+      "first_name": "Vijay",
+      "last_name": "Singh",
+      "full_name": "Vijay Singh",
+      "short_name": "V. Singh"
+    },
+    {
+      "id": "35891",
       "first_name": "Cameron",
-      "id": "57366",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "1",
-      "Past": "",
-      "image": false
+      "last_name": "Smith",
+      "full_name": "Cameron Smith",
+      "short_name": "C. Smith"
     },
     {
-      "last_name": "Zalatoris",
-      "first_name": "Will",
+      "id": "39324",
+      "first_name": "J.J.",
+      "last_name": "Spaun",
+      "full_name": "J.J. Spaun",
+      "short_name": "J. Spaun"
+    },
+    {
+      "id": "34046",
+      "first_name": "Jordan",
+      "last_name": "Spieth",
+      "full_name": "Jordan Spieth",
+      "short_name": "J. Spieth"
+    },
+    {
+      "id": "49960",
+      "first_name": "Sepp",
+      "last_name": "Straka",
+      "full_name": "Sepp Straka",
+      "short_name": "S. Straka"
+    },
+    {
+      "id": "34264",
+      "first_name": "Hudson",
+      "last_name": "Swafford",
+      "full_name": "Hudson Swafford",
+      "short_name": "H. Swafford"
+    },
+    {
+      "id": "33448",
+      "first_name": "Justin",
+      "last_name": "Thomas",
+      "full_name": "Justin Thomas",
+      "short_name": "J. Thomas"
+    },
+    {
+      "id": "40006",
+      "first_name": "Erik",
+      "last_name": "van Rooyen",
+      "full_name": "Erik van Rooyen",
+      "short_name": "E. van Rooyen"
+    },
+    {
+      "id": "37189",
+      "first_name": "Harold",
+      "last_name": "Varner III",
+      "full_name": "Harold Varner III",
+      "short_name": "H. Varner III"
+    },
+    {
+      "id": "25804",
+      "first_name": "Bubba",
+      "last_name": "Watson",
+      "full_name": "Bubba Watson",
+      "short_name": "B. Watson"
+    },
+    {
+      "id": "10423",
+      "first_name": "Mike",
+      "last_name": "Weir",
+      "full_name": "Mike Weir",
+      "short_name": "M. Weir"
+    },
+    {
+      "id": "20396",
+      "first_name": "Lee",
+      "last_name": "Westwood",
+      "full_name": "Lee Westwood",
+      "short_name": "L. Westwood"
+    },
+    {
+      "id": "32139",
+      "first_name": "Danny",
+      "last_name": "Willett",
+      "full_name": "Danny Willett",
+      "short_name": "D. Willett"
+    },
+    {
+      "id": "56278",
+      "first_name": "Matthew",
+      "last_name": "Wolff",
+      "full_name": "Matthew Wolff",
+      "short_name": "M. Wolff"
+    },
+    {
+      "id": "31323",
+      "first_name": "Gary",
+      "last_name": "Woodland",
+      "full_name": "Gary Woodland",
+      "short_name": "G. Woodland"
+    },
+    {
+      "id": "8793",
+      "first_name": "Tiger",
+      "last_name": "Woods",
+      "full_name": "Tiger Woods",
+      "short_name": "T. Woods"
+    },
+    {
+      "id": "57366",
+      "first_name": "Cameron",
+      "last_name": "Young",
+      "full_name": "Cameron Young",
+      "short_name": "C. Young"
+    },
+    {
       "id": "47483",
-      "countryName": "United States",
-      "countryCode": "USA",
-      "Amateur": "",
-      "First": "",
-      "Past": "",
-      "image": false
+      "first_name": "Will",
+      "last_name": "Zalatoris",
+      "full_name": "Will Zalatoris",
+      "short_name": "W. Zalatoris"
+    },
+    {
+      "id": "999999",
+      "first_name": "The",
+      "last_name": "Field",
+      "full_name": "The Field",
+      "short_name": "The Field"
     }
   ]
 }
