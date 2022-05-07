@@ -11,7 +11,7 @@ const Countdown = ({ auction = {}, setAuctionOver = () => {} }) => {
   });
 
   if (seconds === 0) {
-    return null;
+    // return null;
   }
 
   const hours = secondsToHours(seconds);
@@ -40,14 +40,19 @@ const Countdown = ({ auction = {}, setAuctionOver = () => {} }) => {
     const secondsText = seconds > 1 ? 'seconds' : 'second';
     return (
       <span className='text-warning'>
-        {seconds} {secondsText}
+        {seconds === 0 && <>No time</>}
+        {seconds > 0 && (
+          <>
+            {seconds} {secondsText}
+          </>
+        )}
       </span>
     );
   };
 
   return (
     <div className='mb-5 rounded-lg card card-compact bg-base-200'>
-      <div className='card-body'>
+      <div className='items-center justify-center card-body'>
         <h3 className='text-lg font-medium '>
           {hours >= 1 && getHoursText(hours)}
           {minutes <= 59 && minutes >= 2 && getMinutesText(minutes)}

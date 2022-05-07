@@ -33,7 +33,7 @@ export default function Home({ auctions = [] }) {
       <div className='hero'>
         <div className='text-center hero-content'>
           <div className='max-w-md'>
-            <h1 className='mb-4 text-5xl font-bold'>Bid The Field</h1>
+            <h1 className='mb-4 text-3xl font-bold'>Bid The Field</h1>
             <p className='pt-2'>Join an auction and bid on players or teams</p>
             {!sessionLoading && !session && (
               <p className='pt-2'>
@@ -43,12 +43,12 @@ export default function Home({ auctions = [] }) {
           </div>
         </div>
       </div>
-      <div className='max-w-2xl pt-8 pb-24 mx-auto sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <div className='max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0'>
         <div className='grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8'>
           {auctions.map((a) => {
             const auctionOver = isAuctionOver(a);
             return (
-              <div key={a.id} className='relative shadow card bg-base-200'>
+              <div key={a.id} className='relative rounded-lg card bg-base-200'>
                 {auctionOver && (
                   <div className='absolute badge badge-error badge-outline top-5 right-5'>
                     Bidding Over
@@ -60,7 +60,7 @@ export default function Home({ auctions = [] }) {
                   </div>
                 )}
                 <div className='card-body'>
-                  <h2 className='card-title'>{a.name}</h2>
+                  <h2 className='mt-4 card-title'>{a.name}</h2>
                   <p className='py-6'>{a?.description || '-'}</p>
                   <div className='justify-center card-actions'>
                     {!sessionLoading && !session && (

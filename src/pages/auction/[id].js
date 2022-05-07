@@ -16,7 +16,10 @@ import Layout from '../../components/Layout';
 import AccessDenied from '../../components/AccessDenied';
 import OwnerWinningBids from '../../components/OwnerWinningBids';
 import TotalPot from '../../components/TotalPot';
-import AuctionHeader from '../../components/AuctionHeader';
+import NameCard from '../../components/Auction/NameCard/NameCard';
+import StartDateCard from '../../components/Auction/StartDateCard/StartDateCard';
+import EndDateCard from '../../components/Auction/EndDateCard/EndDateCard';
+import RulesPayoutsCard from '../../components/Auction/RulesPayoutsCard/RulesPayoutsCard';
 import BidRow from '../../components/BidRow';
 import Countdown from '../../components/Countdown';
 
@@ -229,25 +232,28 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       <Head>
         <title>Bid The Field - {auction.current.name}</title>
       </Head>
-      <AuctionHeader auction={auction.current} auctionOver={auctionOver} />
 
-      <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
-        <div className='space-y-6 lg:col-start-3 lg:col-span-1'>
-          <TotalPot bids={bids.current} />
-          <Countdown
-            auction={auction.current}
-            setAuctionOver={setAuctionOver}
-          />
-          <OwnerWinningBids
-            bids={bids.current}
-            session={session}
-            playersData={playersData}
-          />
-        </div>
-        <div className='space-y-6 lg:col-start-1 lg:col-span-2'>
+      <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl xl:grid-cols-3'>
+        <NameCard auction={auction.current} />
+        <EndDateCard auction={auction.current} auctionOver={auctionOver} />
+        <OwnerWinningBids
+          bids={bids.current}
+          session={session}
+          playersData={playersData}
+        />
+        {/*<StartDateCard auction={auction.current} />*/}
+        <RulesPayoutsCard auction={auction.current} />
+        <Countdown auction={auction.current} setAuctionOver={setAuctionOver} />
+        <TotalPot bids={bids.current} />
+      </div>
+      <h3 className='px-2 py-6 text-lg font-semibold text-center uppercase'>
+        Player Pool
+      </h3>
+      <div className='px-2 py-4 mx-auto max-w-7xl'>
+        {playersData && playersData.length > 0 && (
           <ul
             role='list'
-            className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'
+            className='grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4'
           >
             {playersData.map((p) => {
               return (
@@ -262,31 +268,31 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
               );
             })}
           </ul>
-          {!playersData ||
-            (playersData.length === 0 && (
-              <div className='shadow-lg alert'>
-                <div>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='flex-shrink-0 w-6 h-6 stroke-current'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
-                    />
-                  </svg>
-                  <span>
-                    Players data was not found for this auction! File:{' '}
-                    {auctionData?.data_filename}
-                  </span>
-                </div>
+        )}
+        {!playersData ||
+          (playersData.length === 0 && (
+            <div className='shadow-lg alert'>
+              <div>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='flex-shrink-0 w-6 h-6 stroke-current'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
+                  />
+                </svg>
+                <span>
+                  Players data was not found for this auction! File:{' '}
+                  {auctionData?.data_filename}
+                </span>
               </div>
-            ))}
-        </div>
+            </div>
+          ))}
       </div>
     </Layout>
   );

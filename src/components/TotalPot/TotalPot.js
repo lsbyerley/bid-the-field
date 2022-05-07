@@ -7,7 +7,7 @@ const TotalPot = ({ bids = [] }) => {
 
   return (
     <div className='mb-5 rounded-lg card card-compact bg-base-200'>
-      <div className='card-body'>
+      <div className='items-center justify-center card-body'>
         <h3 className='text-lg font-medium'>
           <span className='mr-2 text-sm'>Total Pot:</span>
           <span className='text-success'>
