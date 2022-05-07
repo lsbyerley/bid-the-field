@@ -41,7 +41,7 @@ export const fetchMasters = async (url) => {
       };
     });
     // Add The Field player obj
-    players.push(theFieldPlayer);
+    players.unshift(theFieldPlayer);
     return players;
   } catch (err) {
     console.log('LOG: err', err);
@@ -81,7 +81,7 @@ export const fetchOpenChamp = async (url) => {
       };
     });
   // Add The Field player obj
-  players.push(theFieldPlayer);
+  players.unshift(theFieldPlayer);
   return players;
 };
 
@@ -105,7 +105,7 @@ export const fetchPlayersChamp = async (url) => {
     };
   });
   // Add The Field player obj
-  players.push(theFieldPlayer);
+  players.unshift(theFieldPlayer);
   return players;
 };
 
@@ -130,7 +130,7 @@ export const fetchPgaChamp = async (url) => {
     };
   });
   // Add The Field player obj
-  players.push(theFieldPlayer);
+  players.unshift(theFieldPlayer);
   return players;
 };
 

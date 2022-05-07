@@ -1,6 +1,13 @@
 {
   "data": [
     {
+      "id": "999999",
+      "first_name": "The",
+      "last_name": "Field",
+      "full_name": "The Field",
+      "short_name": "The Field"
+    },
+    {
       "id": "45526",
       "first_name": "Abraham",
       "last_name": "Ancer",
@@ -636,13 +643,6 @@
       "last_name": "Zalatoris",
       "full_name": "Will Zalatoris",
       "short_name": "W. Zalatoris"
-    },
-    {
-      "id": "999999",
-      "first_name": "The",
-      "last_name": "Field",
-      "full_name": "The Field",
-      "short_name": "The Field"
     }
   ]
 }
