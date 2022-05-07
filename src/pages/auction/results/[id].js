@@ -9,7 +9,6 @@ import { isAuctionOver } from '../../../lib/auctionUtils';
 // Components
 import Layout from '../../../components/Layout';
 import AccessDenied from '../../../components/AccessDenied';
-import AuctionHeader from '../../../components/AuctionHeader';
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -85,7 +84,6 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       <Head>
         <title>Bid The Field - Results {auction.current.name}</title>
       </Head>
-      <AuctionHeader auction={auction.current} auctionOver={auctionOver} />
 
       <h2 className='py-6 text-lg text-center'>Auction RESULTS TBD</h2>
 
