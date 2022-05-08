@@ -9,6 +9,7 @@ import { isAuctionOver } from '../../../lib/auctionUtils';
 // Components
 import Layout from '../../../components/Layout';
 import AccessDenied from '../../../components/AccessDenied';
+import Results from '../../../components/Auction/Results';
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -31,7 +32,7 @@ export async function getServerSideProps({ params }) {
 
   let players;
   try {
-    players = await import(`../../lib/${auction.data_filename}.json`);
+    players = await import(`../../../lib/${auction.data_filename}.json`);
   } catch (err) {
     console.log('LOG: error importing players json file');
   }
@@ -85,36 +86,51 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <title>Bid The Field - Results {auction.current.name}</title>
       </Head>
 
-      <h2 className='py-6 text-lg text-center'>Auction RESULTS TBD</h2>
+      <div className='flex items-center justify-center px-2 py-8 mx-auto text-lg font-semibold breadcrumbs'>
+        <ul>
+          <li>
+            <Link href={`/auction/${auction.current.id}`}>
+              <a>{auction.current.name}</a>
+            </Link>
+          </li>
+          <li>Results</li>
+        </ul>
+      </div>
 
-      {!auctionOver && (
-        <div className='shadow-lg alert'>
-          <div>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              className='flex-shrink-0 w-6 h-6 stroke-info'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-              ></path>
-            </svg>
+      <div className='px-2 py-4 mx-auto max-w-7xl'>
+        {auctionOver && <Results bids={bids.current} players={playersData} />}
+
+        {!auctionOver && (
+          <div className='shadow-lg alert'>
             <div>
-              <h3 className='font-bold'>Auction still in progress!</h3>
-              <div className='text-xs'>Check back when the auction is over</div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='flex-shrink-0 w-6 h-6 stroke-info'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                ></path>
+              </svg>
+              <div>
+                <h3 className='font-bold'>Auction still in progress!</h3>
+                <div className='text-xs'>
+                  Check back when the auction is over
+                </div>
+              </div>
+            </div>
+            <div className='flex-none'>
+              <Link href={`/auction/${auction.current.id}`}>
+                <a className='btn btn-sm'>See Live</a>
+              </Link>
             </div>
           </div>
-          <div className='flex-none'>
-            <Link href={`/auction/${auction.current.id}`}>
-              <a className='btn btn-sm'>See Live</a>
-            </Link>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'></div>
     </Layout>

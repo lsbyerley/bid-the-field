@@ -16,13 +16,14 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
     <div className='rounded-lg md:row-span-3 card card-compact bg-base-200'>
       <div className='card-body'>
         <div>
-          <h3 className='text-lg font-medium'>
-            <span className='mr-2 text-sm'>Your Winning Bids:</span>
+          <div className='flex justify-between mb-4 text-lg font-medium'>
+            <span className='mr-2 truncate text-info'>Your Winning Bids</span>
             <span className='text-success'>
               ${Number.parseFloat(totalBidAmount).toFixed(2)}
             </span>
-          </h3>
-          <dl className='mt-2 border-t border-b border-gray-200 divide-y divide-gray-200'>
+          </div>
+
+          <dl className='mt-2 border-t divide-y'>
             {winningBids.map((bid) => (
               <div
                 key={bid.id}
@@ -31,7 +32,9 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
                 <dt className=''>
                   {getPlayerFromBid(playersData, bid.player_id)}
                 </dt>
-                <dd className=''>${bid.amount}</dd>
+                <dd className=''>
+                  ${Number.parseFloat(bid.amount).toFixed(2)}
+                </dd>
               </div>
             ))}
             {!winningBids ||

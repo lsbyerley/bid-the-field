@@ -1,9 +1,9 @@
 import { differenceInSeconds, differenceInMinutes, isAfter } from 'date-fns';
 
 // Given an array of bids and a user id, returns the user's winning bids
-export const getOwnerWinningBids = (bids, userId) => {
+export const getOwnerWinningBids = (bids, ownerId) => {
   const ownerBidsSorted = bids
-    .filter((b) => b.owner === userId)
+    .filter((b) => b.owner === ownerId)
     .sort((a, b) => b.amount - a.amount);
 
   const ownerBidsSortedUnique = ownerBidsSorted.reduce((filter, current) => {
@@ -22,7 +22,7 @@ export const getOwnerWinningBids = (bids, userId) => {
   ownerBidsSortedUnique.forEach((ob) => {
     const bidPlayerId = ob.player_id;
     const otherBidsOnPlayerSorted = bids
-      .filter((b) => b.owner !== userId && b.player_id === bidPlayerId)
+      .filter((b) => b.owner !== ownerId && b.player_id === bidPlayerId)
       .sort((a, b) => b.amount - a.amount);
 
     if (otherBidsOnPlayerSorted.length) {
@@ -37,8 +37,21 @@ export const getOwnerWinningBids = (bids, userId) => {
   return winningBids;
 };
 
-export const getAllOwnerBids = (bids, userId) => {
-  return 'TBD';
+export const getAuctionResults = (bids) => {
+  const ownersReducer = (owners, item) => {
+    if (!owners[item.owner]) owners[item.owner] = [];
+    return owners;
+  };
+
+  const owners = bids.reduce(ownersReducer, {});
+
+  Object.keys(owners).forEach((owner) => {
+    const ownerWinnings = getOwnerWinningBids(bids, owner);
+    owners[owner] = ownerWinnings;
+    console.log('log: owner', ownerWinnings);
+  });
+
+  return owners;
 };
 
 // Given an array of bids, returns the total amount of bids filtered by players

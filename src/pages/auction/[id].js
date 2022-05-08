@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { supabase } from '../../lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
@@ -241,10 +242,19 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
           session={session}
           playersData={playersData}
         />
-        {/*<StartDateCard auction={auction.current} />*/}
+        <StartDateCard auction={auction.current} />
         <RulesPayoutsCard auction={auction.current} />
         <Countdown auction={auction.current} setAuctionOver={setAuctionOver} />
         <TotalPot bids={bids.current} />
+        {auctionOver && (
+          <div className='rounded-lg card compact bg-base-200 '>
+            <div className='justify-center card-body'>
+              <Link href={`/auction/results/${auction.current.id}`}>
+                <a className='btn btn-ghost btn-sm'>Results</a>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
       <h3 className='px-2 py-6 text-lg font-semibold text-center uppercase'>
         Player Pool
