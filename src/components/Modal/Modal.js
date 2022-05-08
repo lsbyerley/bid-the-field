@@ -5,7 +5,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 const Modal = () => {
-  let closeButtonRef = useRef(null);
   const { modalOpen, setModalOpen, modalContent, setModalContent } =
     useAppContext();
 
@@ -20,8 +19,8 @@ const Modal = () => {
       <Dialog
         as='div'
         className='fixed inset-0 z-10 overflow-y-auto'
-        onClose={closeModal}
-        initialFocus={closeButtonRef}
+        onClose={() => closeModal()}
+        open={modalOpen}
       >
         <div className='modal modal-open'>
           <Transition.Child
@@ -33,7 +32,7 @@ const Modal = () => {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Dialog.Overlay className='fixed inset-0' />
+            <Dialog.Overlay className='fixed inset-0 bg-black/30' />
           </Transition.Child>
 
           <Transition.Child
@@ -49,7 +48,6 @@ const Modal = () => {
               <button
                 className='absolute btn btn-sm btn-circle right-2 top-2'
                 onClick={() => closeModal()}
-                ref={closeButtonRef}
               >
                 ✕
               </button>

@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { supabase } from '../../../lib/supabaseClient';
 import useAsyncReference from '../../../lib/useAsyncReference';
 import { isAuctionOver } from '../../../lib/auctionUtils';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 // Components
 import Layout from '../../../components/Layout';
@@ -86,22 +87,34 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <title>Bid The Field - Results {auction.current.name}</title>
       </Head>
 
-      <div className='flex items-center justify-center px-2 py-8 mx-auto text-lg font-semibold breadcrumbs'>
-        <ul>
+      <nav className='flex justify-center mt-6 mb-4' aria-label='Breadcrumb'>
+        <ol role='list' className='flex items-center space-x-4'>
           <li>
-            <Link href={`/auction/${auction.current.id}`}>
-              <a>{auction.current.name}</a>
-            </Link>
+            <div className='flex items-center'>
+              <Link href={`/auction/${auction.current.id}`}>
+                <a className='ml-4 text-sm font-medium md:text-lg '>
+                  {auction.current.name}
+                </a>
+              </Link>
+            </div>
           </li>
-          <li>Results</li>
-        </ul>
-      </div>
+          <li>
+            <div className='flex items-center'>
+              <ChevronRightIcon
+                className='flex-shrink-0 w-5 h-5'
+                aria-hidden='true'
+              />
+              <span className='ml-4 text-sm font-medium md:text-lg'>
+                Rosters / Results
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
 
       <div className='px-2 py-4 mx-auto max-w-7xl'>
-        {auctionOver && <Results bids={bids.current} players={playersData} />}
-
         {!auctionOver && (
-          <div className='shadow-lg alert'>
+          <div className='mb-8 shadow-lg alert'>
             <div>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -119,17 +132,19 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
               <div>
                 <h3 className='font-bold'>Auction still in progress!</h3>
                 <div className='text-xs'>
-                  Check back when the auction is over
+                  You can stil place bids on players
                 </div>
               </div>
             </div>
             <div className='flex-none'>
               <Link href={`/auction/${auction.current.id}`}>
-                <a className='btn btn-sm'>See Live</a>
+                <a className='btn btn-sm'>Go Bid</a>
               </Link>
             </div>
           </div>
         )}
+
+        <Results bids={bids.current} players={playersData} />
       </div>
 
       <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'></div>

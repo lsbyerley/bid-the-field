@@ -43,8 +43,9 @@ const BidModal = ({
       <Dialog
         as='div'
         className='fixed inset-0 z-10 overflow-y-auto'
-        onClose={closeModal}
         initialFocus={bidInputRef}
+        onClose={() => closeModal()}
+        open={isOpen}
       >
         <div className='modal modal-open'>
           <Transition.Child
@@ -56,7 +57,7 @@ const BidModal = ({
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Dialog.Overlay className='fixed inset-0' />
+            <Dialog.Overlay className='fixed inset-0 bg-black/30' />
           </Transition.Child>
 
           <Transition.Child
@@ -69,14 +70,23 @@ const BidModal = ({
             leaveTo='opacity-0 scale-95'
           >
             <div className='modal-box'>
-              <Dialog.Title as='h3' className='text-lg font-medium leading-6 '>
+              <button
+                className='absolute btn btn-sm btn-circle right-2 top-2'
+                onClick={() => closeModal()}
+              >
+                ✕
+              </button>
+              <Dialog.Title
+                as='h3'
+                className='mt-5 text-lg font-medium leading-6'
+              >
                 Bid for {player?.first_name} {player?.last_name}
               </Dialog.Title>
               <div className='mt-2'>
                 <div>
                   <label
                     htmlFor='bidAmount'
-                    className='block text-sm font-medium'
+                    className='block mb-2 text-sm font-medium'
                   >
                     Enter Bid more than ${highestBid?.amount || 0}
                   </label>
@@ -111,7 +121,7 @@ const BidModal = ({
                 </div>
               </div>
 
-              <div className='modal-action'>
+              <div className='justify-center modal-action'>
                 <button type='button' className='btn' onClick={submitBid}>
                   Place Bid
                 </button>
