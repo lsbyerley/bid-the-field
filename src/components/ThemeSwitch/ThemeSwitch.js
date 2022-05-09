@@ -14,7 +14,7 @@ const ThemeSwitch = () => {
       role='switch'
       aria-label='Toggle Dark Mode'
       type='button'
-      className='btn btn-square btn-ghost'
+      className='btn btn-square btn-ghost btn-sm'
       onClick={() =>
         setTheme(
           theme === 'dark' || resolvedTheme === 'dark' ? 'light' : 'dark'
@@ -22,9 +22,9 @@ const ThemeSwitch = () => {
       }
     >
       {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
-        <MoonIcon className='inline-block w-6 h-6 stroke-current' />
+        <MoonIcon className='inline-block w-4 h-4 stroke-current md:w-6 md:h-6' />
       ) : (
-        <SunIcon className='inline-block w-6 h-6 stroke-current' />
+        <SunIcon className='inline-block w-4 h-4 stroke-current md:w-6 md:h-6' />
       )}
     </button>
   );

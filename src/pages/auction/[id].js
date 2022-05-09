@@ -246,7 +246,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <title>Bid The Field - {auction.current.name}</title>
       </Head>
 
-      <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl xl:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3'>
         <NameCard auction={auction.current} />
         <EndDateCard auction={auction.current} auctionOver={auctionOver} />
         <OwnerWinningBids

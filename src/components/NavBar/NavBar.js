@@ -11,7 +11,7 @@ const NavBar = () => {
     <div className='navbar bg-base-200'>
       <div className='navbar-start'>
         <div className='dropdown'>
-          <label tabIndex='0' className='btn btn-ghost lg:hidden'>
+          <label tabIndex='0' className='btn btn-sm btn-ghost lg:hidden'>
             <MenuAlt1Icon className='w-5 h-5' />
           </label>
           <ul
@@ -23,13 +23,15 @@ const NavBar = () => {
                 <a>About</a>
   </Link> */}
               <Link href='/'>
-                <a>Home</a>
+                <a className='active:bg-base-300'>Home</a>
               </Link>
             </li>
           </ul>
         </div>
         <Link href='/'>
-          <a className='text-xl normal-case btn btn-ghost'>Bid The Field</a>
+          <a className='normal-case md:text-lg btn btn-sm btn-ghost'>
+            Bid The Field
+          </a>
         </Link>
       </div>
       <div className='hidden navbar-center lg:flex'>
@@ -51,9 +53,9 @@ const NavBar = () => {
           </div>
         )}
         {!sessionLoading && session && (
-          <div className='dropdown dropdown-end'>
+          <div className='ml-2 md:ml-4 dropdown dropdown-end'>
             <label tabIndex='0' className='btn btn-ghost btn-circle avatar'>
-              <div className='w-10 rounded-full'>
+              <div className='w-8 rounded-full md:w-10'>
                 <img
                   referrerPolicy='no-referrer'
                   src={session?.user?.image || 'https://place-hold.it/40x40'}
