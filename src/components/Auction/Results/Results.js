@@ -18,7 +18,7 @@ const Results = ({ bids = [], players = [] }) => {
           >
             <div className='card-body'>
               <div>
-                <div className='flex justify-between mb-4 text-lg font-medium'>
+                <div className='flex justify-between pb-2 mb-4 text-lg font-medium border-b'>
                   <span className='mr-2 text-lg truncate text-info'>
                     {owner}
                   </span>
@@ -26,7 +26,7 @@ const Results = ({ bids = [], players = [] }) => {
                     ${Number.parseFloat(totalBidAmount).toFixed(2)}
                   </span>
                 </div>
-                <dl className='mt-2 border-t divide-y'>
+                <dl className='mt-2 divide-y'>
                   {ownerResults.map((bid) => (
                     <div
                       key={bid.id}
