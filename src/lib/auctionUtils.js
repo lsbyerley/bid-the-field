@@ -53,7 +53,7 @@ export const getAuctionResults = (bids) => {
   Object.keys(owners).forEach((owner) => {
     const ownerWinnings = getOwnerWinningBids(bids, owner);
     owners[owner] = ownerWinnings;
-    console.log('log: owner', ownerWinnings);
+    // console.log('log: owner', ownerWinnings);
   });
 
   return owners;
