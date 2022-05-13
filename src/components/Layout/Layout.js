@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import NavBar from '../NavBar';
 
 const Layout = ({ children }) => {
@@ -6,13 +7,9 @@ const Layout = ({ children }) => {
       <NavBar />
       <main className='flex-1'>{children}</main>
       <footer className='flex items-center justify-center py-8 bg-base-200'>
-        <a
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Bid The Field{' '}
-        </a>
+        <Link href='/'>
+          <a>Bid The Field</a>
+        </Link>
       </footer>
     </div>
   );
