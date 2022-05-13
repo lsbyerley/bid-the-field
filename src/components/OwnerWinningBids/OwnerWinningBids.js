@@ -23,7 +23,7 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
             </span>
           </div>
 
-          <dl className='mt-2 divide-y'>
+          <dl className='mt-2 overflow-y-scroll divide-y max-h-72'>
             {winningBids.map((bid) => (
               <div
                 key={bid.id}
