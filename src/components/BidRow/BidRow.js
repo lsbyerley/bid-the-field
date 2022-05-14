@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CashIcon } from '@heroicons/react/outline';
-import { getPlayerHighestBid } from '../../lib/auctionUtils';
-import useAsyncReference from '../../lib/useAsyncReference';
+import { getPlayerHighestBid } from '@/lib/auctionUtils';
+import useAsyncReference from '@/lib/useAsyncReference';
 import BidModal from '../BidModal';
 
 const BidRow = ({

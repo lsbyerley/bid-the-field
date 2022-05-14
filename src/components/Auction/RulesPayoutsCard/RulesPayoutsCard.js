@@ -1,5 +1,5 @@
-import { useAppContext } from '../../../AppContext';
-import useAsyncReference from '../../../lib/useAsyncReference';
+import { useAppContext } from '@/AppContext';
+import useAsyncReference from '@/lib/useAsyncReference';
 
 const RulesPayoutsCard = ({ auction }) => {
   const asyncAuction = useAsyncReference(auction, true);

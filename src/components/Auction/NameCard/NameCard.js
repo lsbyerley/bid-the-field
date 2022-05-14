@@ -1,5 +1,5 @@
 import { ScaleIcon } from '@heroicons/react/outline';
-import useAsyncReference from '../../../lib/useAsyncReference';
+import useAsyncReference from '@/lib/useAsyncReference';
 
 const NameCard = ({ auction }) => {
   const asyncAuction = useAsyncReference(auction, true);

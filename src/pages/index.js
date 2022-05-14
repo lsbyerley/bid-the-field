@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
-import Layout from '../components/Layout';
+import Layout from '@/components/Layout';
 import Link from 'next/link';
-import { supabase } from '../lib/supabaseClient';
-import { hasAuctionStarted, isAuctionOver } from '../lib/auctionUtils';
+import { supabase } from '@/lib/supabaseClient';
+import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
 export async function getServerSideProps({ params }) {
   const { data, error } = await supabase

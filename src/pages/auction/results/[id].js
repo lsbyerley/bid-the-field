@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { supabase } from '../../../lib/supabaseClient';
-import useAsyncReference from '../../../lib/useAsyncReference';
-import { isAuctionOver } from '../../../lib/auctionUtils';
+import { supabase } from '@/lib/supabaseClient';
+import useAsyncReference from '@/lib/useAsyncReference';
+import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 
 // Components
-import Layout from '../../../components/Layout';
-import AccessDenied from '../../../components/AccessDenied';
-import Results from '../../../components/Auction/Results';
+import Layout from '@/components/Layout';
+import AccessDenied from '@/components/AccessDenied';
+import Results from '@/components/Auction/Results';
+import TotalPot from '@/components/TotalPot';
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -33,7 +34,7 @@ export async function getServerSideProps({ params }) {
 
   let players;
   try {
-    players = await import(`../../../lib/${auction.data_filename}.json`);
+    players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
   } catch (err) {
     console.log('LOG: error importing players json file');
   }
@@ -114,7 +115,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
       <div className='px-2 py-4 mx-auto max-w-7xl'>
         {!auctionOver && (
-          <div className='mb-8 shadow-lg alert'>
+          <div className='mb-8 rounded-lg alert'>
             <div>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -132,7 +133,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
               <div>
                 <h3 className='font-bold'>Auction still in progress!</h3>
                 <div className='text-xs'>
-                  You can stil place bids on players
+                  You can still place bids on players
                 </div>
               </div>
             </div>
@@ -144,10 +145,12 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
           </div>
         )}
 
+        <div className='mb-8'>
+          <TotalPot bids={bids.current} />
+        </div>
+
         <Results bids={bids.current} players={playersData} />
       </div>
-
-      <div className='grid max-w-6xl grid-cols-1 gap-6 px-2 mx-auto mt-8 mb-4 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'></div>
     </Layout>
   );
 };

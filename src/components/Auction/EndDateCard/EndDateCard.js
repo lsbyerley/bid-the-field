@@ -1,6 +1,6 @@
 import { CalendarIcon } from '@heroicons/react/outline';
 import { format } from 'date-fns';
-import useAsyncReference from '../../../lib/useAsyncReference';
+import useAsyncReference from '@/lib/useAsyncReference';
 
 const EndDateCard = ({ auction, auctionOver }) => {
   const asyncAuction = useAsyncReference(auction, true);
