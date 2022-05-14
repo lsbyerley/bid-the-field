@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render an auction 1`] = `
+<div
+  class="flex flex-col min-h-screen grid-bg"
+>
+  <div
+    class="navbar bg-base-200"
+  >
+    <div
+      class="navbar-start"
+    >
+      <div
+        class="dropdown"
+      >
+        <label
+          class="btn btn-sm btn-ghost lg:hidden"
+          tabindex="0"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6h16M4 12h8m-8 6h16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </label>
+        <ul
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          tabindex="0"
+        >
+          <li>
+            <a
+              class="active:bg-base-300"
+              href="/"
+            >
+              Home
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a
+        class="normal-case md:text-lg btn btn-sm btn-ghost"
+        href="/"
+      >
+        Bid The Field
+      </a>
+    </div>
+    <div
+      class="hidden navbar-center lg:flex"
+    />
+    <div
+      class="navbar-end"
+    >
+      <button
+        aria-label="Toggle Dark Mode"
+        class="btn btn-square btn-ghost btn-sm"
+        role="switch"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="inline-block w-4 h-4 stroke-current md:w-6 md:h-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <div
+        class="ml-2 md:ml-4 dropdown dropdown-end"
+      >
+        <label
+          class="btn btn-ghost btn-circle avatar"
+          tabindex="0"
+        >
+          <div
+            class="w-8 rounded-full md:w-10"
+          >
+            <img
+              referrerpolicy="no-referrer"
+              src="https://place-hold.it/40x40"
+            />
+          </div>
+        </label>
+        <ul
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          tabindex="0"
+        >
+          <li
+            class="menu-title"
+          >
+            <div>
+              no email
+            </div>
+          </li>
+          <li>
+            <a
+              class=" active:bg-gray-500"
+              href="/api/auth/signout"
+            >
+              Sign out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <main
+    class="flex-1"
+  >
+    <div
+      class="hero"
+    >
+      <div
+        class="text-center hero-content"
+      >
+        <div
+          class="max-w-md"
+        >
+          <h1
+            class="mb-4 text-3xl font-bold"
+          >
+            Bid The Field
+          </h1>
+          <p
+            class="pt-2"
+          >
+            Join an auction and bid on players or teams
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0"
+    >
+      <div
+        class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8"
+      >
+        <div
+          class="relative rounded-lg card bg-base-200"
+        >
+          <div
+            class="absolute badge badge-success badge-outline top-5 right-5"
+          >
+            In Progress
+          </div>
+          <div
+            class="card-body"
+          >
+            <h2
+              class="mt-4 card-title"
+            >
+              test
+            </h2>
+            <p
+              class="py-6"
+            >
+              test
+            </p>
+            <div
+              class="justify-center card-actions"
+            >
+              <a
+                class="btn btn-outline btn-sm"
+                href="/auction/test"
+              >
+                View Auction
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer
+    class="flex items-center justify-center py-8 bg-base-200"
+  >
+    <a
+      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Bid The Field
+       
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home should render and match snapshot 1`] = `
+<div
+  class="flex flex-col min-h-screen grid-bg"
+>
+  <div
+    class="navbar bg-base-200"
+  >
+    <div
+      class="navbar-start"
+    >
+      <div
+        class="dropdown"
+      >
+        <label
+          class="btn btn-sm btn-ghost lg:hidden"
+          tabindex="0"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6h16M4 12h8m-8 6h16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </label>
+        <ul
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          tabindex="0"
+        >
+          <li>
+            <a
+              class="active:bg-base-300"
+              href="/"
+            >
+              Home
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a
+        class="normal-case md:text-lg btn btn-sm btn-ghost"
+        href="/"
+      >
+        Bid The Field
+      </a>
+    </div>
+    <div
+      class="hidden navbar-center lg:flex"
+    />
+    <div
+      class="navbar-end"
+    >
+      <button
+        aria-label="Toggle Dark Mode"
+        class="btn btn-square btn-ghost btn-sm"
+        role="switch"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="inline-block w-4 h-4 stroke-current md:w-6 md:h-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <div
+        class="ml-2 md:ml-4 dropdown dropdown-end"
+      >
+        <label
+          class="btn btn-ghost btn-circle avatar"
+          tabindex="0"
+        >
+          <div
+            class="w-8 rounded-full md:w-10"
+          >
+            <img
+              referrerpolicy="no-referrer"
+              src="https://place-hold.it/40x40"
+            />
+          </div>
+        </label>
+        <ul
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          tabindex="0"
+        >
+          <li
+            class="menu-title"
+          >
+            <div>
+              no email
+            </div>
+          </li>
+          <li>
+            <a
+              class=" active:bg-gray-500"
+              href="/api/auth/signout"
+            >
+              Sign out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <main
+    class="flex-1"
+  >
+    <div
+      class="hero"
+    >
+      <div
+        class="text-center hero-content"
+      >
+        <div
+          class="max-w-md"
+        >
+          <h1
+            class="mb-4 text-3xl font-bold"
+          >
+            Bid The Field
+          </h1>
+          <p
+            class="pt-2"
+          >
+            Join an auction and bid on players or teams
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0"
+    >
+      <div
+        class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8"
+      />
+    </div>
+  </main>
+  <footer
+    class="flex items-center justify-center py-8 bg-base-200"
+  >
+    <a
+      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Bid The Field
+       
+    </a>
+  </footer>
+</div>
+`;
