@@ -5,7 +5,7 @@ const NameCard = ({ auction }) => {
   const asyncAuction = useAsyncReference(auction, true);
 
   return (
-    <div className='rounded-lg card compact bg-base-200'>
+    <div className='rounded-lg card compact bg-base-100'>
       <div className='justify-center card-body'>
         <div className='flex items-center'>
           <div className='flex-shrink-0'>

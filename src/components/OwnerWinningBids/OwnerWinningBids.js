@@ -13,7 +13,7 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
   );
 
   return (
-    <div className='rounded-lg md:row-span-3 card card-compact bg-base-200'>
+    <div className='rounded-lg md:row-span-3 card card-compact bg-base-100'>
       <div className='card-body'>
         <div>
           <div className='flex justify-between pb-2 mb-4 text-lg font-medium border-b'>

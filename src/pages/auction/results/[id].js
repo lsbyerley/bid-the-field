@@ -10,7 +10,7 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 // Components
 import Layout from '@/components/Layout';
 import AccessDenied from '@/components/AccessDenied';
-import Results from '@/components/Auction/Results';
+import Results from '@/components/Results';
 import TotalPot from '@/components/TotalPot';
 
 export async function getServerSideProps({ params }) {
@@ -115,7 +115,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
       <div className='px-2 py-4 mx-auto max-w-7xl'>
         {!auctionOver && (
-          <div className='mb-8 rounded-lg alert'>
+          <div className='mb-8 rounded-lg alert bg-base-100'>
             <div>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

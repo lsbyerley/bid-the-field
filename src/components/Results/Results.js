@@ -15,7 +15,7 @@ const Results = ({ bids = [], players = [] }) => {
           return (
             <div
               key={owner}
-              className='rounded-lg md:row-span-3 card card-compact bg-base-200'
+              className='rounded-lg md:row-span-3 card card-compact bg-base-100'
             >
               <div className='card-body'>
                 <div>
@@ -55,7 +55,7 @@ const Results = ({ bids = [], players = [] }) => {
         })}
       </div>
       {!Object.keys(auctionResults)?.length && (
-        <div className='justify-center rounded-lg alert'>
+        <div className='justify-center rounded-lg alert bg-base-100'>
           <div>
             <svg
               xmlns='http://www.w3.org/2000/svg'

@@ -50,7 +50,7 @@ export default function Home({ auctions = [] }) {
             const auctionStarted = hasAuctionStarted(a);
             const auctionOver = isAuctionOver(a);
             return (
-              <div key={a.id} className='relative rounded-lg card bg-base-200'>
+              <div key={a.id} className='relative rounded-lg card bg-base-100'>
                 {!auctionStarted && (
                   <div className='absolute badge badge-warning badge-outline top-5 right-5'>
                     Not Started

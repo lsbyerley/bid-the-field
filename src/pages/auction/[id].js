@@ -19,10 +19,10 @@ import Layout from '@/components/Layout';
 import AccessDenied from '@/components/AccessDenied';
 import OwnerWinningBids from '@/components/OwnerWinningBids';
 import TotalPot from '@/components/TotalPot';
-import NameCard from '@/components/Auction/NameCard/NameCard';
-import StartDateCard from '@/components/Auction/StartDateCard/StartDateCard';
-import EndDateCard from '@/components/Auction/EndDateCard/EndDateCard';
-import RulesPayoutsCard from '@/components/Auction/RulesPayoutsCard/RulesPayoutsCard';
+import NameCard from '@/components/NameCard';
+import StartDateCard from '@/components/StartDateCard';
+import EndDateCard from '@/components/EndDateCard';
+import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 import BidRow from '@/components/BidRow';
 import Countdown from '@/components/Countdown';
 
@@ -264,7 +264,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
   const ResultsLink = () => {
     return (
-      <div className='rounded-lg card compact bg-base-200 '>
+      <div className='rounded-lg card compact bg-base-100'>
         <div className='justify-center card-body'>
           <Link href={`/auction/results/${auction.current.id}`}>
             <a className='btn btn-ghost btn-sm'>Rosters / Results</a>
