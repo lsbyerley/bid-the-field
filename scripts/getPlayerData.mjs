@@ -139,8 +139,7 @@ export const fetchPgaChamp = async (url) => {
 
 const run = async () => {
   const players = await fetchPgaChamp(
-    'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2021&format=json'
-    //'https://www.masters.com/en_US/scores/feeds/2022/players/players.json'
+    'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2022&format=json'
   );
 
   console.log(JSON.stringify(players));

@@ -1,7 +1,11 @@
 import { useCountdown } from 'rooks';
 import { secondsToHours, secondsToMinutes } from 'date-fns';
 
-const Countdown = ({ auction = {}, setAuctionOver = () => {} }) => {
+const Countdown = ({
+  auction = {},
+  auctionStarted,
+  setAuctionOver = () => {},
+}) => {
   const endTime = new Date(auction.end_date);
 
   const seconds = useCountdown(endTime, {
@@ -10,9 +14,9 @@ const Countdown = ({ auction = {}, setAuctionOver = () => {} }) => {
     onEnd: () => setAuctionOver(true),
   });
 
-  if (seconds === 0) {
-    // return null;
-  }
+  // if (seconds === 0) {
+  // return null;
+  // }
 
   const hours = secondsToHours(seconds);
   const minutes = secondsToMinutes(seconds);
@@ -49,6 +53,18 @@ const Countdown = ({ auction = {}, setAuctionOver = () => {} }) => {
       </span>
     );
   };
+
+  if (!auctionStarted) {
+    return (
+      <div className='rounded-lg card card-compact bg-base-200'>
+        <div className='items-center justify-center card-body'>
+          <h3 className='text-lg font-medium '>
+            <span className='text-info'>not started</span>
+          </h3>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='rounded-lg card card-compact bg-base-200'>

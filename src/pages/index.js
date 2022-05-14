@@ -3,12 +3,13 @@ import { useSession } from 'next-auth/react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
 import { supabase } from '../lib/supabaseClient';
-import { isAuctionOver } from '../lib/auctionUtils';
-
-// https://www.masters.com/en_US/scores/feeds/2022/scores.json
+import { hasAuctionStarted, isAuctionOver } from '../lib/auctionUtils';
 
 export async function getServerSideProps({ params }) {
-  const { data, error } = await supabase.from('Auctions').select();
+  const { data, error } = await supabase
+    .from('Auctions')
+    .select()
+    .order('start_date', { ascending: false });
 
   if (error) {
     console.log(error.message);
@@ -44,17 +45,23 @@ export default function Home({ auctions = [] }) {
         </div>
       </div>
       <div className='max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0'>
-        <div className='grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8'>
+        <div className='grid grid-cols-1 gap-6 mt-6 md:grid-cols-3'>
           {auctions.map((a) => {
+            const auctionStarted = hasAuctionStarted(a);
             const auctionOver = isAuctionOver(a);
             return (
               <div key={a.id} className='relative rounded-lg card bg-base-200'>
+                {!auctionStarted && (
+                  <div className='absolute badge badge-warning badge-outline top-5 right-5'>
+                    Not Started
+                  </div>
+                )}
                 {auctionOver && (
                   <div className='absolute badge badge-error badge-outline top-5 right-5'>
                     Bidding Over
                   </div>
                 )}
-                {!auctionOver && (
+                {auctionStarted && !auctionOver && (
                   <div className='absolute badge badge-success badge-outline top-5 right-5'>
                     In Progress
                   </div>

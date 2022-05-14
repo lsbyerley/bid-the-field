@@ -1,4 +1,9 @@
-import { differenceInSeconds, differenceInMinutes, isAfter } from 'date-fns';
+import {
+  differenceInSeconds,
+  differenceInMinutes,
+  isAfter,
+  isBefore,
+} from 'date-fns';
 
 // Given an array of bids and a user id, returns the user's winning bids
 export const getOwnerWinningBids = (bids, ownerId) => {
@@ -48,7 +53,7 @@ export const getAuctionResults = (bids) => {
   Object.keys(owners).forEach((owner) => {
     const ownerWinnings = getOwnerWinningBids(bids, owner);
     owners[owner] = ownerWinnings;
-    console.log('log: owner', ownerWinnings);
+    // console.log('log: owner', ownerWinnings);
   });
 
   return owners;
@@ -90,6 +95,10 @@ export const getPlayerHighestBid = (auctionBids, id) => {
 export const getPlayerFromBid = (playersData, playerId) => {
   const player = playersData.find((p) => Number(p.id) === Number(playerId));
   return `${player?.first_name} ${player?.last_name}`;
+};
+
+export const hasAuctionStarted = (auction) => {
+  return isBefore(new Date(auction?.start_date), new Date());
 };
 
 export const isAuctionOver = (auction) => {

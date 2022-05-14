@@ -2,12 +2,17 @@ import { CalendarIcon } from '@heroicons/react/outline';
 import { format } from 'date-fns';
 import useAsyncReference from '../../../lib/useAsyncReference';
 
-const StartDateCard = ({ auction }) => {
+const StartDateCard = ({ auction, auctionStarted }) => {
   const asyncAuction = useAsyncReference(auction, true);
 
   return (
     <div className='rounded-lg card compact bg-base-200'>
       <div className='justify-center card-body'>
+        {!auctionStarted && (
+          <div className='absolute badge badge-warning badge-outline top-5 right-5'>
+            Not Started
+          </div>
+        )}
         <div className='flex items-center'>
           <div className='flex-shrink-0'>
             <CalendarIcon

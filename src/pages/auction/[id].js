@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { supabase } from '../../lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
 import {
+  hasAuctionStarted,
   isAuctionOver,
   secondsLeft,
   shouldDisableField,
@@ -75,6 +76,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [bidSubmitLoading, setBidSubmitLoading] = useState(false);
+  const [auctionStarted, setAuctionStarted] = useState(() =>
+    hasAuctionStarted(auctionData)
+  );
   const [auctionOver, setAuctionOver] = useState(() =>
     isAuctionOver(auctionData)
   );
@@ -92,8 +96,10 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   useIntervalWhen(
     () => {
       console.log(
-        'LOG: interval check auction is over',
-        isAuctionOver(auction.current)
+        `LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`
+      );
+      console.log(
+        `LOG: interval auctionOver: ${isAuctionOver(auction.current)}`
       );
       // if 60 seconds or less are left in auction, set interval check to quick interval
       if (
@@ -102,15 +108,19 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       ) {
         setIntervalCheck(QUICK_INTERVAL_CHECK);
       }
+      // TODO: below if's could be refactored to work when auction dates go backwards when updating via admin console
       if (!auctionOver && isAuctionOver(auction.current)) {
         setAuctionOver(true);
+      }
+      if (!auctionStarted && hasAuctionStarted(auction.current)) {
+        setAuctionStarted(true);
       }
       if (!disableTheField && shouldDisableField(auctionData)) {
         setDisableTheField(true);
       }
     },
     intervalCheck,
-    !auctionOver,
+    !auctionStarted || !auctionOver,
     true
   );
 
@@ -248,16 +258,28 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
       <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3'>
         <NameCard auction={auction.current} />
-        <EndDateCard auction={auction.current} auctionOver={auctionOver} />
+        {!auctionStarted && (
+          <StartDateCard
+            auction={auction.current}
+            auctionStarted={auctionStarted}
+          />
+        )}
+        {auctionStarted && (
+          <EndDateCard auction={auction.current} auctionOver={auctionOver} />
+        )}
+
         <OwnerWinningBids
           bids={bids.current}
           session={session}
           playersData={playersData}
         />
-        {/*<StartDateCard auction={auction.current} />*/}
         <RulesPayoutsCard auction={auction.current} />
         <ResultsLink />
-        <Countdown auction={auction.current} setAuctionOver={setAuctionOver} />
+        <Countdown
+          auction={auction.current}
+          auctionStarted={auctionStarted}
+          setAuctionOver={setAuctionOver}
+        />
         <TotalPot bids={bids.current} />
       </div>
       <h3 className='px-2 py-6 text-lg font-semibold text-center uppercase'>
@@ -275,7 +297,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
                   key={p.id}
                   player={p}
                   bids={bids.current}
-                  biddingDisabled={bidSubmitLoading || auctionOver}
+                  biddingDisabled={
+                    bidSubmitLoading || auctionOver || !auctionStarted
+                  }
                   disableTheField={disableTheField}
                   onSubmitBid={onSubmitBid}
                 />
@@ -301,7 +325,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
                   />
                 </svg>
                 <span>
-                  Players data was not found for this auction! File:{' '}
+                  Player pool not available yet for this auction. File:{' '}
                   {auctionData?.data_filename}
                 </span>
               </div>
