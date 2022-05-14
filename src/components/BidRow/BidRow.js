@@ -38,9 +38,13 @@ const BidRow = ({
               <span className='flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full'>
                 ${highestBid?.amount || 0}
               </span>
-              <h3 className='font-medium truncate'>{player.short_name}</h3>
+              <h3 className='font-medium truncate max-w-[12rem]'>
+                {player.full_name}
+              </h3>
             </div>
-            <p className='mt-4 text-xs truncate'>{highestBid?.owner || '-'}</p>
+            <p className='mt-4 text-xs truncate max-w-[14rem]'>
+              {highestBid?.owner || '-'}
+            </p>
           </div>
         </div>
         <div className='block p-3 md:flex md:justify-around md:items-center'>
