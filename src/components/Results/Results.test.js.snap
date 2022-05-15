@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Results should render and match snapshot 1`] = `
+<div
+  class="grid grid-cols-1 gap-6 md:grid-cols-3"
+>
+  <div
+    class="rounded-lg md:row-span-3 card card-compact bg-base-100"
+  >
+    <div
+      class="card-body"
+    >
+      <div>
+        <div
+          class="flex justify-between pb-2 mb-4 text-lg font-medium border-b"
+        >
+          <span
+            class="mr-2 text-lg truncate text-info"
+          >
+            testowner
+          </span>
+          <span
+            class="text-success"
+          >
+            $
+            25.00
+          </span>
+        </div>
+        <dl
+          class="mt-2 divide-y"
+        >
+          <div
+            class="flex justify-between py-3 text-sm font-medium"
+          >
+            <dt
+              class=""
+            >
+              [{"player_id":"test"}]
+            </dt>
+            <dd
+              class=""
+            >
+              $
+              25.00
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+`;

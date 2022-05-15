@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should render and match snapshot 1`] = `
+<div
+  class="flex flex-col min-h-screen bg-base-200 grid-bg"
+>
+  <div
+    role="nav"
+  >
+    {}
+  </div>
+  <main
+    class="flex-1"
+  />
+  <footer
+    class="flex items-center justify-center py-8 bg-base-100"
+  >
+    <a
+      href="/"
+    >
+      Bid The Field
+    </a>
+  </footer>
+</div>
+`;

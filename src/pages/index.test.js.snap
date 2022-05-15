@@ -2,10 +2,10 @@
 
 exports[`Home should render an auction 1`] = `
 <div
-  class="flex flex-col min-h-screen grid-bg"
+  class="flex flex-col min-h-screen bg-base-200 grid-bg"
 >
   <div
-    class="navbar bg-base-200"
+    class="navbar bg-base-100"
   >
     <div
       class="navbar-start"
@@ -34,7 +34,7 @@ exports[`Home should render an auction 1`] = `
           </svg>
         </label>
         <ul
-          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           tabindex="0"
         >
           <li>
@@ -99,7 +99,7 @@ exports[`Home should render an auction 1`] = `
           </div>
         </label>
         <ul
-          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           tabindex="0"
         >
           <li
@@ -150,10 +150,10 @@ exports[`Home should render an auction 1`] = `
       class="max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0"
     >
       <div
-        class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8"
+        class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3"
       >
         <div
-          class="relative rounded-lg card bg-base-200"
+          class="relative rounded-lg card bg-base-100"
         >
           <div
             class="absolute badge badge-success badge-outline top-5 right-5"
@@ -189,15 +189,12 @@ exports[`Home should render an auction 1`] = `
     </div>
   </main>
   <footer
-    class="flex items-center justify-center py-8 bg-base-200"
+    class="flex items-center justify-center py-8 bg-base-100"
   >
     <a
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      rel="noopener noreferrer"
-      target="_blank"
+      href="/"
     >
       Bid The Field
-       
     </a>
   </footer>
 </div>
@@ -205,10 +202,10 @@ exports[`Home should render an auction 1`] = `
 
 exports[`Home should render and match snapshot 1`] = `
 <div
-  class="flex flex-col min-h-screen grid-bg"
+  class="flex flex-col min-h-screen bg-base-200 grid-bg"
 >
   <div
-    class="navbar bg-base-200"
+    class="navbar bg-base-100"
   >
     <div
       class="navbar-start"
@@ -237,7 +234,7 @@ exports[`Home should render and match snapshot 1`] = `
           </svg>
         </label>
         <ul
-          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           tabindex="0"
         >
           <li>
@@ -302,7 +299,7 @@ exports[`Home should render and match snapshot 1`] = `
           </div>
         </label>
         <ul
-          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52"
+          class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           tabindex="0"
         >
           <li
@@ -353,20 +350,17 @@ exports[`Home should render and match snapshot 1`] = `
       class="max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0"
     >
       <div
-        class="grid grid-cols-1 mt-6 md:grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 md:gap-y-0 lg:gap-x-8"
+        class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3"
       />
     </div>
   </main>
   <footer
-    class="flex items-center justify-center py-8 bg-base-200"
+    class="flex items-center justify-center py-8 bg-base-100"
   >
     <a
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      rel="noopener noreferrer"
-      target="_blank"
+      href="/"
     >
       Bid The Field
-       
     </a>
   </footer>
 </div>

@@ -18,6 +18,9 @@ jest.mock('next-auth/react', () => ({
 }));
 
 jest.mock('../lib/auctionUtils', () => ({
+  hasAuctionStarted: jest.fn((props) => {
+    return true;
+  }),
   isAuctionOver: jest.fn((props) => {
     console.log('LOG: isAuctionOver props', props);
     return false;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccessDenied should render and match snapshot 1`] = `
+<div
+  class="max-w-2xl pt-8 pb-24 mx-auto sm:pt-16 sm:px-6 lg:max-w-7xl lg:px-8"
+>
+  <div
+    class="shadow-lg alert"
+  >
+    <div>
+      <svg
+        aria-hidden="true"
+        class="flex-shrink-0 w-6 h-6 stroke-info"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>
+        Access denied. You must signin to view this page
+      </span>
+    </div>
+    <div
+      class="flex-none"
+    >
+      <a
+        class="btn btn-sm"
+        href="/auth/signin"
+      >
+        Signin
+      </a>
+    </div>
+  </div>
+</div>
+`;
