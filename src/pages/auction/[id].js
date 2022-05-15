@@ -295,7 +295,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <OwnerWinningBids
           bids={bids.current}
           session={session}
-          playersData={playersData}
+          players={playersData}
         />
         <RulesPayoutsCard auction={auction.current} />
         <ResultsLink />
