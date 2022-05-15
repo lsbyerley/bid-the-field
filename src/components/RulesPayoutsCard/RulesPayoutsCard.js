@@ -1,5 +1,5 @@
-import { useAppContext } from '../../../AppContext';
-import useAsyncReference from '../../../lib/useAsyncReference';
+import { useAppContext } from '@/AppContext';
+import useAsyncReference from '@/lib/useAsyncReference';
 
 const RulesPayoutsCard = ({ auction }) => {
   const asyncAuction = useAsyncReference(auction, true);
@@ -15,7 +15,7 @@ const RulesPayoutsCard = ({ auction }) => {
     setModalOpen(true);
   };
   return (
-    <div className='rounded-lg card compact bg-base-200 '>
+    <div className='rounded-lg card compact bg-base-100 '>
       <div className='justify-center card-body'>
         {asyncAuction.current.rules && (
           <button

@@ -4,19 +4,21 @@ import { secondsToHours, secondsToMinutes } from 'date-fns';
 const Countdown = ({
   auction = {},
   auctionStarted,
+  setAuctionStarted = () => {},
+  auctionOver,
   setAuctionOver = () => {},
 }) => {
+  const startTime = new Date(auction.start_date);
   const endTime = new Date(auction.end_date);
 
-  const seconds = useCountdown(endTime, {
-    interval: 1000,
-    // onDown: (time) => console.log('onDown', time),
-    onEnd: () => setAuctionOver(true),
-  });
+  const timeToUse = !auctionStarted ? startTime : endTime;
+  const funcToCallOnEnd = !auctionStarted ? setAuctionStarted : setAuctionOver;
 
-  // if (seconds === 0) {
-  // return null;
-  // }
+  const seconds = useCountdown(timeToUse, {
+    interval: 1000,
+    //onDown: (time) => console.log('onDown func', funcToCallOnEnd),
+    onEnd: () => funcToCallOnEnd(true),
+  });
 
   const hours = secondsToHours(seconds);
   const minutes = secondsToMinutes(seconds);
@@ -54,7 +56,7 @@ const Countdown = ({
     );
   };
 
-  if (!auctionStarted) {
+  /*if (!auctionStarted) {
     return (
       <div className='rounded-lg card card-compact bg-base-200'>
         <div className='items-center justify-center card-body'>
@@ -64,16 +66,19 @@ const Countdown = ({
         </div>
       </div>
     );
-  }
+  }*/
 
   return (
-    <div className='rounded-lg card card-compact bg-base-200'>
+    <div className='rounded-lg card card-compact bg-base-100'>
       <div className='items-center justify-center card-body'>
         <h3 className='text-lg font-medium '>
           {hours >= 1 && getHoursText(hours)}
           {minutes <= 59 && minutes >= 2 && getMinutesText(minutes)}
           {seconds <= 119 && getSecondsText(seconds)}
-          <span className='text-sm'>&nbsp;remaining</span>
+          {!auctionStarted && (
+            <span className='text-sm'>&nbsp;until start</span>
+          )}
+          {auctionStarted && <span className='text-sm'>&nbsp;remaining</span>}
         </h3>
       </div>
     </div>

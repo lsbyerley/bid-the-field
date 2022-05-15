@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CashIcon } from '@heroicons/react/outline';
-import { getPlayerHighestBid } from '../../lib/auctionUtils';
-import useAsyncReference from '../../lib/useAsyncReference';
+import { getPlayerHighestBid } from '@/lib/auctionUtils';
+import useAsyncReference from '@/lib/useAsyncReference';
 import BidModal from '../BidModal';
 
 const BidRow = ({
@@ -30,7 +30,7 @@ const BidRow = ({
     disableTheField && !highestBid?.amount && player?.id !== '999999';
 
   return (
-    <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-200'>
+    <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-100'>
       <div className='flex md:block'>
         <div className='flex items-center justify-between w-full p-3 space-x-6'>
           <div className='flex-1 truncate'>

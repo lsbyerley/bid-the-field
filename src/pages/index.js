@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
-import Layout from '../components/Layout';
+import Layout from '@/components/Layout';
 import Link from 'next/link';
-import { supabase } from '../lib/supabaseClient';
-import { hasAuctionStarted, isAuctionOver } from '../lib/auctionUtils';
+import { supabase } from '@/lib/supabaseClient';
+import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
 export async function getServerSideProps({ params }) {
   const { data, error } = await supabase
@@ -50,7 +50,7 @@ export default function Home({ auctions = [] }) {
             const auctionStarted = hasAuctionStarted(a);
             const auctionOver = isAuctionOver(a);
             return (
-              <div key={a.id} className='relative rounded-lg card bg-base-200'>
+              <div key={a.id} className='relative rounded-lg card bg-base-100'>
                 {!auctionStarted && (
                   <div className='absolute badge badge-warning badge-outline top-5 right-5'>
                     Not Started

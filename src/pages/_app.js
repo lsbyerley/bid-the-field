@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import '../styles/globals.css';
-import AppContextProvider from '../providers/AppContextProvider';
+import AppContextProvider from '@/providers/AppContextProvider';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { usePanelbear } from '@panelbear/panelbear-nextjs';
-import Modal from '../components/Modal';
+import Modal from '@/components/Modal';
 import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 

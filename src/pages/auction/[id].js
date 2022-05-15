@@ -2,28 +2,29 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
 import {
   hasAuctionStarted,
   isAuctionOver,
-  secondsLeft,
+  secondsLeftEnd,
+  secondsLeftStart,
   shouldDisableField,
-} from '../../lib/auctionUtils';
-import useAsyncReference from '../../lib/useAsyncReference';
+} from '@/lib/auctionUtils';
+import useAsyncReference from '@/lib/useAsyncReference';
 import { addMinutes } from 'date-fns';
 
 // Components
-import Layout from '../../components/Layout';
-import AccessDenied from '../../components/AccessDenied';
-import OwnerWinningBids from '../../components/OwnerWinningBids';
-import TotalPot from '../../components/TotalPot';
-import NameCard from '../../components/Auction/NameCard/NameCard';
-import StartDateCard from '../../components/Auction/StartDateCard/StartDateCard';
-import EndDateCard from '../../components/Auction/EndDateCard/EndDateCard';
-import RulesPayoutsCard from '../../components/Auction/RulesPayoutsCard/RulesPayoutsCard';
-import BidRow from '../../components/BidRow';
-import Countdown from '../../components/Countdown';
+import Layout from '@/components/Layout';
+import AccessDenied from '@/components/AccessDenied';
+import OwnerWinningBids from '@/components/OwnerWinningBids';
+import TotalPot from '@/components/TotalPot';
+import NameCard from '@/components/NameCard';
+import StartDateCard from '@/components/StartDateCard';
+import EndDateCard from '@/components/EndDateCard';
+import RulesPayoutsCard from '@/components/RulesPayoutsCard';
+import BidRow from '@/components/BidRow';
+import Countdown from '@/components/Countdown';
 
 // CONSTANTS
 const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
@@ -55,7 +56,7 @@ export async function getServerSideProps({ params }) {
 
   let players;
   try {
-    players = await import(`../../lib/${auction.data_filename}.json`);
+    players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
   } catch (err) {
     console.log('LOG: error importing players json file');
   }
@@ -85,42 +86,65 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   const [disableTheField, setDisableTheField] = useState(() =>
     shouldDisableField(auctionData)
   );
-  const [intervalCheck, setIntervalCheck] = useState(() => {
-    return secondsLeft(auction.current) <= 60
+  const [intervalCheckStart, setIntervalCheckStart] = useState(() => {
+    return secondsLeftStart(auction.current) <= 60
+      ? QUICK_INTERVAL_CHECK
+      : DEFAULT_INTERVAL_CHECK;
+  });
+  const [intervalCheckEnd, setIntervalCheckEnd] = useState(() => {
+    return secondsLeftEnd(auction.current) <= 60
       ? QUICK_INTERVAL_CHECK
       : DEFAULT_INTERVAL_CHECK;
   });
 
   useEffect(() => setMounted(true), []);
 
+  // AUCTION END INTERVAL CHECK
   useIntervalWhen(
     () => {
       console.log(
-        `LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`
-      );
-      console.log(
         `LOG: interval auctionOver: ${isAuctionOver(auction.current)}`
       );
-      // if 60 seconds or less are left in auction, set interval check to quick interval
+      // if 60 seconds or less are left until auction ends, set interval check to quick interval
       if (
-        intervalCheck === DEFAULT_INTERVAL_CHECK &&
-        secondsLeft(auction.current) <= 60
+        intervalCheckEnd === DEFAULT_INTERVAL_CHECK &&
+        secondsLeftEnd(auction.current) <= 60
       ) {
-        setIntervalCheck(QUICK_INTERVAL_CHECK);
+        setIntervalCheckEnd(QUICK_INTERVAL_CHECK);
       }
       // TODO: below if's could be refactored to work when auction dates go backwards when updating via admin console
       if (!auctionOver && isAuctionOver(auction.current)) {
         setAuctionOver(true);
       }
-      if (!auctionStarted && hasAuctionStarted(auction.current)) {
-        setAuctionStarted(true);
-      }
+      // Disable bids on players without a bid 30 minutes before end date as they become part of The Field
       if (!disableTheField && shouldDisableField(auctionData)) {
         setDisableTheField(true);
       }
     },
-    intervalCheck,
-    !auctionStarted || !auctionOver,
+    intervalCheckEnd,
+    auctionStarted && !auctionOver,
+    true
+  );
+
+  // AUCTION START INTERVAL CHECK
+  useIntervalWhen(
+    () => {
+      console.log(
+        `LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`
+      );
+      // if 60 seconds or less are left to start the auction, set interval check to quick interval
+      if (
+        intervalCheckStart === DEFAULT_INTERVAL_CHECK &&
+        secondsLeftStart(auction.current) <= 60
+      ) {
+        setIntervalCheckStart(QUICK_INTERVAL_CHECK);
+      }
+      if (!auctionStarted && hasAuctionStarted(auction.current)) {
+        setAuctionStarted(true);
+      }
+    },
+    intervalCheckStart,
+    !auctionStarted,
     true
   );
 
@@ -206,7 +230,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
       console.log('LOG: error submitting bid', error.message);
     }
 
-    const auctionSecondsLeft = secondsLeft(auction.current);
+    const auctionSecondsLeft = secondsLeftEnd(auction.current);
     if (!error && auctionSecondsLeft > 0 && auctionSecondsLeft <= 180) {
       console.log('LOG: add 3 minutes to auction', auctionSecondsLeft);
       updateAuctionEndTime(3);
@@ -240,7 +264,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
   const ResultsLink = () => {
     return (
-      <div className='rounded-lg card compact bg-base-200 '>
+      <div className='rounded-lg card compact bg-base-100'>
         <div className='justify-center card-body'>
           <Link href={`/auction/results/${auction.current.id}`}>
             <a className='btn btn-ghost btn-sm'>Rosters / Results</a>
@@ -256,7 +280,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <title>Bid The Field - {auction.current.name}</title>
       </Head>
 
-      <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3 xl:px-0'>
         <NameCard auction={auction.current} />
         {!auctionStarted && (
           <StartDateCard
@@ -278,14 +302,16 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         <Countdown
           auction={auction.current}
           auctionStarted={auctionStarted}
+          setAuctionStarted={setAuctionStarted}
+          auctionOver={auctionOver}
           setAuctionOver={setAuctionOver}
         />
         <TotalPot bids={bids.current} />
       </div>
-      <h3 className='px-2 py-6 text-lg font-semibold text-center uppercase'>
+      <h3 className='px-2 py-6 text-lg font-semibold text-center uppercase xl:px-0'>
         Player Pool
       </h3>
-      <div className='px-2 py-4 mx-auto max-w-7xl'>
+      <div className='px-2 py-4 mx-auto mb-8 xl:px-0 max-w-7xl'>
         {playersData && playersData.length > 0 && (
           <ul
             role='list'
