@@ -3,12 +3,29 @@ import { render, screen } from 'test-utils';
 import Results from './Results';
 
 jest.mock('@/lib/auctionUtils', () => ({
+  ...jest.requireActual('@/lib/auctionUtils'),
   getAuctionResults: jest.fn((props) => {
     return {
-      testowner: [{ id: 'test', player_id: 'test', amount: '25' }],
+      ownerOne: [
+        {
+          id: 'test',
+          auction_id: 'test',
+          player_id: '1',
+          amount: 25,
+          owner: 'ownerOne',
+        },
+      ],
+      ownerTwo: [
+        {
+          id: 'test',
+          auction_id: 'test',
+          player_id: '2',
+          amount: 15,
+          owner: 'ownerTwo',
+        },
+      ],
     };
   }),
-  getPlayerFromBid: jest.fn((props) => JSON.stringify(props)),
 }));
 
 const defaultProps = (overrides) => {
@@ -16,15 +33,29 @@ const defaultProps = (overrides) => {
     bids: [
       {
         id: 'test',
-        owner: 'testowner',
-        amount: '25',
-        player_id: 'test',
+        owner: 'ownerOne',
+        amount: 25,
+        player_id: '1',
+        auction_id: 'test',
+      },
+      {
+        id: 'test',
+        owner: 'ownerTwo',
+        amount: 20,
+        player_id: '1',
         auction_id: 'test',
       },
     ],
     players: [
       {
-        player_id: 'test',
+        id: '1',
+        full_name: 'test-full-1',
+        short_name: 'test-short-1',
+      },
+      {
+        id: '2',
+        full_name: 'test-full-2',
+        short_name: 'test-short-2',
       },
     ],
     ...overrides,

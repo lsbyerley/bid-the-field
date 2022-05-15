@@ -17,7 +17,7 @@ exports[`Results should render and match snapshot 1`] = `
           <span
             class="mr-2 text-lg truncate text-info"
           >
-            testowner
+            ownerOne
           </span>
           <span
             class="text-success"
@@ -35,13 +35,57 @@ exports[`Results should render and match snapshot 1`] = `
             <dt
               class=""
             >
-              [{"player_id":"test"}]
+              test-full-1
             </dt>
             <dd
               class=""
             >
               $
               25.00
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div
+    class="rounded-lg md:row-span-3 card card-compact bg-base-100"
+  >
+    <div
+      class="card-body"
+    >
+      <div>
+        <div
+          class="flex justify-between pb-2 mb-4 text-lg font-medium border-b"
+        >
+          <span
+            class="mr-2 text-lg truncate text-info"
+          >
+            ownerTwo
+          </span>
+          <span
+            class="text-success"
+          >
+            $
+            15.00
+          </span>
+        </div>
+        <dl
+          class="mt-2 divide-y"
+        >
+          <div
+            class="flex justify-between py-3 text-sm font-medium"
+          >
+            <dt
+              class=""
+            >
+              test-full-2
+            </dt>
+            <dd
+              class=""
+            >
+              $
+              15.00
             </dd>
           </div>
         </dl>

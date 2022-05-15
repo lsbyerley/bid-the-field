@@ -1,9 +1,9 @@
 import * as utils from './auctionUtils';
 
 const playersData = [
-  { id: 1, first_name: 'test1', last_name: 'test1' },
-  { id: 2, first_name: 'test2', last_name: 'test2' },
-  { id: 3, first_name: 'test3', last_name: 'test3' },
+  { id: 1, full_name: 'test1', short_name: 'test1' },
+  { id: 2, full_name: 'test2', short_name: 'test2' },
+  { id: 3, full_name: 'test3', short_name: 'test3' },
 ];
 
 const bids = [
@@ -55,9 +55,11 @@ describe('auctionUtils -> getPlayerHighestBid', () => {
 describe('auctionUtils -> getPlayerFromBid', () => {
   it('should return a player object from array of bids', () => {
     const playerId = 1;
-    expect(utils.getPlayerFromBid(playersData, playerId)).toEqual(
-      'test1 test1'
-    );
+    expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
+      full_name: 'test1',
+      id: 1,
+      short_name: 'test1',
+    });
   });
 });
 

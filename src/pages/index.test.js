@@ -22,7 +22,6 @@ jest.mock('../lib/auctionUtils', () => ({
     return true;
   }),
   isAuctionOver: jest.fn((props) => {
-    console.log('LOG: isAuctionOver props', props);
     return false;
   }),
 }));
