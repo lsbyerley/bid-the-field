@@ -28,19 +28,24 @@ const Results = ({ bids = [], players = [] }) => {
                     </span>
                   </div>
                   <dl className='mt-2 divide-y'>
-                    {ownerResults.map((bid) => (
-                      <div
-                        key={bid.id}
-                        className='flex justify-between py-3 text-sm font-medium'
-                      >
-                        <dt className=''>
-                          {getPlayerFromBid(players, bid.player_id)}
-                        </dt>
-                        <dd className=''>
-                          ${Number.parseFloat(bid.amount).toFixed(2)}
-                        </dd>
-                      </div>
-                    ))}
+                    {ownerResults.map((bid) => {
+                      const player = getPlayerFromBid(players, bid.player_id);
+                      return (
+                        <div
+                          key={bid.id}
+                          className='flex justify-between py-3 text-sm font-medium'
+                        >
+                          <dt className=''>
+                            {player?.full_name ||
+                              player?.short_name ||
+                              `na:${bid.player_id}`}
+                          </dt>
+                          <dd className=''>
+                            ${Number.parseFloat(bid.amount).toFixed(2)}
+                          </dd>
+                        </div>
+                      );
+                    })}
                     {!ownerResults ||
                       (!ownerResults?.length && (
                         <div className='px-2 py-3'>

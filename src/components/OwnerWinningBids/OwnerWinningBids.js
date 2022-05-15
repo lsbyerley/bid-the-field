@@ -1,7 +1,7 @@
 import { getOwnerWinningBids, getPlayerFromBid } from '@/lib/auctionUtils';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
+const OwnerWinningBids = ({ bids = [], session = {}, players = [] }) => {
   const asyncBids = useAsyncReference(bids, true);
   const winningBids = getOwnerWinningBids(
     asyncBids.current,
@@ -24,19 +24,24 @@ const OwnerWinningBids = ({ bids = [], session = {}, playersData }) => {
           </div>
 
           <dl className='mt-2 overflow-y-scroll divide-y max-h-72'>
-            {winningBids.map((bid) => (
-              <div
-                key={bid.id}
-                className='flex justify-between py-3 text-sm font-medium'
-              >
-                <dt className=''>
-                  {getPlayerFromBid(playersData, bid.player_id)}
-                </dt>
-                <dd className=''>
-                  ${Number.parseFloat(bid.amount).toFixed(2)}
-                </dd>
-              </div>
-            ))}
+            {winningBids.map((bid) => {
+              const player = getPlayerFromBid(players, bid.player_id);
+              return (
+                <div
+                  key={bid.id}
+                  className='flex justify-between py-3 text-sm font-medium'
+                >
+                  <dt className=''>
+                    {player?.full_name ||
+                      player?.short_name ||
+                      `na:${bid.player_id}`}
+                  </dt>
+                  <dd className=''>
+                    ${Number.parseFloat(bid.amount).toFixed(2)}
+                  </dd>
+                </div>
+              );
+            })}
             {!winningBids ||
               (!winningBids?.length && (
                 <div className='px-2 py-3'>
