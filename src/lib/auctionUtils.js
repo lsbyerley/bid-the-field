@@ -94,7 +94,8 @@ export const getPlayerHighestBid = (auctionBids, id) => {
 // given an array of players and player id, returns the player name
 export const getPlayerFromBid = (playersData, playerId) => {
   const player = playersData.find((p) => Number(p.id) === Number(playerId));
-  return `${player?.first_name} ${player?.last_name}`;
+  return player ? player : {};
+  // return `${player?.first_name} ${player?.last_name}`;
 };
 
 export const hasAuctionStarted = (auction) => {
