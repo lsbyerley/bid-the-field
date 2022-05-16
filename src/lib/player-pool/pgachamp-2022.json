@@ -127,13 +127,6 @@
       "short_name": "P. Cantlay"
     },
     {
-      "id": "25364",
-      "first_name": "Paul",
-      "last_name": "Casey",
-      "full_name": "Paul Casey",
-      "short_name": "P. Casey"
-    },
-    {
       "id": "20472",
       "first_name": "Alex",
       "last_name": "Cejka",
@@ -167,6 +160,13 @@
       "last_name": "Conners",
       "full_name": "Corey Conners",
       "short_name": "C. Conners"
+    },
+    {
+      "id": "34076",
+      "first_name": "Joel",
+      "last_name": "Dahmen",
+      "full_name": "Joel Dahmen",
+      "short_name": "J. Dahmen"
     },
     {
       "id": "01249",
@@ -344,13 +344,6 @@
       "short_name": "K. Hickok"
     },
     {
-      "id": "35778",
-      "first_name": "Kazuki",
-      "last_name": "Higa",
-      "full_name": "Kazuki Higa",
-      "short_name": "K. Higa"
-    },
-    {
       "id": "54421",
       "first_name": "Garrick",
       "last_name": "Higgo",
@@ -407,6 +400,13 @@
       "short_name": "R. Hoshino"
     },
     {
+      "id": "35461",
+      "first_name": "Beau",
+      "last_name": "Hossler",
+      "full_name": "Beau Hossler",
+      "short_name": "B. Hossler"
+    },
+    {
       "id": "46717",
       "first_name": "Viktor",
       "last_name": "Hovland",
@@ -426,13 +426,6 @@
       "last_name": "Hurt",
       "full_name": "Austin Hurt",
       "short_name": "A. Hurt"
-    },
-    {
-      "id": "39971",
-      "first_name": "Sungjae",
-      "last_name": "Im",
-      "full_name": "Sungjae Im",
-      "short_name": "S. Im"
     },
     {
       "id": "36514",
@@ -561,6 +554,13 @@
       "short_name": "P. Kizzire"
     },
     {
+      "id": "33122",
+      "first_name": "Russell",
+      "last_name": "Knox",
+      "full_name": "Russell Knox",
+      "short_name": "R. Knox"
+    },
+    {
       "id": "36689",
       "first_name": "Brooks",
       "last_name": "Koepka",
@@ -629,13 +629,6 @@
       "last_name": "List",
       "full_name": "Luke List",
       "short_name": "L. List"
-    },
-    {
-      "id": "01706",
-      "first_name": "Davis",
-      "last_name": "Love III",
-      "full_name": "Davis Love III",
-      "short_name": "D. Love III"
     },
     {
       "id": "33204",
@@ -883,6 +876,20 @@
       "short_name": "S. Scheffler"
     },
     {
+      "id": "47347",
+      "first_name": "Adam",
+      "last_name": "Schenk",
+      "full_name": "Adam Schenk",
+      "short_name": "A. Schenk"
+    },
+    {
+      "id": "26331",
+      "first_name": "Charl",
+      "last_name": "Schwartzel",
+      "full_name": "Charl Schwartzel",
+      "short_name": "C. Schwartzel"
+    },
+    {
       "id": "24502",
       "first_name": "Adam",
       "last_name": "Scott",
@@ -916,6 +923,20 @@
       "last_name": "Spieth",
       "full_name": "Jordan Spieth",
       "short_name": "J. Spieth"
+    },
+    {
+      "id": "30692",
+      "first_name": "Scott",
+      "last_name": "Stallings",
+      "full_name": "Scott Stallings",
+      "short_name": "S. Stallings"
+    },
+    {
+      "id": "29518",
+      "first_name": "Brendan",
+      "last_name": "Steele",
+      "full_name": "Brendan Steele",
+      "short_name": "B. Steele"
     },
     {
       "id": "21528",
@@ -993,13 +1014,6 @@
       "last_name": "Vermeer",
       "full_name": "Ryan Vermeer",
       "short_name": "R. Vermeer"
-    },
-    {
-      "id": "25632",
-      "first_name": "Jimmy",
-      "last_name": "Walker",
-      "full_name": "Jimmy Walker",
-      "short_name": "J. Walker"
     },
     {
       "id": "33624",
