@@ -49,7 +49,7 @@ const Results = ({ bids = [], players = [] }) => {
                     {!ownerResults ||
                       (!ownerResults?.length && (
                         <div className='px-2 py-3'>
-                          <dt className=''>no winning bids</dt>
+                          <dt className='text-warning'>no winning bids</dt>
                         </div>
                       ))}
                   </dl>

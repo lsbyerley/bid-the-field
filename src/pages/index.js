@@ -35,7 +35,14 @@ export default function Home({ auctions = [] }) {
         <div className='text-center hero-content'>
           <div className='max-w-md'>
             <h1 className='mb-4 text-3xl font-bold'>Bid The Field</h1>
-            <p className='pt-2'>Join an auction and bid on players or teams</p>
+            <p className='pt-2'>
+              This site is meant to function as an automated replacement for the
+              excel spreadsheet auction/calcutta mayhem and is still under
+              active development
+            </p>
+            <p className='pt-2'>
+              Suggestions on improvement are encouraged &#129305;
+            </p>
             {!sessionLoading && !session && (
               <p className='pt-2'>
                 You must have a google account to sign in and place bids
