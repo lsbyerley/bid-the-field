@@ -32,7 +32,7 @@ export default function Home({ auctions = [] }) {
         <title>Bid The Field</title>
       </Head>
       <div className='hero'>
-        <div className='text-center hero-content'>
+        <div className='pt-8 text-center hero-content'>
           <div className='max-w-md'>
             <h1 className='mb-4 text-3xl font-bold'>Bid The Field</h1>
             <p className='pt-2'>

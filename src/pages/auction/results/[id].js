@@ -131,15 +131,15 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
                 ></path>
               </svg>
               <div>
-                <h3 className='font-bold'>Auction still in progress!</h3>
+                <h3 className='font-bold'>Auction not over!</h3>
                 <div className='text-xs'>
-                  You can still place bids on players
+                  Auction is in progress or hasn't started
                 </div>
               </div>
             </div>
             <div className='flex-none'>
               <Link href={`/auction/${auction.current.id}`}>
-                <a className='btn btn-sm'>Go Bid</a>
+                <a className='btn btn-sm'>View Auction</a>
               </Link>
             </div>
           </div>
