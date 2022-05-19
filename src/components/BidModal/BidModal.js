@@ -30,6 +30,14 @@ const BidModal = ({
       alert(`Bid must be higher than $0`);
       return;
     }
+    if (Number(bidAmount) <= 0.24) {
+      alert(`Minimum bid of $0.25 required`);
+      return;
+    }
+    if (Number(bidAmount) >= 1001) {
+      alert(`Bid cannot exceed $1000`);
+      return;
+    }
     if (highestBid?.amount && Number(bidAmount) <= Number(highestBid.amount)) {
       alert(`Bid must be higher than $${highestBid.amount}`);
       return;
