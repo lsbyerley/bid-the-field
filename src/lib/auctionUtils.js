@@ -5,6 +5,12 @@ import {
   isBefore,
 } from 'date-fns';
 
+// Round a number to the decimal place passed in
+// https://www.jacklmoore.com/notes/rounding-in-javascript/
+export const round = (value, decimals) => {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+};
+
 // Given an array of bids and a user id, returns the user's winning bids
 export const getOwnerWinningBids = (bids, ownerId) => {
   const ownerBidsSorted = bids

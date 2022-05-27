@@ -1,5 +1,6 @@
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { round } from '../../lib/auctionUtils';
 
 const BidModal = ({
   isOpen = false,
@@ -26,23 +27,30 @@ const BidModal = ({
       alert('Valid bid amount required');
       return;
     }
-    if (Number(bidAmount) <= 0) {
+
+    // Round the bid amount to the nearest tenth decimal
+    const formattedBidAmount = round(bidAmount, 2);
+
+    if (Number(formattedBidAmount) <= 0) {
       alert(`Bid must be higher than $0`);
       return;
     }
-    if (Number(bidAmount) <= 0.24) {
+    if (Number(formattedBidAmount) <= 0.24) {
       alert(`Minimum bid of $0.25 required`);
       return;
     }
-    if (Number(bidAmount) >= 1001) {
+    if (Number(formattedBidAmount) >= 1001) {
       alert(`Bid cannot exceed $1000`);
       return;
     }
-    if (highestBid?.amount && Number(bidAmount) <= Number(highestBid.amount)) {
+    if (
+      highestBid?.amount &&
+      Number(formattedBidAmount) <= Number(highestBid.amount)
+    ) {
       alert(`Bid must be higher than $${highestBid.amount}`);
       return;
     }
-    onSubmit(bidAmount, player.id);
+    onSubmit(formattedBidAmount, player.id);
     closeModal();
   };
 
