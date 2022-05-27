@@ -75,9 +75,36 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   if (!auction.current) {
     return (
       <Layout>
-        <p className='py-6 text-center'>
-          Auction Not Found. Check the ID and try again
-        </p>
+        <div className='px-2 py-4 mx-auto max-w-7xl xl:px-0'>
+          <div className='mt-16 rounded-lg alert bg-base-100'>
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='flex-shrink-0 w-6 h-6 stroke-info'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                ></path>
+              </svg>
+              <div>
+                <h3 className='font-bold'>Auction not found!</h3>
+                <div className='text-xs'>
+                  Check the ID and try again or go to the home page.
+                </div>
+              </div>
+            </div>
+            <div className='flex-none'>
+              <Link href='/'>
+                <a className='btn btn-sm'>Go Home</a>
+              </Link>
+            </div>
+          </div>
+        </div>
       </Layout>
     );
   }
