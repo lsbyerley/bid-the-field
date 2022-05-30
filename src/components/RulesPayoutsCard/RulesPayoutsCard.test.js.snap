@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RulesPayoutsCard should render and match snapshot 1`] = `
+<div
+  class="rounded-lg card compact bg-base-100 "
+>
+  <div
+    class="justify-center card-body"
+  >
+    <button
+      class="btn btn-ghost btn-sm"
+    >
+      Rules
+    </button>
+    <button
+      class="btn btn-ghost btn-sm"
+    >
+      Payouts
+    </button>
+  </div>
+</div>
+`;

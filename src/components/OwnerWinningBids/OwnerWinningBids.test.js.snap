@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OwnerWinningBids should render and match snapshot 1`] = `
+<div
+  class="rounded-lg md:row-span-3 card card-compact bg-base-100"
+>
+  <div
+    class="card-body"
+  >
+    <div>
+      <div
+        class="flex justify-between pb-2 mb-4 text-lg font-medium border-b"
+      >
+        <span
+          class="mr-2 truncate text-info"
+        >
+          Your Winning Bids
+        </span>
+        <span
+          class="text-success"
+        >
+          $
+          0.00
+        </span>
+      </div>
+      <dl
+        class="mt-2 overflow-y-scroll divide-y max-h-72"
+      >
+        <div
+          class="px-2 py-3"
+        >
+          <dt
+            class="text-warning"
+          >
+            no winning bids
+          </dt>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+`;

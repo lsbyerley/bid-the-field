@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BidRow should render and match snapshot 1`] = `
+<li
+  class="col-span-1 rounded-lg shadow bg-base-100"
+>
+  <div
+    class="flex md:block"
+  >
+    <div
+      class="flex items-center justify-between w-full p-3 space-x-6"
+    >
+      <div
+        class="flex-1 truncate"
+      >
+        <div
+          class="flex items-center space-x-3"
+        >
+          <span
+            class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full"
+          >
+            $
+            0
+          </span>
+          <h3
+            class="font-medium truncate max-w-[12rem]"
+          />
+        </div>
+        <p
+          class="mt-4 text-xs truncate max-w-[14rem]"
+        >
+          -
+        </p>
+      </div>
+    </div>
+    <div
+      class="block p-3 md:flex md:justify-around md:items-center"
+    >
+      <button
+        class="w-full btn btn-xs btn-ghost md:w-auto"
+      >
+        <svg
+          aria-hidden="true"
+          class="w-5 h-5 "
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span
+          class="ml-1"
+        >
+          Bid
+        </span>
+      </button>
+      <button
+        class="w-full btn btn-xs btn-ghost md:w-auto"
+        disabled=""
+      >
+        <span
+          class="ml-1"
+        >
+          Bid 10%
+        </span>
+      </button>
+    </div>
+  </div>
+</li>
+`;
