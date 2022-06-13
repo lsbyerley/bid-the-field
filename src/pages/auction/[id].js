@@ -23,7 +23,7 @@ import NameCard from '@/components/NameCard';
 import StartDateCard from '@/components/StartDateCard';
 import EndDateCard from '@/components/EndDateCard';
 import RulesPayoutsCard from '@/components/RulesPayoutsCard';
-import BidRow from '@/components/BidRow';
+import BidField from '@/components/BidField';
 import Countdown from '@/components/Countdown';
 
 // CONSTANTS
@@ -31,9 +31,6 @@ const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
 //https://github.com/nextauthjs/next-auth-example/blob/main/pages/server.tsx
-
-//TODO's
-// 1. order player list by highest bids
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -343,27 +340,13 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
         Player Pool
       </h3>
       <div className='px-2 py-4 mx-auto mb-8 xl:px-0 max-w-7xl'>
-        {playersData && playersData.length > 0 && (
-          <ul
-            role='list'
-            className='grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4'
-          >
-            {playersData.map((p) => {
-              return (
-                <BidRow
-                  key={p.id}
-                  player={p}
-                  bids={bids.current}
-                  biddingDisabled={
-                    bidSubmitLoading || auctionOver || !auctionStarted
-                  }
-                  disableTheField={disableTheField}
-                  onSubmitBid={onSubmitBid}
-                />
-              );
-            })}
-          </ul>
-        )}
+        <BidField
+          playersData={playersData}
+          bids={bids.current}
+          biddingDisabled={bidSubmitLoading || auctionOver || !auctionStarted}
+          disableTheField={disableTheField}
+          onSubmitBid={onSubmitBid}
+        />
         {!playersData ||
           (playersData.length === 0 && (
             <div className='shadow-lg alert'>
