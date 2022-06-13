@@ -10,8 +10,6 @@ import fetch from 'node-fetch';
 // }
 // -----------------------------------------
 
-//TODO: add player obj formatting to each fetch below
-
 // -----------------------------------------
 // The Masters Player Pool
 // found here: https://www.masters.com/en_US/scores/feeds/2022/players/players.json
@@ -52,14 +50,25 @@ export const fetchMasters = async (url) => {
 // -----------------------------------------
 // US Open Player Pool
 // found here: 'https://www.usopen.com/bin/usopen/players.json'
+// or here: https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=026&YEAR=2022&format=json
 // -----------------------------------------
 
 export const fetchUsOpen = async (url) => {
   const playerRes = await fetch(url).then((res) => res.json());
-  const players = playerRes.map((p) => {
-    return { ...p };
+  const players = playerRes.Tournament.Players.filter(
+    (p) => p.isAlternate === 'No'
+  ).map((p) => {
+    return {
+      id: p.TournamentPlayerId,
+      first_name: p.PlayerFirstName,
+      last_name: p.PlayerLastName,
+      full_name: `${p.PlayerFirstName} ${p.PlayerLastName}`,
+      short_name: `${p.PlayerFirstName.substring(0, 1)}. ${p.PlayerLastName}`,
+    };
   });
-  console.log('LOG: playerRes', JSON.stringify(players));
+  // Add The Field player obj
+  players.unshift(theFieldPlayer);
+  return players;
 };
 
 // -----------------------------------------
@@ -138,8 +147,9 @@ export const fetchPgaChamp = async (url) => {
 // https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=480&YEAR=2022&format=json
 
 const run = async () => {
-  const players = await fetchPgaChamp(
-    'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2022&format=json'
+  const players = await fetchUsOpen(
+    //'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2022&format=json'
+    'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=026&YEAR=2022&format=json'
   );
 
   console.log(JSON.stringify(players));

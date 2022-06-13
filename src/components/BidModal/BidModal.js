@@ -35,8 +35,8 @@ const BidModal = ({
       alert(`Bid must be higher than $0`);
       return;
     }
-    if (Number(formattedBidAmount) <= 0.24) {
-      alert(`Minimum bid of $0.25 required`);
+    if (Number(formattedBidAmount) < 1) {
+      alert(`Minimum bid of $1.00 required`);
       return;
     }
     if (Number(formattedBidAmount) >= 1001) {
