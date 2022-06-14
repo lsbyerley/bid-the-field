@@ -152,6 +152,10 @@ const run = async () => {
     'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=026&YEAR=2022&format=json'
   );
 
-  console.log(JSON.stringify(players));
+  const returnObj = {
+    data: players,
+  };
+
+  console.log(JSON.stringify(returnObj));
 };
 run();
