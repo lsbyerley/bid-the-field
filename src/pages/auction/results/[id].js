@@ -159,9 +159,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
               </svg>
               <div>
                 <h3 className='font-bold'>Auction not over!</h3>
-                <div className='text-xs'>
-                  Auction is in progress or hasn't started
-                </div>
+                <div className='text-xs'>Auction is still in progress</div>
               </div>
             </div>
             <div className='flex-none'>

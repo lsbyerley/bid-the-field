@@ -27,7 +27,7 @@ const Results = ({ bids = [], players = [] }) => {
                       ${Number.parseFloat(totalBidAmount).toFixed(2)}
                     </span>
                   </div>
-                  <dl className='mt-2 divide-y'>
+                  <dl className='mt-2 overflow-y-scroll divide-y max-h-96'>
                     {ownerResults.map((bid) => {
                       const player = getPlayerFromBid(players, bid.player_id);
                       return (

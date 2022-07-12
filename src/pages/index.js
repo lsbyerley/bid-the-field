@@ -15,8 +15,6 @@ export async function getServerSideProps({ params }) {
     console.log('LOG: error fetching auctions', error.message);
   }
 
-  console.log('LOG: here', data);
-
   return {
     props: {
       auctions: data || [],
