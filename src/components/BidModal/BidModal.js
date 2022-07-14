@@ -50,6 +50,14 @@ const BidModal = ({
       alert(`Bid must be higher than $${highestBid.amount}`);
       return;
     }
+    if (
+      highestBid?.amount &&
+      Number(formattedBidAmount) - Number(highestBid.amount) <= 0.99
+    ) {
+      console.log(Number(formattedBidAmount) - Number(highestBid.amount));
+      alert(`Bid must be atleast $1 higher than ${highestBid.amount}`);
+      return;
+    }
     onSubmit(formattedBidAmount, player.id);
     closeModal();
   };
