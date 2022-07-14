@@ -2,6 +2,10 @@ import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { round } from '../../lib/auctionUtils';
 
+const MIN_BID = 1;
+const MAX_BID = 1001;
+const MIN_TO_OUTBID = 0.99;
+
 const BidModal = ({
   isOpen = false,
   setIsOpen = () => {},
@@ -35,11 +39,11 @@ const BidModal = ({
       alert(`Bid must be higher than $0`);
       return;
     }
-    if (Number(formattedBidAmount) < 1) {
+    if (Number(formattedBidAmount) < MIN_BID) {
       alert(`Minimum bid of $1.00 required`);
       return;
     }
-    if (Number(formattedBidAmount) >= 1001) {
+    if (Number(formattedBidAmount) >= MAX_BID) {
       alert(`Bid cannot exceed $1000`);
       return;
     }
@@ -52,9 +56,8 @@ const BidModal = ({
     }
     if (
       highestBid?.amount &&
-      Number(formattedBidAmount) - Number(highestBid.amount) <= 0.99
+      Number(formattedBidAmount) - Number(highestBid.amount) <= MIN_TO_OUTBID
     ) {
-      console.log(Number(formattedBidAmount) - Number(highestBid.amount));
       alert(`Bid must be atleast $1 higher than ${highestBid.amount}`);
       return;
     }

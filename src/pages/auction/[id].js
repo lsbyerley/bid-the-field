@@ -214,8 +214,6 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
     }
     setBidSubmitLoading(true);
 
-    //TODO: round bids to the nearest tenth decimal place 5.0001 -> 5.01
-
     const { data, error } = await supabase.from('Bids').insert([
       {
         auction_id: auction.current?.id,

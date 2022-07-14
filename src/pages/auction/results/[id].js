@@ -12,6 +12,7 @@ import Layout from '@/components/Layout';
 import AccessDenied from '@/components/AccessDenied';
 import Results from '@/components/Results';
 import TotalPot from '@/components/TotalPot';
+import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
@@ -170,8 +171,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
           </div>
         )}
 
-        <div className='mb-8'>
+        <div className='grid grid-cols-1 gap-6 mb-8 md:grid-cols-2'>
           <TotalPot bids={bids.current} />
+          <RulesPayoutsCard auction={auction.current} />
         </div>
 
         <Results bids={bids.current} players={playersData} />
