@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@supabase/auth-helpers-react';
 import { supabase } from '@/lib/supabaseClient';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
@@ -14,16 +14,18 @@ import Results from '@/components/Results';
 import TotalPot from '@/components/TotalPot';
 import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
+// TODO: add live bids updating here?
+
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
-    .from('Auctions')
+    .from('auctions')
     .select('*')
     .eq('id', params.id)
     .single();
 
   const { data: bids, error: bidsError } = await supabase
-    .from('Bids')
-    .select('*')
+    .from('bids')
+    .select(`*, profile:owner_id(email,name)`)
     .eq('auction_id', params.id);
 
   if (auctionError) {
@@ -49,10 +51,13 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
+const AuctionResultsPage = ({
+  auctionData = {},
+  bidsData = [],
+  playersData = [],
+}) => {
   const [mounted, setMounted] = useState(false);
-  const { data: session, status: sessionStatus } = useSession();
-  const sessionLoading = sessionStatus === 'loading';
+  const { isLoading, user } = useUser();
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [auctionOver, setAuctionOver] = useState(() =>
@@ -62,10 +67,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   useEffect(() => setMounted(true), []);
 
   // When rendering client side don't display anything until loading is complete
-  // https://github.com/nextauthjs/next-auth-example/blob/main/pages/protected.tsx
-  if (typeof window !== 'undefined' && sessionLoading) return null;
+  if (typeof window !== 'undefined' && isLoading) return null;
 
-  if (!session) {
+  if (!user) {
     return (
       <Layout>
         <AccessDenied />
@@ -182,4 +186,4 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   );
 };
 
-export default AuctionPage;
+export default AuctionResultsPage;

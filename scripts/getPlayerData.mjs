@@ -1,4 +1,6 @@
 import fetch from 'node-fetch';
+import { v4 as uuidv4 } from 'uuid';
+
 // -----------------------------------------
 // JSON structure { data: [playerObject] }
 // Player Object Structure
@@ -24,7 +26,6 @@ const theFieldPlayer = {
 };
 
 export const fetchMasters = async (url) => {
-  // TODO: access denied when fetching via script
   try {
     const playerRes = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla' },

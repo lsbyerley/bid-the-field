@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@supabase/auth-helpers-react';
 import { supabase } from '@/lib/supabaseClient';
 import { useIntervalWhen } from 'rooks';
 import {
@@ -30,25 +30,32 @@ import Countdown from '@/components/Countdown';
 const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
-//https://github.com/nextauthjs/next-auth-example/blob/main/pages/server.tsx
-
 export async function getServerSideProps({ params }) {
   const { data: auction, error: auctionError } = await supabase
-    .from('Auctions')
+    .from('auctions')
     .select('*')
     .eq('id', params.id)
     .single();
 
+  // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
+
   const { data: bids, error: bidsError } = await supabase
-    .from('Bids')
-    .select('*')
+    .from('bids')
+    .select(`*, profile:owner_id(email,name)`)
     .eq('auction_id', params.id);
 
+  const { data: profiles, error: profilesError } = await supabase
+    .from('profiles')
+    .select('*');
+
   if (auctionError) {
-    console.log('LOG: auctionError', auctionError.message);
+    console.log('LOG: auctionError', auctionError);
   }
   if (bidsError) {
-    console.log('LOG: bidsError', bidsError.message);
+    console.log('LOG: bidsError', bidsError);
+  }
+  if (profilesError) {
+    console.log('LOG: profilesError', profilesError);
   }
 
   let players;
@@ -58,19 +65,32 @@ export async function getServerSideProps({ params }) {
     console.log('LOG: error importing players json file');
   }
 
+  //console.log('LOG: bids', bids);
+
   return {
     props: {
+      profilesData: profiles || [],
       auctionData: auction,
-      bidsData: bids,
+      bidsData: bids || [],
       playersData: players?.data || [],
     },
   };
 }
 
-const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
+const AuctionPage = ({
+  profilesData = [],
+  auctionData = {},
+  bidsData = [],
+  playersData = [],
+}) => {
   const [mounted, setMounted] = useState(false);
-  const { data: session, status: sessionStatus } = useSession();
-  const sessionLoading = sessionStatus === 'loading';
+
+  // const { data: session, status: sessionStatus } = useSession();
+  // const sessionLoading = sessionStatus === 'loading';
+  const { isLoading, user, error } = useUser();
+
+  // console.log('LOG: user', user);
+
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [bidSubmitLoading, setBidSubmitLoading] = useState(false);
@@ -147,9 +167,16 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
   const handleUpdateBids = (payload) => {
     if (payload?.eventType === 'INSERT') {
-      const updatedBids = [...bids.current, payload.new];
+      const newBid = {
+        ...payload.new,
+        profile: profilesData.find(
+          (profile) => profile.id === payload.new.owner_id
+        ),
+      };
+      const updatedBids = [...bids.current, newBid];
       setBids(updatedBids);
     }
+    // TODO: not needed, could probably remove
     if (payload?.eventType === 'UPDATE') {
       const updatedBids = [...bids.current];
       const indexOfBidToUpdate = bids.current.findIndex(
@@ -169,14 +196,18 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
   useEffect(() => {
     const bidsSubscription = supabase
-      .from(`Bids:auction_id=eq.${auction.current?.id}`)
+      .from(`bids:auction_id=eq.${auction.current?.id}`)
       .on('INSERT', (payload) => {
-        console.log('LOG: bids changed', payload);
+        console.log('LOG: bids sub insert', payload);
         handleUpdateBids(payload);
       })
       .on('UPDATE', (payload) => {
-        console.log('LOG: bids changed', payload);
-        handleUpdateBids(payload);
+        console.log('LOG: bids sub update', payload);
+        // handleUpdateBids(payload);
+      })
+      .on('DELETE', (payload) => {
+        console.log('LOG: bids sub delete', payload);
+        // handleUpdateBids(payload);
       })
       .subscribe();
 
@@ -185,7 +216,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
   useEffect(() => {
     const auctionUpdateSubscription = supabase
-      .from(`Auctions:id=eq.${auction.current?.id}`)
+      .from(`auctions:id=eq.${auction.current?.id}`)
       .on('UPDATE', (payload) => {
         console.log('LOG: auction updated', payload);
         handleUpdateAuction(payload);
@@ -202,7 +233,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
     );
     const { data: updateAuctionData, error: updateAuctionError } =
       await supabase
-        .from(`Auctions`)
+        .from(`auctions`)
         .update({ end_date: dateAddThreeMinutes })
         .match({ id: auction.current?.id });
   };
@@ -214,17 +245,20 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
     }
     setBidSubmitLoading(true);
 
-    const { data, error } = await supabase.from('Bids').insert([
+    console.log('LOG: submit bit', bidAmount, user.id);
+
+    const { data, error } = await supabase.from('bids').insert([
       {
         auction_id: auction.current?.id,
         player_id: playerId,
         amount: bidAmount,
-        owner: session.user.email,
+        owner_id: user.id,
       },
     ]);
 
     if (error) {
       setBidSubmitLoading(false);
+      console.log('LOG: bid error', error);
       alert('Error submitting bid: ', error?.message);
       return;
     }
@@ -240,10 +274,9 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
   };
 
   // When rendering client side don't display anything until loading is complete
-  // https://github.com/nextauthjs/next-auth-example/blob/main/pages/protected.tsx
-  if (typeof window !== 'undefined' && sessionLoading) return null;
+  if (typeof window !== 'undefined' && isLoading) return null;
 
-  if (!session) {
+  if (!user) {
     return (
       <Layout>
         <AccessDenied />
@@ -320,7 +353,7 @@ const AuctionPage = ({ auctionData = {}, bidsData = [], playersData = [] }) => {
 
         <OwnerWinningBids
           bids={bids.current}
-          session={session}
+          user={user}
           players={playersData}
         />
         <RulesPayoutsCard auction={auction.current} />

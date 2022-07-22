@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import { useUser } from '@supabase/auth-helpers-react';
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import { MenuAlt1Icon } from '@heroicons/react/outline';
 import ThemeSwitch from '../ThemeSwitch';
 
 const NavBar = () => {
-  const { data: session, status: sessionStatus } = useSession();
-  const sessionLoading = sessionStatus === 'loading';
+  const { isLoading, user, error } = useUser();
 
   return (
     <div className='navbar bg-base-100'>
@@ -45,20 +45,26 @@ const NavBar = () => {
       </div>
       <div className='navbar-end'>
         <ThemeSwitch />
-        {!sessionLoading && !session && (
-          <div>
-            <Link href='/auth/signin'>
-              <a className='ml-4 btn btn-sm'>Sign in</a>
-            </Link>
-          </div>
+        {!isLoading && !user && (
+          <button
+            className='ml-4 btn btn-sm'
+            onClick={() => {
+              supabaseClient.auth.signIn({ provider: 'google' });
+            }}
+          >
+            Sign In
+          </button>
         )}
-        {!sessionLoading && session && (
+        {!isLoading && user && (
           <div className='ml-2 md:ml-4 dropdown dropdown-end'>
             <label tabIndex='0' className='btn btn-ghost btn-circle avatar'>
               <div className='w-8 rounded-full md:w-10'>
                 <img
                   referrerPolicy='no-referrer'
-                  src={session?.user?.image || 'https://place-hold.it/40x40'}
+                  src={
+                    user?.user_metadata?.picture ||
+                    'https://place-hold.it/40x40'
+                  }
                 />
               </div>
             </label>
@@ -67,19 +73,12 @@ const NavBar = () => {
               className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
             >
               <li className='menu-title'>
-                <div>{session?.user?.email || 'no email'}</div>
+                <div>{user?.email || 'no email'}</div>
               </li>
               <li>
-                <a
-                  className=' active:bg-gray-500'
-                  href={`/api/auth/signout`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signOut();
-                  }}
-                >
-                  Sign out
-                </a>
+                <Link href='/api/auth/logout'>
+                  <a className='active:bg-gray-500'>Logout</a>
+                </Link>
               </li>
             </ul>
           </div>

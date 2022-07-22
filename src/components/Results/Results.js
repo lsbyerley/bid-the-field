@@ -5,10 +5,10 @@ const Results = ({ bids = [], players = [] }) => {
 
   return (
     <>
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+      <div className='grid grid-cols-1 gap-6 mb-8 md:grid-cols-3'>
         {Object.keys(auctionResults).map((owner) => {
           const ownerResults = auctionResults[owner];
-          const totalBidAmount = ownerResults.reduce(
+          const totalBidAmount = ownerResults.winningBids.reduce(
             (total, bid) => total + bid.amount,
             0
           );
@@ -21,14 +21,15 @@ const Results = ({ bids = [], players = [] }) => {
                 <div>
                   <div className='flex justify-between pb-2 mb-4 text-lg font-medium border-b'>
                     <span className='mr-2 text-lg truncate text-info'>
-                      {owner}
+                      {ownerResults?.profile?.name ||
+                        ownerResults?.profile?.email}
                     </span>
                     <span className='text-success'>
                       ${Number.parseFloat(totalBidAmount).toFixed(2)}
                     </span>
                   </div>
                   <dl className='mt-2 overflow-y-scroll divide-y max-h-96'>
-                    {ownerResults.map((bid) => {
+                    {ownerResults.winningBids.map((bid) => {
                       const player = getPlayerFromBid(players, bid.player_id);
                       return (
                         <div
@@ -47,7 +48,7 @@ const Results = ({ bids = [], players = [] }) => {
                       );
                     })}
                     {!ownerResults ||
-                      (!ownerResults?.length && (
+                      (!ownerResults?.winningBids?.length && (
                         <div className='px-2 py-3'>
                           <dt className='text-warning'>no winning bids</dt>
                         </div>

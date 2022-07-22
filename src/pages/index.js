@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@supabase/auth-helpers-react';
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
@@ -7,7 +8,7 @@ import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
 export async function getServerSideProps({ params }) {
   const { data, error } = await supabase
-    .from('Auctions')
+    .from('auctions')
     .select()
     .order('start_date', { ascending: false });
 
@@ -23,8 +24,11 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Home({ auctions = [] }) {
-  const { data: session, status: sessionStatus } = useSession();
-  const sessionLoading = sessionStatus === 'loading';
+  // const { data: session, status: sessionStatus } = useSession();
+  const { isLoading, user, error } = useUser();
+  //const sessionLoading = sessionStatus === 'loading';
+
+  console.log('LOG: user supabase', isLoading, user, error);
 
   return (
     <Layout>
@@ -43,7 +47,7 @@ export default function Home({ auctions = [] }) {
             <p className='pt-2'>
               Suggestions on improvement are encouraged &#129305;
             </p>
-            {!sessionLoading && !session && (
+            {!user && (
               <p className='pt-2'>
                 You must have a google account to sign in and place bids
               </p>
@@ -81,14 +85,17 @@ export default function Home({ auctions = [] }) {
                     <h2 className='mt-4 card-title'>{a.name}</h2>
                     <p className='py-6'>{a?.description || '-'}</p>
                     <div className='justify-center card-actions'>
-                      {!sessionLoading && !session && (
-                        <Link href='/auth/signin'>
-                          <a className='btn btn-outline btn-sm'>
-                            Sign In To Bid
-                          </a>
-                        </Link>
+                      {!isLoading && !user && (
+                        <button
+                          className='btn btn-outline btn-sm'
+                          onClick={() => {
+                            supabaseClient.auth.signIn({ provider: 'google' });
+                          }}
+                        >
+                          Sign In To Bid
+                        </button>
                       )}
-                      {!sessionLoading && session && (
+                      {!isLoading && user && (
                         <Link href={`/auction/${a.id}`}>
                           <a className='btn btn-outline btn-sm'>View Auction</a>
                         </Link>
