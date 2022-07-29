@@ -89,8 +89,6 @@ const AuctionPage = ({
   // const sessionLoading = sessionStatus === 'loading';
   const { isLoading, user, error } = useUser();
 
-  // console.log('LOG: user', user);
-
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [bidSubmitLoading, setBidSubmitLoading] = useState(false);
@@ -245,7 +243,7 @@ const AuctionPage = ({
     }
     setBidSubmitLoading(true);
 
-    console.log('LOG: submit bit', bidAmount, user.id);
+    // console.log('LOG: submit bit', bidAmount, user.id);
 
     const { data, error } = await supabase.from('bids').insert([
       {
@@ -270,7 +268,7 @@ const AuctionPage = ({
     }
 
     setBidSubmitLoading(false);
-    console.log('LOG: data', data);
+    // console.log('LOG: data', data);
   };
 
   // When rendering client side don't display anything until loading is complete

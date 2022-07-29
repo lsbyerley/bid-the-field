@@ -28,8 +28,6 @@ export default function Home({ auctions = [] }) {
   const { isLoading, user, error } = useUser();
   //const sessionLoading = sessionStatus === 'loading';
 
-  console.log('LOG: user supabase', isLoading, user, error);
-
   return (
     <Layout>
       <Head>
