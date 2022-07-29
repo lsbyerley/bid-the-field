@@ -14,13 +14,13 @@ export const round = (value, decimals) => {
 // Given an array of bids and a user id, returns the user's winning bids
 export const getOwnerWinningBids = (bids, ownerId) => {
   const ownerBidsSorted = bids
-    .filter((b) => b.owner === ownerId)
+    .filter((b) => b.owner_id === ownerId)
     .sort((a, b) => b.amount - a.amount);
 
   const ownerBidsSortedUnique = ownerBidsSorted.reduce((filter, current) => {
-    const bidOnPlayer = filter.find(
-      (bid) => bid.player_id === current.player_id
-    );
+    const bidOnPlayer = filter.find((bid) => {
+      return bid.player_id === current.player_id;
+    });
     if (!bidOnPlayer) {
       return filter.concat([current]);
     } else {
@@ -33,7 +33,7 @@ export const getOwnerWinningBids = (bids, ownerId) => {
   ownerBidsSortedUnique.forEach((ob) => {
     const bidPlayerId = ob.player_id;
     const otherBidsOnPlayerSorted = bids
-      .filter((b) => b.owner !== ownerId && b.player_id === bidPlayerId)
+      .filter((b) => b.owner_id !== ownerId && b.player_id === bidPlayerId)
       .sort((a, b) => b.amount - a.amount);
 
     if (otherBidsOnPlayerSorted.length) {
@@ -50,7 +50,11 @@ export const getOwnerWinningBids = (bids, ownerId) => {
 
 export const getAuctionResults = (bids) => {
   const ownersReducer = (owners, item) => {
-    if (!owners[item.owner]) owners[item.owner] = [];
+    if (!owners[item.owner_id])
+      owners[item.owner_id] = {
+        profile: item.profile,
+        winningBids: [],
+      };
     return owners;
   };
 
@@ -58,7 +62,7 @@ export const getAuctionResults = (bids) => {
 
   Object.keys(owners).forEach((owner) => {
     const ownerWinnings = getOwnerWinningBids(bids, owner);
-    owners[owner] = ownerWinnings;
+    owners[owner].winningBids = ownerWinnings;
     // console.log('log: owner', ownerWinnings);
   });
 
@@ -90,7 +94,7 @@ export const getPlayerHighestBid = (auctionBids, id) => {
   let highestBid = {};
   if (auctionBids && auctionBids.length) {
     const playerBids = auctionBids
-      .filter((b) => b?.player_id === Number(id))
+      .filter((b) => b?.player_id === id)
       .sort((a, b) => b?.amount - a?.amount);
     highestBid = playerBids[0] || {};
   }
@@ -99,7 +103,7 @@ export const getPlayerHighestBid = (auctionBids, id) => {
 
 // given an array of players and player id, returns the player name
 export const getPlayerFromBid = (playersData, playerId) => {
-  const player = playersData.find((p) => Number(p.id) === Number(playerId));
+  const player = playersData.find((p) => p.id === playerId);
   return player ? player : {};
   // return `${player?.first_name} ${player?.last_name}`;
 };

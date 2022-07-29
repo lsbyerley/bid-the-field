@@ -55,7 +55,7 @@ const BidRow = ({
               </h3>
             </div>
             <p className='mt-4 text-xs truncate max-w-[14rem]'>
-              {highestBid?.owner || '-'}
+              {highestBid?.profile?.name || highestBid?.profile?.email || '-'}
             </p>
           </div>
         </div>
