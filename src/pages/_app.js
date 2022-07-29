@@ -15,7 +15,7 @@ const MyApp = ({ Component, pageProps }) => {
   usePanelbear(process.env.NEXT_PUBLIC_PANELBEAR_ID);
   const router = useRouter();
 
-  console.log('LOG: test', process.env.NEXT_PUBLIC_SUPABASE_URL);
+  console.log('LOG: test', supabaseClient);
 
   useEffect(() => {
     const handleStart = (url) => {
