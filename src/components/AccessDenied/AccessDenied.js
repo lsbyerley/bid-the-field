@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ExclamationCircleIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 const AccessDenied = () => {
   return (

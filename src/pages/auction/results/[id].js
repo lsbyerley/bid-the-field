@@ -5,7 +5,7 @@ import { useUser } from '@supabase/auth-helpers-react';
 import { supabase } from '@/lib/supabaseClient';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 // Components
 import Layout from '@/components/Layout';

@@ -24,9 +24,7 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Home({ auctions = [] }) {
-  // const { data: session, status: sessionStatus } = useSession();
   const { isLoading, user, error } = useUser();
-  //const sessionLoading = sessionStatus === 'loading';
 
   return (
     <Layout>
@@ -86,8 +84,11 @@ export default function Home({ auctions = [] }) {
                       {!isLoading && !user && (
                         <button
                           className='btn btn-outline btn-sm'
-                          onClick={() => {
-                            supabaseClient.auth.signIn({ provider: 'google' });
+                          onClick={(e) => {
+                            e.preventDefault();
+                            return supabaseClient.auth.signIn({
+                              provider: 'google',
+                            });
                           }}
                         >
                           Sign In To Bid

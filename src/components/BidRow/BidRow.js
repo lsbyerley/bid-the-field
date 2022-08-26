@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CashIcon } from '@heroicons/react/outline';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { getPlayerHighestBid } from '@/lib/auctionUtils';
 import useAsyncReference from '@/lib/useAsyncReference';
 import BidModal from '../BidModal';
@@ -55,7 +55,10 @@ const BidRow = ({
               </h3>
             </div>
             <p className='mt-4 text-xs truncate max-w-[14rem]'>
-              {highestBid?.profile?.name || highestBid?.profile?.email || '-'}
+              {highestBid?.profile?.name ||
+                highestBid?.profile?.email ||
+                highestBid?.owner_id ||
+                '-'}
             </p>
           </div>
         </div>
@@ -70,7 +73,7 @@ const BidRow = ({
                 onClick={() => openBidModal()}
                 className='w-full btn btn-xs btn-ghost md:w-auto'
               >
-                <CashIcon className='w-5 h-5 ' aria-hidden='true' />
+                <CurrencyDollarIcon className='w-5 h-5 ' aria-hidden='true' />
                 <span className='ml-1'>Bid</span>
               </button>
               <button
