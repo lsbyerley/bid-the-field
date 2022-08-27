@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useUser } from '@supabase/auth-helpers-react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useIntervalWhen } from 'rooks';
 import {
   hasAuctionStarted,
@@ -31,7 +31,7 @@ const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
 export async function getServerSideProps({ params }) {
-  const { data: auction, error: auctionError } = await supabase
+  const { data: auction, error: auctionError } = await supabaseClient
     .from('auctions')
     .select('*')
     .eq('id', params.id)
@@ -39,12 +39,12 @@ export async function getServerSideProps({ params }) {
 
   // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
 
-  const { data: bids, error: bidsError } = await supabase
+  const { data: bids, error: bidsError } = await supabaseClient
     .from('bids')
     .select(`*, profile:owner_id(email,name)`)
     .eq('auction_id', params.id);
 
-  const { data: profiles, error: profilesError } = await supabase
+  const { data: profiles, error: profilesError } = await supabaseClient
     .from('profiles')
     .select('*');
 
@@ -193,7 +193,7 @@ const AuctionPage = ({
   };
 
   useEffect(() => {
-    const bidsSubscription = supabase
+    const bidsSubscription = supabaseClient
       .from(`bids:auction_id=eq.${auction.current?.id}`)
       .on('INSERT', (payload) => {
         console.log('LOG: bids sub insert', payload);
@@ -209,11 +209,11 @@ const AuctionPage = ({
       })
       .subscribe();
 
-    return () => supabase.removeSubscription(bidsSubscription);
+    return () => supabaseClient.removeSubscription(bidsSubscription);
   }, []);
 
   useEffect(() => {
-    const auctionUpdateSubscription = supabase
+    const auctionUpdateSubscription = supabaseClient
       .from(`auctions:id=eq.${auction.current?.id}`)
       .on('UPDATE', (payload) => {
         console.log('LOG: auction updated', payload);
@@ -221,7 +221,7 @@ const AuctionPage = ({
       })
       .subscribe();
 
-    return () => supabase.removeSubscription(auctionUpdateSubscription);
+    return () => supabaseClient.removeSubscription(auctionUpdateSubscription);
   }, []);
 
   const updateAuctionEndTime = async (minutesToAdd) => {
@@ -230,7 +230,7 @@ const AuctionPage = ({
       minutesToAdd
     );
     const { data: updateAuctionData, error: updateAuctionError } =
-      await supabase
+      await supabaseClient
         .from(`auctions`)
         .update({ end_date: dateAddThreeMinutes })
         .match({ id: auction.current?.id });
@@ -245,7 +245,7 @@ const AuctionPage = ({
 
     // console.log('LOG: submit bit', bidAmount, user.id);
 
-    const { data, error } = await supabase.from('bids').insert([
+    const { data, error } = await supabaseClient.from('bids').insert([
       {
         auction_id: auction.current?.id,
         player_id: playerId,

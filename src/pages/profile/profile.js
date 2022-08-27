@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -5,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import {
   getUser,
   withPageAuth,
+  supabaseClient,
   supabaseServerClient,
 } from '@supabase/auth-helpers-nextjs';
-import { supabase } from '@/lib/supabaseClient';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 export const getServerSideProps = withPageAuth({
@@ -27,6 +28,8 @@ export const getServerSideProps = withPageAuth({
 });
 
 const profile = ({ user, profile }) => {
+  const router = useRouter();
+
   const formOptions = {
     defaultValues: {
       name: profile?.name,
@@ -43,7 +46,7 @@ const profile = ({ user, profile }) => {
   };
 
   const updateProfile = async (formValues) => {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('profiles')
       .update({
         ...formValues,
@@ -53,23 +56,25 @@ const profile = ({ user, profile }) => {
     if (error) {
       console.log('LOG: save profile error', error);
       alert('There was an error saving your profile');
+      reset();
       return;
     }
 
     console.log('LOG: profile updated', data);
     alert('Profile updated!');
+    router.reload();
   };
 
   /* useEffect(() => {
-    const profileUpdateSubscription = supabase
+    const profileUpdateSubscription = supabaseClient
       .from(`profiles:id=eq.${user?.id}`)
       .on('UPDATE', (payload) => {
         console.log('LOG: profile updated', payload);
-        handleUpdateProfile(payload);
+        // handleUpdateProfile(payload);
       })
       .subscribe();
 
-    return () => supabase.removeSubscription(auctionUpdateSubscription);
+    return () => supabaseClient.removeSubscription(profileUpdateSubscription);
   }, []); */
 
   if (!profile) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useUser } from '@supabase/auth-helpers-react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -17,13 +17,13 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 // TODO: add live bids updating here?
 
 export async function getServerSideProps({ params }) {
-  const { data: auction, error: auctionError } = await supabase
+  const { data: auction, error: auctionError } = await supabaseClient
     .from('auctions')
     .select('*')
     .eq('id', params.id)
     .single();
 
-  const { data: bids, error: bidsError } = await supabase
+  const { data: bids, error: bidsError } = await supabaseClient
     .from('bids')
     .select(`*, profile:owner_id(email,name)`)
     .eq('auction_id', params.id);

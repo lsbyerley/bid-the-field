@@ -3,11 +3,10 @@ import { useUser } from '@supabase/auth-helpers-react';
 import { supabaseClient } from '@supabase/auth-helpers-nextjs';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabaseClient';
 import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
 export async function getServerSideProps({ params }) {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('auctions')
     .select()
     .order('start_date', { ascending: false });
