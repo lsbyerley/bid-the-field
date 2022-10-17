@@ -1,29 +1,44 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useUser } from '@supabase/auth-helpers-react';
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import {
+  useSessionContext,
+  useSupabaseClient,
+} from '@supabase/auth-helpers-react';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
-export async function getServerSideProps({ params }) {
-  const { data, error } = await supabaseClient
-    .from('auctions')
-    .select()
-    .order('start_date', { ascending: false });
+export default function Home() {
+  const { isLoading, session, error } = useSessionContext();
+  const supabaseClient = useSupabaseClient();
+  const [auctions, setAuctions] = useState([]);
+  const [auctionsLoading, setAuctionsLoading] = useState(false);
 
-  if (error) {
-    console.log('LOG: error fetching auctions', error.message);
-  }
+  const fetchAuctions = async () => {
+    try {
+      setAuctionsLoading(true);
+      const { data, error } = await supabaseClient
+        .from('auctions')
+        .select()
+        .order('start_date', { ascending: false });
 
-  return {
-    props: {
-      auctions: data || [],
-    },
+      if (error) {
+        console.log('LOG: error fetching auctions', error.message);
+        setAuctionsLoading(false);
+        return;
+      }
+
+      setAuctions(data);
+      setAuctionsLoading(false);
+    } catch (error) {
+      console.log('LOG: error fetching auctions', error.message);
+      setAuctionsLoading(false);
+    }
   };
-}
 
-export default function Home({ auctions = [] }) {
-  const { isLoading, user, error } = useUser();
+  useEffect(() => {
+    fetchAuctions();
+  }, [supabaseClient]);
 
   return (
     <Layout>
@@ -42,7 +57,7 @@ export default function Home({ auctions = [] }) {
             <p className='pt-2'>
               Suggestions on improvement are encouraged &#129305;
             </p>
-            {!user && (
+            {!session && (
               <p className='pt-2'>
                 You must have a google account to sign in and place bids
               </p>
@@ -80,12 +95,12 @@ export default function Home({ auctions = [] }) {
                     <h2 className='mt-4 card-title'>{a.name}</h2>
                     <p className='py-6'>{a?.description || '-'}</p>
                     <div className='justify-center card-actions'>
-                      {!isLoading && !user && (
+                      {!isLoading && !session && (
                         <button
                           className='btn btn-outline btn-sm'
                           onClick={(e) => {
                             e.preventDefault();
-                            return supabaseClient.auth.signIn({
+                            return supabaseClient.auth.signInWithOAuth({
                               provider: 'google',
                             });
                           }}
@@ -93,7 +108,7 @@ export default function Home({ auctions = [] }) {
                           Sign In To Bid
                         </button>
                       )}
-                      {!isLoading && user && (
+                      {!isLoading && session && (
                         <Link href={`/auction/${a.id}`}>
                           <a className='btn btn-outline btn-sm'>View Auction</a>
                         </Link>
@@ -104,7 +119,7 @@ export default function Home({ auctions = [] }) {
               );
             })}
         </div>
-        {!auctions?.length && (
+        {!auctions?.length && !auctionsLoading && (
           <div className='justify-center rounded-lg alert bg-base-100'>
             <div>
               <svg

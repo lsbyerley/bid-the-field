@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '@supabase/auth-helpers-react';
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import {
+  useSessionContext,
+  useSupabaseClient,
+} from '@supabase/auth-helpers-react';
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import { useIntervalWhen } from 'rooks';
 import {
   hasAuctionStarted,
@@ -16,7 +19,6 @@ import { addMinutes } from 'date-fns';
 
 // Components
 import Layout from '@/components/Layout';
-import AccessDenied from '@/components/AccessDenied';
 import OwnerWinningBids from '@/components/OwnerWinningBids';
 import TotalPot from '@/components/TotalPot';
 import NameCard from '@/components/NameCard';
@@ -30,52 +32,70 @@ import Countdown from '@/components/Countdown';
 const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
-export async function getServerSideProps({ params }) {
-  const { data: auction, error: auctionError } = await supabaseClient
-    .from('auctions')
-    .select('*')
-    .eq('id', params.id)
-    .single();
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/',
+  async getServerSideProps(ctx, supabase) {
+    const params = ctx.params;
+    try {
+      const { data: auction, error: auctionError } = await supabase
+        .from('auctions')
+        .select('*')
+        .eq('id', params.id)
+        .single();
 
-  // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
+      // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
 
-  const { data: bids, error: bidsError } = await supabaseClient
-    .from('bids')
-    .select(`*, profile:owner_id(email,name)`)
-    .eq('auction_id', params.id);
+      const { data: bids, error: bidsError } = await supabase
+        .from('bids')
+        .select(`*, profile:owner_id(email,name)`)
+        .eq('auction_id', params.id);
 
-  const { data: profiles, error: profilesError } = await supabaseClient
-    .from('profiles')
-    .select('*');
+      const { data: profiles, error: profilesError } = await supabase
+        .from('profiles')
+        .select('*');
 
-  if (auctionError) {
-    console.log('LOG: auctionError', auctionError);
-  }
-  if (bidsError) {
-    console.log('LOG: bidsError', bidsError);
-  }
-  if (profilesError) {
-    console.log('LOG: profilesError', profilesError);
-  }
+      if (auctionError) {
+        console.log('LOG: auctionError', auctionError);
+      }
+      if (bidsError) {
+        console.log('LOG: bidsError', bidsError);
+      }
+      if (profilesError) {
+        console.log('LOG: profilesError', profilesError);
+      }
 
-  let players;
-  try {
-    players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
-  } catch (err) {
-    console.log('LOG: error importing players json file');
-  }
+      let players;
+      try {
+        players = await import(
+          `@/lib/player-pool/${auction.data_filename}.json`
+        );
+      } catch (err) {
+        console.log('LOG: error importing players json file');
+      }
 
-  //console.log('LOG: bids', bids);
+      //console.log('LOG: bids', bids);
 
-  return {
-    props: {
-      profilesData: profiles || [],
-      auctionData: auction,
-      bidsData: bids || [],
-      playersData: players?.data || [],
-    },
-  };
-}
+      return {
+        props: {
+          profilesData: profiles || [],
+          auctionData: auction,
+          bidsData: bids || [],
+          playersData: players?.data || [],
+        },
+      };
+    } catch (error) {
+      console.log('LOG: server error', error);
+      return {
+        props: {
+          profilesData: [],
+          auctionData: {},
+          bidsData: [],
+          playersData: [],
+        },
+      };
+    }
+  },
+});
 
 const AuctionPage = ({
   profilesData = [],
@@ -84,10 +104,8 @@ const AuctionPage = ({
   playersData = [],
 }) => {
   const [mounted, setMounted] = useState(false);
-
-  // const { data: session, status: sessionStatus } = useSession();
-  // const sessionLoading = sessionStatus === 'loading';
-  const { isLoading, user, error } = useUser();
+  const { isLoading, session, error } = useSessionContext();
+  const supabaseClient = useSupabaseClient();
 
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
@@ -194,35 +212,45 @@ const AuctionPage = ({
 
   useEffect(() => {
     const bidsSubscription = supabaseClient
-      .from(`bids:auction_id=eq.${auction.current?.id}`)
-      .on('INSERT', (payload) => {
-        console.log('LOG: bids sub insert', payload);
-        handleUpdateBids(payload);
-      })
-      .on('UPDATE', (payload) => {
-        console.log('LOG: bids sub update', payload);
-        // handleUpdateBids(payload);
-      })
-      .on('DELETE', (payload) => {
-        console.log('LOG: bids sub delete', payload);
-        // handleUpdateBids(payload);
-      })
+      .channel('public:bids')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'bids',
+          filter: `auction_id=eq.${auction.current?.id}`,
+        },
+        (payload) => {
+          console.log('LOG: bids sub insert', payload);
+          handleUpdateBids(payload);
+        }
+      )
       .subscribe();
 
-    return () => supabaseClient.removeSubscription(bidsSubscription);
-  }, []);
+    return () => supabaseClient.removeChannel(bidsSubscription);
+  }, [supabaseClient]);
 
   useEffect(() => {
     const auctionUpdateSubscription = supabaseClient
-      .from(`auctions:id=eq.${auction.current?.id}`)
-      .on('UPDATE', (payload) => {
-        console.log('LOG: auction updated', payload);
-        handleUpdateAuction(payload);
-      })
+      .channel('public:auctions')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'auctions',
+          filter: `id=eq.${auction.current?.id}`,
+        },
+        (payload) => {
+          console.log('LOG: auction updated', payload);
+          handleUpdateAuction(payload);
+        }
+      )
       .subscribe();
 
-    return () => supabaseClient.removeSubscription(auctionUpdateSubscription);
-  }, []);
+    return () => supabaseClient.removeChannel(auctionUpdateSubscription);
+  }, [supabaseClient]);
 
   const updateAuctionEndTime = async (minutesToAdd) => {
     const dateAddThreeMinutes = addMinutes(
@@ -250,7 +278,7 @@ const AuctionPage = ({
         auction_id: auction.current?.id,
         player_id: playerId,
         amount: bidAmount,
-        owner_id: user.id,
+        owner_id: session?.user?.id,
       },
     ]);
 
@@ -268,19 +296,10 @@ const AuctionPage = ({
     }
 
     setBidSubmitLoading(false);
-    // console.log('LOG: data', data);
   };
 
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && isLoading) return null;
-
-  if (!user) {
-    return (
-      <Layout>
-        <AccessDenied />
-      </Layout>
-    );
-  }
 
   if (!auction?.current) {
     return (
@@ -351,7 +370,7 @@ const AuctionPage = ({
 
         <OwnerWinningBids
           bids={bids.current}
-          user={user}
+          user={session?.user}
           players={playersData}
         />
         <RulesPayoutsCard auction={auction.current} />
