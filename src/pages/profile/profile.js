@@ -3,31 +3,38 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useForm } from 'react-hook-form';
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import {
-  getUser,
-  withPageAuth,
-  supabaseClient,
-  supabaseServerClient,
-} from '@supabase/auth-helpers-nextjs';
+  useSessionContext,
+  useSupabaseClient,
+} from '@supabase/auth-helpers-react';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 export const getServerSideProps = withPageAuth({
   redirectTo: '/',
-  async getServerSideProps(ctx) {
-    // Run queries with RLS on the server
-    // TODO: setup RLS https://supabase.com/docs/guides/auth/managing-user-data
-    const { user } = await getUser(ctx);
-    const { data: profile } = await supabaseServerClient(ctx)
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .single();
+  async getServerSideProps(ctx, supabase) {
+    try {
+      // Run queries with RLS on the server
+      // TODO: setup RLS https://supabase.com/docs/guides/auth/managing-user-data
+      const auth_token = JSON.parse(ctx.req.cookies['supabase-auth-token']);
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', auth_token?.user?.id)
+        .single();
 
-    return { props: { user, profile } };
+      return { props: { profile } };
+    } catch (error) {
+      console.log('LOG: server error', error);
+      return { props: { profile: null } };
+    }
   },
 });
 
-const profile = ({ user, profile }) => {
+const profile = ({ profile }) => {
+  const supabaseClient = useSupabaseClient();
+  const { error, session } = useSessionContext();
+  const user = session?.user;
   const router = useRouter();
 
   const formOptions = {

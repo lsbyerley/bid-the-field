@@ -1,11 +1,16 @@
 import Link from 'next/link';
-import { useUser } from '@supabase/auth-helpers-react';
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import {
+  useSessionContext,
+  useSupabaseClient,
+} from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import ThemeSwitch from '../ThemeSwitch';
 
 const NavBar = () => {
-  const { isLoading, user, error } = useUser();
+  const router = useRouter();
+  const { isLoading, session, error } = useSessionContext();
+  const supabaseClient = useSupabaseClient();
 
   return (
     <div className='navbar bg-base-100'>
@@ -45,12 +50,12 @@ const NavBar = () => {
       </div>
       <div className='navbar-end'>
         <ThemeSwitch />
-        {!isLoading && !user && (
+        {!isLoading && !session && (
           <button
             className='ml-4 btn btn-sm'
             onClick={(e) => {
               e.preventDefault();
-              return supabaseClient.auth.signIn({
+              return supabaseClient.auth.signInWithOAuth({
                 provider: 'google',
               });
             }}
@@ -58,14 +63,14 @@ const NavBar = () => {
             Sign In
           </button>
         )}
-        {!isLoading && user && (
+        {!isLoading && session && (
           <div className='ml-2 md:ml-4 dropdown dropdown-end'>
             <label tabIndex='0' className='btn btn-ghost btn-circle avatar'>
               <div className='w-8 rounded-full md:w-10'>
                 <img
                   referrerPolicy='no-referrer'
                   src={
-                    user?.user_metadata?.picture ||
+                    session?.user?.user_metadata?.picture ||
                     'https://place-hold.it/40x40'
                   }
                 />
@@ -76,7 +81,11 @@ const NavBar = () => {
               className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
             >
               <li className='menu-title'>
-                <div>{user?.name || user?.email || 'n/a'}</div>
+                <div>
+                  {session?.user?.user_metadata?.name ||
+                    session?.user?.user_metadata?.email ||
+                    'n/a'}
+                </div>
               </li>
               <li>
                 <Link href='/profile'>
@@ -84,9 +93,14 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <Link href='/api/auth/logout'>
-                  <a className='active:bg-gray-500'>Logout</a>
-                </Link>
+                <button
+                  onClick={async () => {
+                    await supabaseClient.auth.signOut();
+                    router.push('/');
+                  }}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

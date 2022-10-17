@@ -1,55 +1,71 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '@supabase/auth-helpers-react';
-import { supabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useSessionContext } from '@supabase/auth-helpers-react';
+import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 // Components
 import Layout from '@/components/Layout';
-import AccessDenied from '@/components/AccessDenied';
 import Results from '@/components/Results';
 import TotalPot from '@/components/TotalPot';
 import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 // TODO: add live bids updating here?
 
-export async function getServerSideProps({ params }) {
-  const { data: auction, error: auctionError } = await supabaseClient
-    .from('auctions')
-    .select('*')
-    .eq('id', params.id)
-    .single();
+export const getServerSideProps = withPageAuth({
+  redirectTo: '/',
+  async getServerSideProps(ctx, supabase) {
+    const params = ctx.params;
+    try {
+      const { data: auction, error: auctionError } = await supabase
+        .from('auctions')
+        .select('*')
+        .eq('id', params.id)
+        .single();
 
-  const { data: bids, error: bidsError } = await supabaseClient
-    .from('bids')
-    .select(`*, profile:owner_id(email,name)`)
-    .eq('auction_id', params.id);
+      const { data: bids, error: bidsError } = await supabase
+        .from('bids')
+        .select(`*, profile:owner_id(email,name)`)
+        .eq('auction_id', params.id);
 
-  if (auctionError) {
-    console.log('LOG: auctionError', auctionError.message);
-  }
-  if (bidsError) {
-    console.log('LOG: bidsError', bidsError.message);
-  }
+      if (auctionError) {
+        console.log('LOG: auctionError', auctionError.message);
+      }
+      if (bidsError) {
+        console.log('LOG: bidsError', bidsError.message);
+      }
 
-  let players;
-  try {
-    players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
-  } catch (err) {
-    console.log('LOG: error importing players json file');
-  }
+      let players;
+      try {
+        players = await import(
+          `@/lib/player-pool/${auction.data_filename}.json`
+        );
+      } catch (err) {
+        console.log('LOG: error importing players json file');
+      }
 
-  return {
-    props: {
-      auctionData: auction,
-      bidsData: bids,
-      playersData: players?.data || [],
-    },
-  };
-}
+      return {
+        props: {
+          auctionData: auction,
+          bidsData: bids,
+          playersData: players?.data || [],
+        },
+      };
+    } catch (error) {
+      console.log('LOG: server error', error);
+      return {
+        props: {
+          auctionData: {},
+          bidsData: [],
+          playersData: [],
+        },
+      };
+    }
+  },
+});
 
 const AuctionResultsPage = ({
   auctionData = {},
@@ -57,7 +73,7 @@ const AuctionResultsPage = ({
   playersData = [],
 }) => {
   const [mounted, setMounted] = useState(false);
-  const { isLoading, user } = useUser();
+  const { isLoading, session, error } = useSessionContext();
   const [bids, setBids] = useAsyncReference(bidsData);
   const [auction, setAuction] = useAsyncReference(auctionData);
   const [auctionOver, setAuctionOver] = useState(() =>
@@ -68,14 +84,6 @@ const AuctionResultsPage = ({
 
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && isLoading) return null;
-
-  if (!user) {
-    return (
-      <Layout>
-        <AccessDenied />
-      </Layout>
-    );
-  }
 
   if (!auction.current) {
     return (
