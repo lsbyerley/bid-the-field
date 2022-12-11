@@ -350,10 +350,12 @@ const AuctionPage = ({
     );
   };
 
+  const pageTitle = `Bid The Field - ${auction.current?.name}`;
+
   return (
     <Layout>
       <Head>
-        <title>Bid The Field - {auction.current.name}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3 xl:px-0'>

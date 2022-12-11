@@ -49,14 +49,14 @@ export default function Home() {
         <div className='pt-8 text-center hero-content'>
           <div className='max-w-md'>
             <h1 className='mb-4 text-3xl font-bold'>Bid The Field</h1>
-            <p className='pt-2'>
+            {/*<p className='pt-2'>
               This site is meant to function as an automated replacement for the
               excel spreadsheet auction/calcutta mayhem and is still under
               active development
             </p>
             <p className='pt-2'>
               Suggestions on improvement are encouraged &#129305;
-            </p>
+            </p>*/}
             {!session && (
               <p className='pt-2'>
                 You must have a google account to sign in and place bids
@@ -135,7 +135,7 @@ export default function Home() {
                   d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
                 />
               </svg>
-              <span>No auctions available right now!</span>
+              <span>There are no auctions available.</span>
             </div>
           </div>
         )}
