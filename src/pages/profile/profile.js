@@ -100,8 +100,8 @@ const profile = ({ profile }) => {
               </span>
             </div>
             <div className='flex-none'>
-              <Link href='/'>
-                <a className='btn btn-sm'>Home</a>
+              <Link href='/' className='btn btn-sm'>
+                Home
               </Link>
             </div>
           </div>

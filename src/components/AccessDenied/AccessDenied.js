@@ -13,8 +13,8 @@ const AccessDenied = () => {
           <span>Access denied. You must signin to view this page</span>
         </div>
         <div className='flex-none'>
-          <Link href='/auth/signin'>
-            <a className='btn btn-sm'>Signin</a>
+          <Link href='/auth/signin' className='btn btn-sm'>
+            Signin
           </Link>
         </div>
       </div>

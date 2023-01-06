@@ -24,19 +24,19 @@ const NavBar = () => {
             className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
           >
             <li>
-              <Link href='/'>
-                <a className='active:bg-base-300'>Home</a>
+              <Link href='/' className='active:bg-base-300'>
+                Home
               </Link>
-              <Link href='/profile'>
-                <a className='active:bg-base-300'>Profile</a>
+              <Link href='/profile' className='active:bg-base-300'>
+                Profile
               </Link>
             </li>
           </ul>
         </div>
-        <Link href='/'>
-          <a className='normal-case md:text-lg btn btn-sm btn-ghost'>
+        <Link href='/' className='normal-case md:text-lg btn btn-sm btn-ghost'>
+          
             Bid The Field
-          </a>
+          
         </Link>
       </div>
       <div className='hidden navbar-center lg:flex'>
@@ -88,8 +88,8 @@ const NavBar = () => {
                 </div>
               </li>
               <li>
-                <Link href='/profile'>
-                  <a className='active:bg-gray-90'>Profile</a>
+                <Link href='/profile' className='active:bg-gray-90'>
+                  Profile
                 </Link>
               </li>
               <li>

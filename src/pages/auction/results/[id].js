@@ -112,8 +112,8 @@ const AuctionResultsPage = ({
               </div>
             </div>
             <div className='flex-none'>
-              <Link href='/'>
-                <a className='btn btn-sm'>Go Home</a>
+              <Link href='/' className='btn btn-sm'>
+                Go Home
               </Link>
             </div>
           </div>
@@ -132,10 +132,12 @@ const AuctionResultsPage = ({
         <ol role='list' className='flex items-center space-x-4'>
           <li>
             <div className='flex items-center'>
-              <Link href={`/auction/${auction.current.id}`}>
-                <a className='ml-4 text-sm font-medium md:text-lg '>
-                  {auction.current.name}
-                </a>
+              <Link
+                href={`/auction/${auction.current.id}`}
+                className='ml-4 text-sm font-medium md:text-lg '>
+
+                {auction.current.name}
+
               </Link>
             </div>
           </li>
@@ -176,8 +178,8 @@ const AuctionResultsPage = ({
               </div>
             </div>
             <div className='flex-none'>
-              <Link href={`/auction/${auction.current.id}`}>
-                <a className='btn btn-sm'>View Auction</a>
+              <Link href={`/auction/${auction.current.id}`} className='btn btn-sm'>
+                View Auction
               </Link>
             </div>
           </div>

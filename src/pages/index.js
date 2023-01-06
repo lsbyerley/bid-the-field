@@ -109,8 +109,8 @@ export default function Home() {
                         </button>
                       )}
                       {!isLoading && session && (
-                        <Link href={`/auction/${a.id}`}>
-                          <a className='btn btn-outline btn-sm'>View Auction</a>
+                        <Link href={`/auction/${a.id}`} className='btn btn-outline btn-sm'>
+                          View Auction
                         </Link>
                       )}
                     </div>

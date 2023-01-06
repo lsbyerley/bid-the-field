@@ -328,8 +328,8 @@ const AuctionPage = ({
               </div>
             </div>
             <div className='flex-none'>
-              <Link href='/'>
-                <a className='btn btn-sm'>Go Home</a>
+              <Link href='/' className='btn btn-sm'>
+                Go Home
               </Link>
             </div>
           </div>
@@ -342,8 +342,10 @@ const AuctionPage = ({
     return (
       <div className='rounded-lg card compact bg-base-100'>
         <div className='justify-center card-body'>
-          <Link href={`/auction/results/${auction.current.id}`}>
-            <a className='btn btn-ghost btn-sm'>Rosters / Results</a>
+          <Link
+            href={`/auction/results/${auction.current.id}`}
+            className='btn btn-ghost btn-sm'>
+            Rosters / Results
           </Link>
         </div>
       </div>
