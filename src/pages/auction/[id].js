@@ -5,7 +5,7 @@ import {
   useSessionContext,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useIntervalWhen } from 'rooks';
 import {
   hasAuctionStarted,
@@ -32,70 +32,81 @@ import Countdown from '@/components/Countdown';
 const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: '/',
-  async getServerSideProps(ctx, supabase) {
-    const params = ctx.params;
-    try {
-      const { data: auction, error: auctionError } = await supabase
-        .from('auctions')
-        .select('*')
-        .eq('id', params.id)
-        .single();
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-      // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
+  if (!session)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
 
-      const { data: bids, error: bidsError } = await supabase
-        .from('bids')
-        .select(`*, profile:owner_id(email,name)`)
-        .eq('auction_id', params.id);
+  // Run queries with RLS on the server
+  const params = ctx.params;
+  try {
+    const { data: auction, error: auctionError } = await supabase
+      .from('auctions')
+      .select('*')
+      .eq('id', params.id)
+      .single();
 
-      const { data: profiles, error: profilesError } = await supabase
-        .from('profiles')
-        .select('*');
+    // https://supabase.com/docs/reference/javascript/select#query-foreign-tables
 
-      if (auctionError) {
-        console.log('LOG: auctionError', auctionError);
-      }
-      if (bidsError) {
-        console.log('LOG: bidsError', bidsError);
-      }
-      if (profilesError) {
-        console.log('LOG: profilesError', profilesError);
-      }
+    const { data: bids, error: bidsError } = await supabase
+      .from('bids')
+      .select(`*, profile:owner_id(email,name)`)
+      .eq('auction_id', params.id);
 
-      let players;
-      try {
-        players = await import(
-          `@/lib/player-pool/${auction.data_filename}.json`
-        );
-      } catch (err) {
-        console.log('LOG: error importing players json file');
-      }
+    const { data: profiles, error: profilesError } = await supabase
+      .from('profiles')
+      .select('*');
 
-      //console.log('LOG: bids', bids);
-
-      return {
-        props: {
-          profilesData: profiles || [],
-          auctionData: auction,
-          bidsData: bids || [],
-          playersData: players?.data || [],
-        },
-      };
-    } catch (error) {
-      console.log('LOG: server error', error);
-      return {
-        props: {
-          profilesData: [],
-          auctionData: {},
-          bidsData: [],
-          playersData: [],
-        },
-      };
+    if (auctionError) {
+      console.log('LOG: auctionError', auctionError);
     }
-  },
-});
+    if (bidsError) {
+      console.log('LOG: bidsError', bidsError);
+    }
+    if (profilesError) {
+      console.log('LOG: profilesError', profilesError);
+    }
+
+    let players;
+    try {
+      players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
+    } catch (err) {
+      console.log('LOG: error importing players json file');
+    }
+
+    //console.log('LOG: bids', bids);
+
+    return {
+      props: {
+        profilesData: profiles || [],
+        auctionData: auction,
+        bidsData: bids || [],
+        playersData: players?.data || [],
+      },
+    };
+  } catch (error) {
+    console.log('LOG: server error', error);
+    return {
+      props: {
+        profilesData: [],
+        auctionData: {},
+        bidsData: [],
+        playersData: [],
+      },
+    };
+  }
+};
 
 const AuctionPage = ({
   profilesData = [],
@@ -103,8 +114,7 @@ const AuctionPage = ({
   bidsData = [],
   playersData = [],
 }) => {
-  const [mounted, setMounted] = useState(false);
-  const { isLoading, session, error } = useSessionContext();
+  const { session } = useSessionContext();
   const supabaseClient = useSupabaseClient();
 
   const [bids, setBids] = useAsyncReference(bidsData);
@@ -129,8 +139,6 @@ const AuctionPage = ({
       ? QUICK_INTERVAL_CHECK
       : DEFAULT_INTERVAL_CHECK;
   });
-
-  useEffect(() => setMounted(true), []);
 
   // AUCTION END INTERVAL CHECK
   useIntervalWhen(
@@ -298,9 +306,6 @@ const AuctionPage = ({
     setBidSubmitLoading(false);
   };
 
-  // When rendering client side don't display anything until loading is complete
-  if (typeof window !== 'undefined' && isLoading) return null;
-
   if (!auction?.current) {
     return (
       <Layout>
@@ -344,7 +349,8 @@ const AuctionPage = ({
         <div className='justify-center card-body'>
           <Link
             href={`/auction/results/${auction.current.id}`}
-            className='btn btn-ghost btn-sm'>
+            className='btn btn-ghost btn-sm'
+          >
             Rosters / Results
           </Link>
         </div>

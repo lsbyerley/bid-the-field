@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useSessionContext } from '@supabase/auth-helpers-react';
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -15,75 +14,77 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 // TODO: add live bids updating here?
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: '/',
-  async getServerSideProps(ctx, supabase) {
-    const params = ctx.params;
-    try {
-      const { data: auction, error: auctionError } = await supabase
-        .from('auctions')
-        .select('*')
-        .eq('id', params.id)
-        .single();
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-      const { data: bids, error: bidsError } = await supabase
-        .from('bids')
-        .select(`*, profile:owner_id(email,name)`)
-        .eq('auction_id', params.id);
+  if (!session)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
 
-      if (auctionError) {
-        console.log('LOG: auctionError', auctionError.message);
-      }
-      if (bidsError) {
-        console.log('LOG: bidsError', bidsError.message);
-      }
+  // Run queries with RLS on the server
+  const params = ctx.params;
+  try {
+    const { data: auction, error: auctionError } = await supabase
+      .from('auctions')
+      .select('*')
+      .eq('id', params.id)
+      .single();
 
-      let players;
-      try {
-        players = await import(
-          `@/lib/player-pool/${auction.data_filename}.json`
-        );
-      } catch (err) {
-        console.log('LOG: error importing players json file');
-      }
+    const { data: bids, error: bidsError } = await supabase
+      .from('bids')
+      .select(`*, profile:owner_id(email,name)`)
+      .eq('auction_id', params.id);
 
-      return {
-        props: {
-          auctionData: auction,
-          bidsData: bids,
-          playersData: players?.data || [],
-        },
-      };
-    } catch (error) {
-      console.log('LOG: server error', error);
-      return {
-        props: {
-          auctionData: {},
-          bidsData: [],
-          playersData: [],
-        },
-      };
+    if (auctionError) {
+      console.log('LOG: auctionError', auctionError.message);
     }
-  },
-});
+    if (bidsError) {
+      console.log('LOG: bidsError', bidsError.message);
+    }
+
+    let players;
+    try {
+      players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
+    } catch (err) {
+      console.log('LOG: error importing players json file');
+    }
+
+    return {
+      props: {
+        auctionData: auction,
+        bidsData: bids,
+        playersData: players?.data || [],
+      },
+    };
+  } catch (error) {
+    console.log('LOG: server error', error);
+    return {
+      props: {
+        auctionData: {},
+        bidsData: [],
+        playersData: [],
+      },
+    };
+  }
+};
 
 const AuctionResultsPage = ({
   auctionData = {},
   bidsData = [],
   playersData = [],
 }) => {
-  const [mounted, setMounted] = useState(false);
-  const { isLoading, session, error } = useSessionContext();
-  const [bids, setBids] = useAsyncReference(bidsData);
-  const [auction, setAuction] = useAsyncReference(auctionData);
-  const [auctionOver, setAuctionOver] = useState(() =>
-    isAuctionOver(auctionData)
-  );
-
-  useEffect(() => setMounted(true), []);
-
-  // When rendering client side don't display anything until loading is complete
-  if (typeof window !== 'undefined' && isLoading) return null;
+  const [bids] = useAsyncReference(bidsData);
+  const [auction] = useAsyncReference(auctionData);
+  const [auctionOver] = useState(() => isAuctionOver(auctionData));
 
   if (!auction.current) {
     return (
@@ -122,10 +123,12 @@ const AuctionResultsPage = ({
     );
   }
 
+  const pageTitle = `Bid The Field - Results ${auction.current.name}`;
+
   return (
     <Layout>
       <Head>
-        <title>Bid The Field - Results {auction.current.name}</title>
+        <title>{pageTitle}</title>
       </Head>
 
       <nav className='flex justify-center mt-6 mb-4' aria-label='Breadcrumb'>
@@ -134,10 +137,9 @@ const AuctionResultsPage = ({
             <div className='flex items-center'>
               <Link
                 href={`/auction/${auction.current.id}`}
-                className='ml-4 text-sm font-medium md:text-lg '>
-
+                className='ml-4 text-sm font-medium md:text-lg '
+              >
                 {auction.current.name}
-
               </Link>
             </div>
           </li>
@@ -178,7 +180,10 @@ const AuctionResultsPage = ({
               </div>
             </div>
             <div className='flex-none'>
-              <Link href={`/auction/${auction.current.id}`} className='btn btn-sm'>
+              <Link
+                href={`/auction/${auction.current.id}`}
+                className='btn btn-sm'
+              >
                 View Auction
               </Link>
             </div>

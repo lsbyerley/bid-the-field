@@ -9,6 +9,7 @@ export { default as Modal } from './Modal';
 export { default as NameCard } from './NameCard';
 export { default as NavBar } from './NavBar';
 export { default as OwnerWinningBids } from './OwnerWinningBids';
+export { default as Placeholders } from './Placeholders';
 export { default as Results } from './Results';
 export { default as RulesPayoutsCard } from './RulesPayoutsCard';
 export { default as StartDateCard } from './StartDateCard';

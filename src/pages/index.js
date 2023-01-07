@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
 import {
   useSessionContext,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
-import Layout from '@/components/Layout';
-import Link from 'next/link';
+import { Layout, Placeholders } from '@/components';
 import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
+
+const wait = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export default function Home() {
   const { isLoading, session, error } = useSessionContext();
@@ -28,6 +30,7 @@ export default function Home() {
         return;
       }
 
+      await wait(1000);
       setAuctions(data);
       setAuctionsLoading(false);
     } catch (error) {
@@ -67,6 +70,7 @@ export default function Home() {
       </div>
       <div className='max-w-2xl px-2 py-4 mx-auto lg:max-w-7xl md:px-0'>
         <div className='grid grid-cols-1 gap-6 mt-6 md:grid-cols-3'>
+          {auctionsLoading && <Placeholders number={6} />}
           {auctions?.length > 0 &&
             auctions.map((a) => {
               const auctionStarted = hasAuctionStarted(a);
@@ -109,7 +113,10 @@ export default function Home() {
                         </button>
                       )}
                       {!isLoading && session && (
-                        <Link href={`/auction/${a.id}`} className='btn btn-outline btn-sm'>
+                        <Link
+                          href={`/auction/${a.id}`}
+                          className='btn btn-outline btn-sm'
+                        >
                           View Auction
                         </Link>
                       )}
