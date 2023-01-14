@@ -2,6 +2,7 @@ import useAsyncReference from '@/lib/useAsyncReference';
 import BidRow from '@/components/BidRow';
 
 const BidField = ({
+  sport,
   playersData = [],
   bids = [],
   biddingDisabled = false,
@@ -22,6 +23,7 @@ const BidField = ({
           {playersData.map((p) => {
             return (
               <BidRow
+                sport={sport}
                 key={p.id}
                 player={p}
                 bids={asyncBids.current}

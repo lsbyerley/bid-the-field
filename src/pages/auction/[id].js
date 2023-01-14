@@ -399,6 +399,7 @@ const AuctionPage = ({
       </h3>
       <div className='px-2 py-4 mx-auto mb-8 xl:px-0 max-w-7xl'>
         <BidField
+          sport={auction.current.sport}
           playersData={playersData}
           bids={bids.current}
           biddingDisabled={bidSubmitLoading || auctionOver || !auctionStarted}

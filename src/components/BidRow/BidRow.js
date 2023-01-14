@@ -7,6 +7,7 @@ import BidModal from '../BidModal';
 const FIELD_PLAYER_ID = '999999';
 
 const BidRow = ({
+  sport,
   player = {},
   bids = [],
   biddingDisabled = false,
@@ -42,7 +43,11 @@ const BidRow = ({
     !disableTheField && player?.id === FIELD_PLAYER_ID;
 
   return (
-    <li key={player.id} className='col-span-1 rounded-lg shadow bg-base-100'>
+    <li
+      key={player.id}
+      className='col-span-1 rounded-lg shadow bg-base-100'
+      data-sport={sport}
+    >
       <div className='flex md:block'>
         <div className='flex items-center justify-between w-full p-3 space-x-6'>
           <div className='flex-1 truncate'>

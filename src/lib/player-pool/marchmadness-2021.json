@@ -1,0 +1,616 @@
+{
+  "data": [
+    {
+      "id": "c2104cdc-c83d-40d2-a3cd-df986e29f5d3",
+      "first_name": "Alabama",
+      "last_name": "Crimson Tide",
+      "full_name": "Alabama Crimson Tide",
+      "short_name": "Alabama",
+      "region": "West Regional",
+      "seed": 6
+    },
+    {
+      "id": "1551b3a0-6d10-4ffa-8dfa-73b56f004553",
+      "first_name": "Memphis",
+      "last_name": "Tigers",
+      "full_name": "Memphis Tigers",
+      "short_name": "Memphis",
+      "region": "West Regional",
+      "seed": 9
+    },
+    {
+      "id": "2f4d21f8-6d5f-48a5-abca-52a30583871a",
+      "first_name": "Gonzaga",
+      "last_name": "Bulldogs",
+      "full_name": "Gonzaga Bulldogs",
+      "short_name": "Gonzaga",
+      "region": "West Regional",
+      "seed": 1
+    },
+    {
+      "id": "b03bb029-4499-4a2c-9074-5071ed360b21",
+      "first_name": "Rutgers",
+      "last_name": "Scarlet Knights",
+      "full_name": "Rutgers Scarlet Knights",
+      "short_name": "Rutgers",
+      "region": "West Regional",
+      "seed": 11
+    },
+    {
+      "id": "c70c23c4-ab09-4797-a1af-792c848ab17f",
+      "first_name": "Arkansas",
+      "last_name": "Razorbacks",
+      "full_name": "Arkansas Razorbacks",
+      "short_name": "Arkansas",
+      "region": "West Regional",
+      "seed": 4
+    },
+    {
+      "id": "a41d5a05-4c11-4171-a57e-e7a1ea325a6d",
+      "first_name": "Michigan State",
+      "last_name": "Spartans",
+      "full_name": "Michigan State Spartans",
+      "short_name": "Michigan State",
+      "region": "West Regional",
+      "seed": 7
+    },
+    {
+      "id": "2920c5fa-1e86-4958-a7c4-1e97b8e201d8",
+      "first_name": "Davidson",
+      "last_name": "Wildcats",
+      "full_name": "Davidson Wildcats",
+      "short_name": "Davidson",
+      "region": "West Regional",
+      "seed": 10
+    },
+    {
+      "id": "80962f09-8821-48b6-8cf0-0cf0eea56aa8",
+      "first_name": "Notre Dame",
+      "last_name": "Fighting Irish",
+      "full_name": "Notre Dame Fighting Irish",
+      "short_name": "Notre Dame",
+      "region": "West Regional",
+      "seed": 11
+    },
+    {
+      "id": "faeb1160-5d15-4f26-99fc-c441cf21fc7f",
+      "first_name": "Duke",
+      "last_name": "Blue Devils",
+      "full_name": "Duke Blue Devils",
+      "short_name": "Duke",
+      "region": "West Regional",
+      "seed": 2
+    },
+    {
+      "id": "c009914b-3303-4dee-b915-978aa48a31d0",
+      "first_name": "Cal State Fullerton",
+      "last_name": "Titans",
+      "full_name": "Cal State Fullerton Titans",
+      "short_name": "Cal State Fullerton",
+      "region": "West Regional",
+      "seed": 15
+    },
+    {
+      "id": "c1c54dbf-805c-47fc-a707-c803e94db2a4",
+      "first_name": "Boise State",
+      "last_name": "Broncos",
+      "full_name": "Boise State Broncos",
+      "short_name": "Boise State",
+      "region": "West Regional",
+      "seed": 8
+    },
+    {
+      "id": "bec40585-b587-4548-93f5-b7c00b046aea",
+      "first_name": "Montana State",
+      "last_name": "Bobcats",
+      "full_name": "Montana State Bobcats",
+      "short_name": "Montana State",
+      "region": "West Regional",
+      "seed": 14
+    },
+    {
+      "id": "efba5350-79bc-47aa-a189-db177b95b491",
+      "first_name": "Connecticut",
+      "last_name": "Huskies",
+      "full_name": "Connecticut Huskies",
+      "short_name": "Connecticut",
+      "region": "West Regional",
+      "seed": 5
+    },
+    {
+      "id": "94ea835b-8ce9-4de2-a5b1-971548fea974",
+      "first_name": "Georgia State",
+      "last_name": "Panthers",
+      "full_name": "Georgia State Panthers",
+      "short_name": "Georgia State",
+      "region": "West Regional",
+      "seed": 16
+    },
+    {
+      "id": "f8c705b7-87d3-411a-9c8b-5124daab0469",
+      "first_name": "Texas Tech",
+      "last_name": "Red Raiders",
+      "full_name": "Texas Tech Red Raiders",
+      "short_name": "Texas Tech",
+      "region": "West Regional",
+      "seed": 3
+    },
+    {
+      "id": "18e89867-9201-41ce-ba19-fadddf92fa17",
+      "first_name": "Vermont",
+      "last_name": "Catamounts",
+      "full_name": "Vermont Catamounts",
+      "short_name": "Vermont",
+      "region": "West Regional",
+      "seed": 13
+    },
+    {
+      "id": "5016fe1a-9571-4d10-bf5b-b9c1b496bd57",
+      "first_name": "New Mexico State",
+      "last_name": "Aggies",
+      "full_name": "New Mexico State Aggies",
+      "short_name": "New Mexico State",
+      "region": "West Regional",
+      "seed": 12
+    },
+    {
+      "id": "6ed15092-2670-450a-99c2-61d861e87644",
+      "first_name": "Texas",
+      "last_name": "Longhorns",
+      "full_name": "Texas Longhorns",
+      "short_name": "Texas",
+      "region": "East Regional",
+      "seed": 6
+    },
+    {
+      "id": "a7127c0a-a466-47ae-91ad-9a71ee2c9427",
+      "first_name": "Wyoming",
+      "last_name": "Cowboys",
+      "full_name": "Wyoming Cowboys",
+      "short_name": "Wyoming",
+      "region": "East Regional",
+      "seed": 12
+    },
+    {
+      "id": "56fe0ab2-e4f0-47b9-8726-9ce23ebcde20",
+      "first_name": "Akron",
+      "last_name": "Zips",
+      "full_name": "Akron Zips",
+      "short_name": "Akron",
+      "region": "East Regional",
+      "seed": 13
+    },
+    {
+      "id": "324ccccc-575b-4b82-acb0-fbb8e68da13b",
+      "first_name": "Virginia Tech",
+      "last_name": "Hokies",
+      "full_name": "Virginia Tech Hokies",
+      "short_name": "Virginia Tech",
+      "region": "East Regional",
+      "seed": 11
+    },
+    {
+      "id": "77a69fb0-1355-4342-ac09-b4cc7949d95e",
+      "first_name": "Murray State",
+      "last_name": "Racers",
+      "full_name": "Murray State Racers",
+      "short_name": "Murray State",
+      "region": "East Regional",
+      "seed": 7
+    },
+    {
+      "id": "06f7c904-0ac7-4125-b0f4-f4871bb69057",
+      "first_name": "Marquette",
+      "last_name": "Golden Eagles",
+      "full_name": "Marquette Golden Eagles",
+      "short_name": "Marquette",
+      "region": "East Regional",
+      "seed": 9
+    },
+    {
+      "id": "b18f34af-a7f1-4659-a2e5-fc11a31cd316",
+      "first_name": "Saint Mary's",
+      "last_name": "Gaels",
+      "full_name": "Saint Mary's Gaels",
+      "short_name": "Saint Mary's",
+      "region": "East Regional",
+      "seed": 5
+    },
+    {
+      "id": "e9ca48b2-00ba-41c0-a02b-6885a2da1ff1",
+      "first_name": "North Carolina",
+      "last_name": "Tar Heels",
+      "full_name": "North Carolina Tar Heels",
+      "short_name": "North Carolina",
+      "region": "East Regional",
+      "seed": 8
+    },
+    {
+      "id": "db6e1cab-3fa3-4a93-a673-8b2a358ff4bf",
+      "first_name": "Baylor",
+      "last_name": "Bears",
+      "full_name": "Baylor Bears",
+      "short_name": "Baylor",
+      "region": "East Regional",
+      "seed": 1
+    },
+    {
+      "id": "ec0d6b67-4b16-4b50-92b2-1a651dae6b0f",
+      "first_name": "UCLA",
+      "last_name": "Bruins",
+      "full_name": "UCLA Bruins",
+      "short_name": "UCLA",
+      "region": "East Regional",
+      "seed": 4
+    },
+    {
+      "id": "e66d7ed2-9b4c-48c8-adaa-a276793b057d",
+      "first_name": "Saint Peter's",
+      "last_name": "Peacocks",
+      "full_name": "Saint Peter's Peacocks",
+      "short_name": "Saint Peter's",
+      "region": "East Regional",
+      "seed": 15
+    },
+    {
+      "id": "12d7f888-675b-459f-9099-a38f771d8a95",
+      "first_name": "Purdue",
+      "last_name": "Boilermakers",
+      "full_name": "Purdue Boilermakers",
+      "short_name": "Purdue",
+      "region": "East Regional",
+      "seed": 3
+    },
+    {
+      "id": "ca478771-aa3d-4231-81e0-b70f519134fb",
+      "first_name": "Yale",
+      "last_name": "Bulldogs",
+      "full_name": "Yale Bulldogs",
+      "short_name": "Yale",
+      "region": "East Regional",
+      "seed": 14
+    },
+    {
+      "id": "d24efd99-8717-43b9-a086-9986a684ac04",
+      "first_name": "San Francisco",
+      "last_name": "Dons",
+      "full_name": "San Francisco Dons",
+      "short_name": "San Francisco",
+      "region": "East Regional",
+      "seed": 10
+    },
+    {
+      "id": "2267a1f4-68f6-418b-aaf6-2aa0c4b291f1",
+      "first_name": "Kentucky",
+      "last_name": "Wildcats",
+      "full_name": "Kentucky Wildcats",
+      "short_name": "Kentucky",
+      "region": "East Regional",
+      "seed": 2
+    },
+    {
+      "id": "a8f75c12-c4db-401f-99e3-b48209d85274",
+      "first_name": "Norfolk State",
+      "last_name": "Spartans",
+      "full_name": "Norfolk State Spartans",
+      "short_name": "Norfolk State",
+      "region": "East Regional",
+      "seed": 16
+    },
+    {
+      "id": "c3f0a8ce-af67-497f-a750-3b859376b20a",
+      "first_name": "Indiana",
+      "last_name": "Hoosiers",
+      "full_name": "Indiana Hoosiers",
+      "short_name": "Indiana",
+      "region": "East Regional",
+      "seed": 12
+    },
+    {
+      "id": "1f99a164-d593-4d81-85d5-0d7889d6f486",
+      "first_name": "Houston",
+      "last_name": "Cougars",
+      "full_name": "Houston Cougars",
+      "short_name": "Houston",
+      "region": "South Regional",
+      "seed": 5
+    },
+    {
+      "id": "150148c2-ca8f-414f-8f41-d94a55d4a122",
+      "first_name": "Illinois",
+      "last_name": "Fighting Illini",
+      "full_name": "Illinois Fighting Illini",
+      "short_name": "Illinois",
+      "region": "South Regional",
+      "seed": 4
+    },
+    {
+      "id": "4383eb6a-7fd8-4ff2-94c5-43c933121e88",
+      "first_name": "Villanova",
+      "last_name": "Wildcats",
+      "full_name": "Villanova Wildcats",
+      "short_name": "Villanova",
+      "region": "South Regional",
+      "seed": 2
+    },
+    {
+      "id": "61dadefa-76bf-4db4-8067-f88df540b9cd",
+      "first_name": "Bryant University",
+      "last_name": "Bulldogs",
+      "full_name": "Bryant University Bulldogs",
+      "short_name": "Bryant University",
+      "region": "South Regional",
+      "seed": 16
+    },
+    {
+      "id": "61a3908a-7492-4b6f-809e-12c61976bb0a",
+      "first_name": "Loyola Chicago",
+      "last_name": "Ramblers",
+      "full_name": "Loyola Chicago Ramblers",
+      "short_name": "Loyola Chicago",
+      "region": "South Regional",
+      "seed": 10
+    },
+    {
+      "id": "600aad0e-85e7-4db8-be0b-94ba02a08e55",
+      "first_name": "Longwood",
+      "last_name": "Lancers",
+      "full_name": "Longwood Lancers",
+      "short_name": "Longwood",
+      "region": "South Regional",
+      "seed": 14
+    },
+    {
+      "id": "f7fcbb6e-4a55-41ea-ba21-f763ed914467",
+      "first_name": "TCU",
+      "last_name": "Horned Frogs",
+      "full_name": "TCU Horned Frogs",
+      "short_name": "TCU",
+      "region": "South Regional",
+      "seed": 9
+    },
+    {
+      "id": "bdc2561d-f603-4fab-a262-f1d2af462277",
+      "first_name": "Michigan",
+      "last_name": "Wolverines",
+      "full_name": "Michigan Wolverines",
+      "short_name": "Michigan",
+      "region": "South Regional",
+      "seed": 11
+    },
+    {
+      "id": "4c9fb59b-6cec-4b0d-bb0f-628b391d138c",
+      "first_name": "Chattanooga",
+      "last_name": "Mocs",
+      "full_name": "Chattanooga Mocs",
+      "short_name": "Chattanooga",
+      "region": "South Regional",
+      "seed": 13
+    },
+    {
+      "id": "aef5e386-d8e8-460c-8014-3a2f090fd988",
+      "first_name": "Seton Hall",
+      "last_name": "Pirates",
+      "full_name": "Seton Hall Pirates",
+      "short_name": "Seton Hall",
+      "region": "South Regional",
+      "seed": 8
+    },
+    {
+      "id": "9c396fa7-c165-4599-8542-158bd0d9a199",
+      "first_name": "Wright State",
+      "last_name": "Raiders",
+      "full_name": "Wright State Raiders",
+      "short_name": "Wright State",
+      "region": "South Regional",
+      "seed": 16
+    },
+    {
+      "id": "9b166a3f-e64b-4825-bb6b-92c6f0418263",
+      "first_name": "Arizona",
+      "last_name": "Wildcats",
+      "full_name": "Arizona Wildcats",
+      "short_name": "Arizona",
+      "region": "South Regional",
+      "seed": 1
+    },
+    {
+      "id": "b827dbdf-230f-4916-9703-3bb9004e26eb",
+      "first_name": "Tennessee",
+      "last_name": "Volunteers",
+      "full_name": "Tennessee Volunteers",
+      "short_name": "Tennessee",
+      "region": "South Regional",
+      "seed": 3
+    },
+    {
+      "id": "857462b3-0ab6-4d26-9669-10ca354e382b",
+      "first_name": "Ohio State",
+      "last_name": "Buckeyes",
+      "full_name": "Ohio State Buckeyes",
+      "short_name": "Ohio State",
+      "region": "South Regional",
+      "seed": 7
+    },
+    {
+      "id": "1a470730-f328-4fb1-8bbf-36a069e4d6b2",
+      "first_name": "Colorado State",
+      "last_name": "Rams",
+      "full_name": "Colorado State Rams",
+      "short_name": "Colorado State",
+      "region": "South Regional",
+      "seed": 6
+    },
+    {
+      "id": "0affc15f-641d-4211-970d-fb9fb8d36842",
+      "first_name": "Delaware",
+      "last_name": "Fightin Blue Hens",
+      "full_name": "Delaware Fightin Blue Hens",
+      "short_name": "Delaware",
+      "region": "South Regional",
+      "seed": 15
+    },
+    {
+      "id": "63a8fdcf-b51b-4de3-8a57-2a6e41d362ce",
+      "first_name": "UAB",
+      "last_name": "Blazers",
+      "full_name": "UAB Blazers",
+      "short_name": "UAB",
+      "region": "South Regional",
+      "seed": 12
+    },
+    {
+      "id": "3a000455-de7c-4ca8-880e-abdce7f21da9",
+      "first_name": "USC",
+      "last_name": "Trojans",
+      "full_name": "USC Trojans",
+      "short_name": "USC",
+      "region": "Midwest Regional",
+      "seed": 7
+    },
+    {
+      "id": "c10544de-e3bd-4776-ba2e-83df8c017fd1",
+      "first_name": "Iowa",
+      "last_name": "Hawkeyes",
+      "full_name": "Iowa Hawkeyes",
+      "short_name": "Iowa",
+      "region": "Midwest Regional",
+      "seed": 5
+    },
+    {
+      "id": "eb157f98-0697-459c-9293-ddb162ceb28b",
+      "first_name": "Texas Southern",
+      "last_name": "Tigers",
+      "full_name": "Texas Southern Tigers",
+      "short_name": "Texas Southern",
+      "region": "Midwest Regional",
+      "seed": 16
+    },
+    {
+      "id": "0e4258fa-3154-4c16-b693-adecab184c6c",
+      "first_name": "Iowa State",
+      "last_name": "Cyclones",
+      "full_name": "Iowa State Cyclones",
+      "short_name": "Iowa State",
+      "region": "Midwest Regional",
+      "seed": 11
+    },
+    {
+      "id": "7aec5187-cb1b-45e5-8f7d-406d766cdc73",
+      "first_name": "Miami (FL)",
+      "last_name": "Hurricanes",
+      "full_name": "Miami (FL) Hurricanes",
+      "short_name": "Miami (FL)",
+      "region": "Midwest Regional",
+      "seed": 10
+    },
+    {
+      "id": "7d3b9c72-cbdd-4b64-9aa3-a5bde9b75fdc",
+      "first_name": "Providence",
+      "last_name": "Friars",
+      "full_name": "Providence Friars",
+      "short_name": "Providence",
+      "region": "Midwest Regional",
+      "seed": 4
+    },
+    {
+      "id": "7d797407-623e-476d-b299-46de4275414d",
+      "first_name": "Creighton",
+      "last_name": "Bluejays",
+      "full_name": "Creighton Bluejays",
+      "short_name": "Creighton",
+      "region": "Midwest Regional",
+      "seed": 9
+    },
+    {
+      "id": "9b66e1e0-aace-4671-9be2-54c8acf5ecfc",
+      "first_name": "Richmond",
+      "last_name": "Spiders",
+      "full_name": "Richmond Spiders",
+      "short_name": "Richmond",
+      "region": "Midwest Regional",
+      "seed": 12
+    },
+    {
+      "id": "13358462-e05b-4449-8688-90c4622cdde8",
+      "first_name": "Jacksonville State",
+      "last_name": "Gamecocks",
+      "full_name": "Jacksonville State Gamecocks",
+      "short_name": "Jacksonville State",
+      "region": "Midwest Regional",
+      "seed": 15
+    },
+    {
+      "id": "fe21a988-3e96-4f3c-8f9f-b449ccda43b0",
+      "first_name": "Texas A&M-CC",
+      "last_name": "Islanders",
+      "full_name": "Texas A&M-CC Islanders",
+      "short_name": "Texas A&M-CC",
+      "region": "Midwest Regional",
+      "seed": 16
+    },
+    {
+      "id": "0c0608b3-f349-4f5e-9a10-7e6a744dd0d2",
+      "first_name": "Auburn",
+      "last_name": "Tigers",
+      "full_name": "Auburn Tigers",
+      "short_name": "Auburn",
+      "region": "Midwest Regional",
+      "seed": 2
+    },
+    {
+      "id": "80a19b57-d6ab-4bee-934f-33a72c2e958a",
+      "first_name": "Colgate",
+      "last_name": "Raiders",
+      "full_name": "Colgate Raiders",
+      "short_name": "Colgate",
+      "region": "Midwest Regional",
+      "seed": 14
+    },
+    {
+      "id": "e6914f16-ca37-4d2e-ba26-a425910283e2",
+      "first_name": "San Diego State",
+      "last_name": "Aztecs",
+      "full_name": "San Diego State Aztecs",
+      "short_name": "San Diego State",
+      "region": "Midwest Regional",
+      "seed": 8
+    },
+    {
+      "id": "fae4855b-1b64-4b40-a632-9ed345e1e952",
+      "first_name": "Kansas",
+      "last_name": "Jayhawks",
+      "full_name": "Kansas Jayhawks",
+      "short_name": "Kansas",
+      "region": "Midwest Regional",
+      "seed": 1
+    },
+    {
+      "id": "6ef40534-5fad-4755-84de-7dcbd645d1f0",
+      "first_name": "South Dakota State",
+      "last_name": "Jackrabbits",
+      "full_name": "South Dakota State Jackrabbits",
+      "short_name": "South Dakota State",
+      "region": "Midwest Regional",
+      "seed": 13
+    },
+    {
+      "id": "c7569eae-5b93-4197-b204-6f3a62146b25",
+      "first_name": "Wisconsin",
+      "last_name": "Badgers",
+      "full_name": "Wisconsin Badgers",
+      "short_name": "Wisconsin",
+      "region": "Midwest Regional",
+      "seed": 3
+    },
+    {
+      "id": "70e2bedd-3a0a-479c-ac99-e3f58aa6824b",
+      "first_name": "LSU",
+      "last_name": "Tigers",
+      "full_name": "LSU Tigers",
+      "short_name": "LSU",
+      "region": "Midwest Regional",
+      "seed": 6
+    }
+  ]
+}
