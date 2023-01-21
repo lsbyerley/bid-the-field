@@ -93,10 +93,25 @@ export const getTotalPot = (bids) => {
 export const getPlayerHighestBid = (auctionBids, id) => {
   let highestBid = {};
   if (auctionBids && auctionBids.length) {
-    const playerBids = auctionBids
-      .filter((b) => b?.player_id === id)
-      .sort((a, b) => b?.amount - a?.amount);
-    highestBid = playerBids[0] || {};
+    highestBid = auctionBids
+      .filter((b) => b.player_id === id)
+      .reduce((curr, highest) => {
+        if (!highest.amount) {
+          highest = curr;
+          return highest;
+        }
+
+        if (curr.amount > highest.amount) {
+          highest = curr;
+          return highest;
+        }
+
+        if (curr.amount === highest.amount) {
+          highest = curr.created_at < highest.created_at ? curr : highest;
+        }
+
+        return highest;
+      }, {});
   }
   return highestBid;
 };

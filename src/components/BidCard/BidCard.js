@@ -51,6 +51,7 @@ const BidRow = ({
   return (
     <li
       key={player.id}
+      data-player-id={player.id}
       className='col-span-1 rounded-lg shadow bg-base-100'
       data-sport={sport}
     >

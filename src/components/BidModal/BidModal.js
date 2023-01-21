@@ -3,8 +3,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { round } from '../../lib/auctionUtils';
 
 const MIN_BID = 1;
-const MAX_BID = 1001;
-const MIN_TO_OUTBID = 0.99;
+const MAX_BID = 1000.01;
+const MIN_TO_OUTBID = 1.99;
 
 const BidModal = ({
   isOpen = false,
@@ -40,25 +40,29 @@ const BidModal = ({
       return;
     }
     if (Number(formattedBidAmount) < MIN_BID) {
-      alert(`Minimum bid of $1.00 required`);
+      alert(`Minimum bid of $${MIN_BID} required.`);
       return;
     }
     if (Number(formattedBidAmount) >= MAX_BID) {
-      alert(`Bid cannot exceed $1000`);
+      alert(`Bid cannot exceed $${MAX_BID - 0.01}.`);
       return;
     }
     if (
       highestBid?.amount &&
       Number(formattedBidAmount) <= Number(highestBid.amount)
     ) {
-      alert(`Bid must be higher than $${highestBid.amount}`);
+      alert(`Bid must be higher than $${highestBid.amount}.`);
       return;
     }
     if (
       highestBid?.amount &&
       Number(formattedBidAmount) - Number(highestBid.amount) <= MIN_TO_OUTBID
     ) {
-      alert(`Bid must be atleast $1 higher than ${highestBid.amount}`);
+      alert(
+        `Bid must be atleast $${MIN_TO_OUTBID + 0.01} higher than $${
+          highestBid.amount
+        }.`
+      );
       return;
     }
     onSubmit(formattedBidAmount, player.id);
