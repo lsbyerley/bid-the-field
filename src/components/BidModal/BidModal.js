@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { round } from '../../lib/auctionUtils';
 
 const MIN_BID = 1;
-const MAX_BID = 1000.01;
+const MAX_BID_AMOUNT = 500;
 const MIN_TO_OUTBID = 1.99;
 
 const BidModal = ({
@@ -33,35 +33,34 @@ const BidModal = ({
     }
 
     // Round the bid amount to the nearest tenth decimal
-    const formattedBidAmount = round(bidAmount, 2);
+    const formattedBidAmount = Number(round(bidAmount, 2));
+    const highBid = highestBid?.amount ? Number(highestBid.amount) : null;
 
-    if (Number(formattedBidAmount) <= 0) {
+    if (formattedBidAmount <= 0) {
       alert(`Bid must be higher than $0`);
       return;
     }
-    if (Number(formattedBidAmount) < MIN_BID) {
+    if (formattedBidAmount < MIN_BID) {
       alert(`Minimum bid of $${MIN_BID} required.`);
       return;
     }
-    if (Number(formattedBidAmount) >= MAX_BID) {
-      alert(`Bid cannot exceed $${MAX_BID - 0.01}.`);
-      return;
-    }
-    if (
-      highestBid?.amount &&
-      Number(formattedBidAmount) <= Number(highestBid.amount)
-    ) {
-      alert(`Bid must be higher than $${highestBid.amount}.`);
-      return;
-    }
-    if (
-      highestBid?.amount &&
-      Number(formattedBidAmount) - Number(highestBid.amount) <= MIN_TO_OUTBID
-    ) {
+    if (!highBid && formattedBidAmount > MAX_BID_AMOUNT) {
       alert(
-        `Bid must be atleast $${MIN_TO_OUTBID + 0.01} higher than $${
-          highestBid.amount
-        }.`
+        `A bid is capped at $${MAX_BID_AMOUNT} until the highest bid exceeds $${MAX_BID_AMOUNT}.`
+      );
+      return;
+    }
+    if (highBid && formattedBidAmount - highBid > MAX_BID_AMOUNT) {
+      alert(`Bid cannot exceed $${MAX_BID_AMOUNT}.`);
+      return;
+    }
+    if (highBid && formattedBidAmount <= highBid) {
+      alert(`Bid must be higher than $${highBid}.`);
+      return;
+    }
+    if (highBid && formattedBidAmount - highBid <= MIN_TO_OUTBID) {
+      alert(
+        `Bid must be atleast $${MIN_TO_OUTBID + 0.01} higher than $${highBid}.`
       );
       return;
     }
