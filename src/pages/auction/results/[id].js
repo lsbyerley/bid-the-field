@@ -113,7 +113,7 @@ const AuctionResultsPage = ({
               </div>
             </div>
             <div className='flex-none'>
-              <Link href='/' className='btn btn-sm'>
+              <Link href='/' className='btn btn-sm no-animation'>
                 Go Home
               </Link>
             </div>

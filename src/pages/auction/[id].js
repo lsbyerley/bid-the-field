@@ -349,7 +349,7 @@ const AuctionPage = ({
         <div className='justify-center card-body'>
           <Link
             href={`/auction/results/${auction.current.id}`}
-            className='btn btn-ghost btn-sm'
+            className='btn btn-ghost btn-sm no-animation'
           >
             Rosters / Results
           </Link>
