@@ -19,7 +19,7 @@ const RulesPayoutsCard = ({ auction }) => {
       <div className='justify-center card-body'>
         {asyncAuction.current.rules && (
           <button
-            className='btn btn-ghost btn-sm'
+            className='btn btn-ghost btn-sm no-animation'
             onClick={() => openRulesModal()}
           >
             Rules
@@ -27,7 +27,7 @@ const RulesPayoutsCard = ({ auction }) => {
         )}
         {asyncAuction.current.payouts && (
           <button
-            className='btn btn-ghost btn-sm'
+            className='btn btn-ghost btn-sm no-animation'
             onClick={() => openPayoutsModal()}
           >
             Payouts
