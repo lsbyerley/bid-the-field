@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { getPlayerHighestBid } from '@/lib/auctionUtils';
-import useAsyncReference from '@/lib/useAsyncReference';
 import BidModal from '../BidModal';
 import { BasketballBidCard, GolfBidCard } from './types';
 
@@ -14,13 +12,14 @@ const BID_CARD_VARIANTS = {
 const BidRow = ({
   sport,
   player = {},
-  bids = [],
+  //bids = [],
   biddingDisabled = false,
   disableTheField = false,
   onSubmitBid = () => {},
 }) => {
-  const asyncBids = useAsyncReference(bids, true);
-  const highestBid = getPlayerHighestBid(asyncBids.current, player.id);
+  // const asyncBids = useAsyncReference(bids, true);
+  // const highestBid = getPlayerHighestBid(asyncBids.current, player.id);
+  const highestBid = player.highestBid || {};
   const [isOpen, setIsOpen] = useState(false);
   const BidCardComponent = BID_CARD_VARIANTS[sport];
 

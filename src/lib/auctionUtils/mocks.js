@@ -1,8 +1,9 @@
 export const playersData = [
-  { id: 1, full_name: 'test1', short_name: 'test1' },
-  { id: 2, full_name: 'test2', short_name: 'test2' },
-  { id: 3, full_name: 'test3', short_name: 'test3' },
-  { id: 4, full_name: 'test4', short_name: 'test4' },
+  { id: 1, name: 'test1' },
+  { id: 2, name: 'test2' },
+  { id: 3, name: 'test3' },
+  { id: 5, name: 'nobidtest1' },
+  { id: 6, name: 'nobidtest2' },
 ];
 
 export const mockProfile = { name: '', email: '' };

@@ -174,3 +174,21 @@ export const minutesLeft = (auction) => {
   const diff = differenceInMinutes(new Date(auction?.end_date), new Date());
   return diff > -1 ? diff : 0;
 };
+
+// Given an array of players and bids, attaches the highest bid to the player object and sorts
+export const sortPlayersByHighestBid = (players, bids) => {
+  return players
+    .map((p) => {
+      const highestBid = getPlayerHighestBid(bids, p.id);
+      return {
+        ...p,
+        highestBid,
+      };
+    })
+    .sort((a, b) => {
+      var ab = a.highestBid?.amount || 0;
+      var bb = b.highestBid?.amount || 0;
+
+      return bb - ab;
+    });
+};

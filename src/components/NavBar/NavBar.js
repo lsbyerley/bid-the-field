@@ -34,9 +34,7 @@ const NavBar = () => {
           </ul>
         </div>
         <Link href='/' className='normal-case md:text-lg btn btn-sm btn-ghost'>
-          
-            Bid The Field
-          
+          Bid The Field
         </Link>
       </div>
       <div className='hidden navbar-center lg:flex'>
@@ -70,7 +68,7 @@ const NavBar = () => {
                 <img
                   referrerPolicy='no-referrer'
                   src={
-                    session?.user?.user_metadata?.picture ||
+                    session.user?.user_metadata?.picture ||
                     'https://place-hold.it/40x40'
                   }
                 />
@@ -82,8 +80,8 @@ const NavBar = () => {
             >
               <li className='menu-title'>
                 <div>
-                  {session?.user?.user_metadata?.name ||
-                    session?.user?.user_metadata?.email ||
+                  {session.user?.user_metadata?.name ||
+                    session.user?.user_metadata?.email ||
                     'n/a'}
                 </div>
               </li>

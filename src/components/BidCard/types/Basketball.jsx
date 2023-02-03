@@ -23,7 +23,7 @@ const BasketballBidCard = ({
             </h3>
           </div>
           <p className='mt-4 text-xs truncate max-w-[14rem]'>
-            {highestBid?.profile?.name ||
+            {highestBid?.profile?.username ||
               highestBid?.profile?.email ||
               highestBid?.owner_id ||
               '-'}
@@ -39,7 +39,7 @@ const BasketballBidCard = ({
             <button
               disabled={biddingDisabled || isOpen || disableTheFieldPlayer}
               onClick={() => openBidModal()}
-              className='w-full btn btn-xs btn-ghost md:w-auto'
+              className='w-full btn btn-xs btn-ghost md:w-auto no-animation'
             >
               <CurrencyDollarIcon className='w-5 h-5 ' aria-hidden='true' />
               <span className='ml-1'>Bid</span>
@@ -53,7 +53,7 @@ const BasketballBidCard = ({
                 highestBid?.amount < 10
               }
               onClick={() => submitTenPercentBid(player, highestBid)}
-              className='w-full btn btn-xs btn-ghost md:w-auto'
+              className='w-full btn btn-xs btn-ghost md:w-auto no-animation'
             >
               <span className='ml-1'>Bid 10%</span>
             </button>

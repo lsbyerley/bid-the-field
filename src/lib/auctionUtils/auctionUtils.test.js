@@ -165,17 +165,15 @@ describe('auctionUtils', () => {
     it('should return a player object from array of bids', () => {
       const playerId = 1;
       expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
-        full_name: 'test1',
+        name: 'test1',
         id: 1,
-        short_name: 'test1',
       });
     });
     it('should return a player 1 object from array of bids if id is a string', () => {
       const playerId = '1';
       expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
-        full_name: 'test1',
+        name: 'test1',
         id: 1,
-        short_name: 'test1',
       });
     });
     it('should return empty object if player not found', () => {
@@ -274,6 +272,58 @@ describe('auctionUtils', () => {
         end_date: '2022-06-17T15:58:00',
       };
       expect(utils.minutesLeft(auction)).toEqual(0);
+    });
+  });
+
+  describe('sortPlayersByHighestBid', () => {
+    it('should return players sorted by the highest bid', () => {
+      expect(
+        utils.sortPlayersByHighestBid(playersData, clone(mockBids))
+      ).toEqual([
+        {
+          id: 1,
+          name: 'test1',
+          highestBid: {
+            amount: 27,
+            created_at: mockBidDates.date1603,
+            owner_id: '1',
+            player_id: 1,
+            profile: mockProfile,
+          },
+        },
+        {
+          id: 2,
+          name: 'test2',
+          highestBid: {
+            amount: 27,
+            created_at: mockBidDates.date1603,
+            owner_id: '2',
+            player_id: 2,
+            profile: mockProfile,
+          },
+        },
+        {
+          id: 3,
+          name: 'test3',
+          highestBid: {
+            amount: 27,
+            created_at: mockBidDates.date1602,
+            owner_id: '3',
+            player_id: 3,
+            profile: mockProfile,
+          },
+        },
+        {
+          id: 5,
+          name: 'nobidtest1',
+          highestBid: {},
+        },
+        {
+          id: 6,
+          name: 'nobidtest2',
+          highestBid: {},
+        },
+      ]);
     });
   });
 });

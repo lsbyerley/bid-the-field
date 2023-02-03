@@ -52,7 +52,6 @@ const profile = ({ profile }) => {
 
   const formOptions = {
     defaultValues: {
-      name: profile?.name,
       phone: profile?.phone,
       username: profile?.username,
     },
@@ -142,30 +141,11 @@ const profile = ({ profile }) => {
                   <div>
                     <h3 className='text-lg font-medium leading-6'>Profile</h3>
                     <p className='max-w-2xl mt-1 text-sm '>
-                      Your name, username, or email may be displayed publicly to
-                      show winning bids.
+                      Your username or email will be displayed publicly to show
+                      winning bids.
                     </p>
                   </div>
                   <div className='mt-6 space-y-6 sm:mt-5 sm:space-y-5'>
-                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
-                      <label
-                        htmlFor='name'
-                        className='block text-sm font-medium sm:mt-px sm:pt-2'
-                      >
-                        Name
-                      </label>
-                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                        <input
-                          {...register('name')}
-                          type='text'
-                          name='name'
-                          id='name'
-                          autoComplete='given-name'
-                          className='w-full max-w-lg input input-bordered'
-                        />
-                      </div>
-                    </div>
-
                     <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
                         htmlFor='username'

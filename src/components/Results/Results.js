@@ -21,7 +21,7 @@ const Results = ({ bids = [], players = [] }) => {
                 <div>
                   <div className='flex justify-between pb-2 mb-4 text-lg font-medium border-b'>
                     <span className='mr-2 text-lg truncate text-info'>
-                      {ownerResults?.profile?.name ||
+                      {ownerResults?.profile?.username ||
                         ownerResults?.profile?.email}
                     </span>
                     <span className='text-success'>
