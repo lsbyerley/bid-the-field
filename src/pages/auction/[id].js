@@ -61,7 +61,7 @@ export const getServerSideProps = async (ctx) => {
 
     const { data: bids, error: bidsError } = await supabase
       .from('bids')
-      .select(`*, profile:owner_id(email,name)`)
+      .select(`*, profile:owner_id(email,username)`)
       .eq('auction_id', params.id);
 
     const { data: profiles, error: profilesError } = await supabase
@@ -194,7 +194,7 @@ const AuctionPage = ({
       const newBid = {
         ...payload.new,
         profile: profilesData.find(
-          (profile) => profile.id === payload.new.owner_id
+          (profile) => `${profile.id}` === `${payload.new.owner_id}`
         ),
       };
       const updatedBids = [...bids.current, newBid];
@@ -204,7 +204,7 @@ const AuctionPage = ({
     if (payload?.eventType === 'UPDATE') {
       const updatedBids = [...bids.current];
       const indexOfBidToUpdate = bids.current.findIndex(
-        (b) => b.id === payload.new.id
+        (b) => `${b.id}` === `${payload.new.id}`
       );
       updatedBids.splice(indexOfBidToUpdate, 1, payload.new);
       setBids(updatedBids);
