@@ -4,6 +4,7 @@ import {
   isAfter,
   isBefore,
 } from 'date-fns';
+import isEmpty from 'just-is-empty';
 
 // Round a number to the decimal place passed in
 // https://www.jacklmoore.com/notes/rounding-in-javascript/
@@ -12,14 +13,15 @@ export const round = (value, decimals) => {
 };
 
 // Given an array of bids and a user id, returns the user's winning bids
+// TODO: refactor this logic
 export const getOwnerWinningBids = (bids, ownerId) => {
   const ownerBidsSorted = bids
-    .filter((b) => b.owner_id === ownerId)
+    .filter((b) => `${b.owner_id}` === `${ownerId}`)
     .sort((a, b) => b.amount - a.amount);
 
   const ownerBidsSortedUnique = ownerBidsSorted.reduce((filter, current) => {
     const bidOnPlayer = filter.find((bid) => {
-      return bid.player_id === current.player_id;
+      return `${bid.player_id}` === `${current.player_id}`;
     });
     if (!bidOnPlayer) {
       return filter.concat([current]);
@@ -28,22 +30,39 @@ export const getOwnerWinningBids = (bids, ownerId) => {
     }
   }, []);
 
-  let winningBids = [];
-
-  ownerBidsSortedUnique.forEach((ob) => {
-    const bidPlayerId = ob.player_id;
+  const winningBids = ownerBidsSortedUnique.reduce((winningBids, bid) => {
+    const bidPlayerId = bid.player_id;
     const otherBidsOnPlayerSorted = bids
-      .filter((b) => b.owner_id !== ownerId && b.player_id === bidPlayerId)
+      .filter(
+        (b) =>
+          `${b.owner_id}` !== `${ownerId}` &&
+          `${b.player_id}` === `${bidPlayerId}`
+      )
       .sort((a, b) => b.amount - a.amount);
+    const isOtherBids = !isEmpty(otherBidsOnPlayerSorted);
 
-    if (otherBidsOnPlayerSorted.length) {
-      if (ob.amount > otherBidsOnPlayerSorted[0].amount) {
-        winningBids.push(ob);
-      }
-    } else {
-      winningBids.push(ob);
+    if (!isOtherBids) {
+      winningBids.push(bid);
+      return winningBids;
     }
-  });
+
+    if (isOtherBids) {
+      const otherBid = otherBidsOnPlayerSorted[0]; // highest of other bids
+      // check if amount is higher
+      if (bid.amount > otherBid.amount) {
+        winningBids.push(bid);
+      }
+      // if amounts are the same, give tie to bid placed first by date
+      if (
+        bid.amount === otherBid.amount &&
+        isBefore(new Date(bid.created_at), new Date(otherBid.created_at))
+      ) {
+        winningBids.push(bid);
+      }
+    }
+
+    return winningBids;
+  }, []);
 
   return winningBids;
 };
@@ -63,7 +82,6 @@ export const getAuctionResults = (bids) => {
   Object.keys(owners).forEach((owner) => {
     const ownerWinnings = getOwnerWinningBids(bids, owner);
     owners[owner].winningBids = ownerWinnings;
-    // console.log('log: owner', ownerWinnings);
   });
 
   return owners;
@@ -95,19 +113,23 @@ export const getPlayerHighestBid = (auctionBids, id) => {
   if (auctionBids && auctionBids.length) {
     highestBid = auctionBids
       .filter((b) => b.player_id === id)
-      .reduce((curr, highest) => {
-        if (!highest.amount) {
-          highest = curr;
-          return highest;
+      .reduce((highest, curr) => {
+        // if highest isn't set yet
+        if (isEmpty(highest)) {
+          return curr;
         }
 
+        // if amount is greater
         if (curr.amount > highest.amount) {
-          highest = curr;
-          return highest;
+          return curr;
         }
 
-        if (curr.amount === highest.amount) {
-          highest = curr.created_at < highest.created_at ? curr : highest;
+        // If tie in amount, give to earlier bid date
+        if (
+          curr.amount === highest.amount &&
+          isBefore(new Date(curr.created_at), new Date(highest.created_at))
+        ) {
+          return curr;
         }
 
         return highest;
@@ -118,7 +140,7 @@ export const getPlayerHighestBid = (auctionBids, id) => {
 
 // given an array of players and player id, returns the player name
 export const getPlayerFromBid = (playersData, playerId) => {
-  const player = playersData.find((p) => p.id === playerId);
+  const player = playersData.find((p) => `${p.id}` === `${playerId}`);
   return player ? player : {};
   // return `${player?.first_name} ${player?.last_name}`;
 };
