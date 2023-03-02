@@ -1,21 +1,4 @@
-import type { Database } from '../../../db_types';
-
-type Auction = Database["public"]["Tables"]["auctions"]["Row"];
-type Bid = Database["public"]["Tables"]["bids"]["Row"];
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
-
-type Player = {
-  id: string,
-  name: string,
-};
-
-export interface PlayerWithHighBid extends Player {
-  highestBid: Bid
-}
-
-export interface BidWithProfile extends Bid {
-  profile: Profile
-};
+import type { Player, PlayerWithHighBid, BidWithProfile } from './auctionUtils';
 
 export const playersData = [
   { id: '1', name: 'test1' },
@@ -33,9 +16,16 @@ export const playersDataWithHighBid = [
   { id: '6', name: 'nobidtest2' },
 ] as PlayerWithHighBid[];
 
-export const mockAuction = {  }
+export const mockAuction = {};
 
-export const mockProfile = { created_at: '', email: '', id: '', name: '', phone: '', username: '', };
+export const mockProfile = {
+  created_at: '',
+  email: '',
+  id: '',
+  name: '',
+  phone: '',
+  username: '',
+};
 
 // mockdate june 17, 2022 4pm
 export const mockSystemDate = new Date('June 17, 2022 16:00:00');

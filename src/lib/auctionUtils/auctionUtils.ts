@@ -8,18 +8,22 @@ import isEmpty from 'just-is-empty';
 
 import type { Database } from '../../../db_types';
 
-type Auction = Database["public"]["Tables"]["auctions"]["Row"];
-type Bid = Database["public"]["Tables"]["bids"]["Row"];
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+type Auction = Database['public']['Tables']['auctions']['Row'];
+type Bid = Database['public']['Tables']['bids']['Row'];
+type Profile = Database['public']['Tables']['profiles']['Row'];
 
-type player = {
-  id: string,
-  highestBid: Bid
-};
+export interface Player {
+  id: string;
+  name: string;
+}
 
-interface BidWithProfile extends Bid {
-  profile: Profile
-};
+export interface BidWithProfile extends Bid {
+  profile: Profile;
+}
+
+export interface PlayerWithHighBid extends Player {
+  highestBid: Bid;
+}
 
 // Round a number to the decimal place passed in
 // https://www.jacklmoore.com/notes/rounding-in-javascript/
@@ -153,7 +157,7 @@ export const getPlayerHighestBid = (auctionBids: Bid[], id: string) => {
 };
 
 // given an array of players and player id, returns the player name
-export const getPlayerFromBid = (playersData, playerId) => {
+export const getPlayerFromBid = (playersData: Player[], playerId: string) => {
   const player = playersData.find((p) => `${p.id}` === `${playerId}`);
   return player ? player : {};
   // return `${player?.first_name} ${player?.last_name}`;
@@ -190,7 +194,7 @@ export const minutesLeft = (auction: Auction) => {
 };
 
 // Given an array of players and bids, attaches the highest bid to the player object and sorts
-export const sortPlayersByHighestBid = (players: player[], bids: Bid[]) => {
+export const sortPlayersByHighestBid = (players: Player[], bids: Bid[]) => {
   return players
     .map((p) => {
       const highestBid = getPlayerHighestBid(bids, p.id);
@@ -199,7 +203,7 @@ export const sortPlayersByHighestBid = (players: player[], bids: Bid[]) => {
         highestBid,
       };
     })
-    .sort((a: player, b: player) => {
+    .sort((a: PlayerWithHighBid, b: PlayerWithHighBid) => {
       var ab = a.highestBid?.amount || 0;
       var bb = b.highestBid?.amount || 0;
 

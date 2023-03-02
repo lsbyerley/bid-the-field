@@ -9,6 +9,7 @@
     "pkg:update:check": "ncu",
     "pkg:update:install": "ncu --upgrade; npm install",
     "playerscript": "node scripts/getPlayerData.mjs",
+    "test:unit": "jest --coverage",
     "jest": "TZ=UTC jest"
   },
   "dependencies": {
