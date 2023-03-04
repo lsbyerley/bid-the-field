@@ -14,7 +14,10 @@ type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export interface Player {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
+  full_name: string;
+  short_name: string;
 }
 
 export interface BidWithProfile extends Bid {

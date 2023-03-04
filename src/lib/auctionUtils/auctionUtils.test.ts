@@ -167,7 +167,7 @@ describe('auctionUtils', () => {
 
   describe('getPlayerFromBid', () => {
     it('should return a player object from array of bids', () => {
-      const playerId = 1;
+      const playerId = '1';
       expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
         name: 'test1',
         id: '1',
@@ -181,7 +181,7 @@ describe('auctionUtils', () => {
       });
     });
     it('should return empty object if player not found', () => {
-      const playerId = 99;
+      const playerId = '99';
       expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({});
     });
   });

@@ -1,18 +1,32 @@
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { round } from '../../lib/auctionUtils';
+import isEmpty from 'just-is-empty';
+import type { Player, BidWithProfile } from '@/lib/auctionUtils/auctionUtils';
 
 const MIN_BID = 1;
 const MAX_BID_AMOUNT = 500;
 const MIN_TO_OUTBID = 1.99;
 
+interface FormData {
+  bidAmount: string | number;
+}
+
+interface BidModalArgs {
+  isOpen: boolean;
+  setIsOpen: Function;
+  onSubmit: Function;
+  player: Player;
+  highestBid: BidWithProfile;
+}
+
 const BidModal = ({
   isOpen = false,
-  setIsOpen = () => {},
-  onSubmit = () => {},
-  player = null,
+  setIsOpen = (open: boolean) => {},
+  onSubmit = (bidAmount: number, playerId: string) => {},
+  player,
   highestBid = null,
-}) => {
+}: BidModalArgs) => {
   let bidInputRef = useRef(null);
   const [formInput, updateFormInput] = useState({
     bidAmount: '',
@@ -21,19 +35,17 @@ const BidModal = ({
     setIsOpen(false);
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const submitBid = async () => {
+  const submitBid = async (formInput: FormData) => {
     const { bidAmount } = formInput;
-    if (!bidAmount || isNaN(Number(bidAmount))) {
+    if (isEmpty(bidAmount) || isNaN(Number(bidAmount))) {
       alert('Valid bid amount required');
       return;
     }
 
+    const numBid = Number(bidAmount);
+
     // Round the bid amount to the nearest tenth decimal
-    const formattedBidAmount = Number(round(bidAmount, 2));
+    const formattedBidAmount = round(numBid, 2);
     const highBid = highestBid?.amount ? Number(highestBid.amount) : null;
 
     if (formattedBidAmount <= 0) {
@@ -152,7 +164,11 @@ const BidModal = ({
               </div>
 
               <div className='justify-center modal-action'>
-                <button type='button' className='btn' onClick={submitBid}>
+                <button
+                  type='button'
+                  className='btn'
+                  onClick={() => submitBid(formInput)}
+                >
                   Place Bid
                 </button>
               </div>
