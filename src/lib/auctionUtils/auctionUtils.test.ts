@@ -1,5 +1,6 @@
 import * as utils from './auctionUtils';
 import {
+  defaultPlayerData,
   playersData,
   playersDataWithHighBid,
   mockProfile,
@@ -169,14 +170,8 @@ describe('auctionUtils', () => {
     it('should return a player object from array of bids', () => {
       const playerId = '1';
       expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
-        name: 'test1',
-        id: '1',
-      });
-    });
-    it('should return a player 1 object from array of bids if id is a string', () => {
-      const playerId = '1';
-      expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({
-        name: 'test1',
+        ...defaultPlayerData,
+        first_name: 'test1',
         id: '1',
       });
     });
@@ -307,8 +302,9 @@ describe('auctionUtils', () => {
         utils.sortPlayersByHighestBid(playersDataWithHighBid, clone(mockBids))
       ).toEqual([
         {
+          ...defaultPlayerData,
           id: '1',
-          name: 'test1',
+          first_name: 'test1',
           highestBid: {
             amount: 27,
             auction_id: 1,
@@ -320,8 +316,9 @@ describe('auctionUtils', () => {
           },
         },
         {
+          ...defaultPlayerData,
           id: '2',
-          name: 'test2',
+          first_name: 'test2',
           highestBid: {
             amount: 27,
             created_at: mockBidDates.date1603,
@@ -331,8 +328,9 @@ describe('auctionUtils', () => {
           },
         },
         {
+          ...defaultPlayerData,
           id: '3',
-          name: 'test3',
+          first_name: 'test3',
           highestBid: {
             amount: 27,
             created_at: mockBidDates.date1602,
@@ -342,13 +340,15 @@ describe('auctionUtils', () => {
           },
         },
         {
+          ...defaultPlayerData,
           id: '5',
-          name: 'nobidtest1',
+          first_name: 'nobidtest1',
           highestBid: {},
         },
         {
+          ...defaultPlayerData,
           id: '6',
-          name: 'nobidtest2',
+          first_name: 'nobidtest2',
           highestBid: {},
         },
       ]);

@@ -1,19 +1,26 @@
 import type { Player, PlayerWithHighBid, BidWithProfile } from './auctionUtils';
 
+export const defaultPlayerData = {
+  first_name: '',
+  last_name: '',
+  short_name: '',
+  full_name: '',
+};
+
 export const playersData = [
-  { id: '1', name: 'test1' },
-  { id: '2', name: 'test2' },
-  { id: '3', name: 'test3' },
-  { id: '5', name: 'nobidtest1' },
-  { id: '6', name: 'nobidtest2' },
+  { ...defaultPlayerData, id: '1', first_name: 'test1' },
+  { ...defaultPlayerData, id: '2', first_name: 'test2' },
+  { ...defaultPlayerData, id: '3', first_name: 'test3' },
+  { ...defaultPlayerData, id: '5', first_name: 'nobidtest1' },
+  { ...defaultPlayerData, id: '6', first_name: 'nobidtest2' },
 ] as Player[];
 
 export const playersDataWithHighBid = [
-  { id: '1', name: 'test1' },
-  { id: '2', name: 'test2' },
-  { id: '3', name: 'test3' },
-  { id: '5', name: 'nobidtest1' },
-  { id: '6', name: 'nobidtest2' },
+  { ...defaultPlayerData, id: '1', first_name: 'test1' },
+  { ...defaultPlayerData, id: '2', first_name: 'test2' },
+  { ...defaultPlayerData, id: '3', first_name: 'test3' },
+  { ...defaultPlayerData, id: '5', first_name: 'nobidtest1' },
+  { ...defaultPlayerData, id: '6', first_name: 'nobidtest2' },
 ] as PlayerWithHighBid[];
 
 export const mockAuction = {};
