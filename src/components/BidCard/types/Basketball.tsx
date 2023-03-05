@@ -1,4 +1,19 @@
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import type {
+  BasketballPlayer,
+  BidWithProfile,
+} from '@/lib/auctionUtils/auctionUtils';
+
+export interface BasketballBidCardArgs {
+  isOpen: boolean;
+  player: BasketballPlayer;
+  highestBid: BidWithProfile;
+  biddingDisabled: boolean;
+  openBidModal: Function;
+  submitTenPercentBid: Function;
+  isPartOfField: boolean;
+  disableTheFieldPlayer: boolean;
+}
 
 const BasketballBidCard = ({
   isOpen,
@@ -9,7 +24,7 @@ const BasketballBidCard = ({
   submitTenPercentBid,
   isPartOfField,
   disableTheFieldPlayer,
-}) => {
+}: BasketballBidCardArgs) => {
   return (
     <div className='flex md:block'>
       <div className='flex items-center justify-between w-full p-3 space-x-6'>

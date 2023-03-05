@@ -16,11 +16,11 @@ const NavBar = () => {
     <div className='navbar bg-base-100'>
       <div className='navbar-start'>
         <div className='dropdown'>
-          <label tabIndex='0' className='btn btn-sm btn-ghost lg:hidden'>
+          <label tabIndex={0} className='btn btn-sm btn-ghost lg:hidden'>
             <Bars3Icon className='w-5 h-5' />
           </label>
           <ul
-            tabIndex='0'
+            tabIndex={0}
             className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
           >
             <li>
@@ -63,7 +63,7 @@ const NavBar = () => {
         )}
         {!isLoading && session && (
           <div className='ml-2 md:ml-4 dropdown dropdown-end'>
-            <label tabIndex='0' className='btn btn-ghost btn-circle avatar'>
+            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
               <div className='w-8 rounded-full md:w-10'>
                 <img
                   referrerPolicy='no-referrer'
@@ -75,7 +75,7 @@ const NavBar = () => {
               </div>
             </label>
             <ul
-              tabIndex='0'
+              tabIndex={0}
               className='p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52'
             >
               <li className='menu-title'>

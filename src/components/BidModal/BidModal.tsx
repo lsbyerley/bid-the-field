@@ -2,7 +2,7 @@ import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { round } from '../../lib/auctionUtils';
 import isEmpty from 'just-is-empty';
-import type { Player, BidWithProfile } from '@/lib/auctionUtils/auctionUtils';
+import type { Player, Bid } from '@/lib/auctionUtils/auctionUtils';
 
 const MIN_BID = 1;
 const MAX_BID_AMOUNT = 500;
@@ -17,7 +17,7 @@ interface BidModalArgs {
   setIsOpen: Function;
   onSubmit: Function;
   player: Player;
-  highestBid: BidWithProfile;
+  highestBid: Bid;
 }
 
 const BidModal = ({
@@ -35,6 +35,7 @@ const BidModal = ({
     setIsOpen(false);
   };
 
+  // TODO: add to auction utils and unit test
   const submitBid = async (formInput: FormData) => {
     const { bidAmount } = formInput;
     if (isEmpty(bidAmount) || isNaN(Number(bidAmount))) {

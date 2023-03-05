@@ -1,4 +1,16 @@
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import type { Player, BidWithProfile } from '@/lib/auctionUtils/auctionUtils';
+
+export interface GolfBidCardArgs {
+  isOpen: boolean;
+  player: Player;
+  highestBid: BidWithProfile;
+  biddingDisabled: boolean;
+  openBidModal: Function;
+  submitTenPercentBid: Function;
+  isPartOfField: boolean;
+  disableTheFieldPlayer: boolean;
+}
 
 const GolfBidCard = ({
   isOpen,
@@ -9,7 +21,7 @@ const GolfBidCard = ({
   submitTenPercentBid,
   isPartOfField,
   disableTheFieldPlayer,
-}) => {
+}: GolfBidCardArgs) => {
   return (
     <div className='flex md:block'>
       <div className='flex items-center justify-between w-full p-3 space-x-6'>

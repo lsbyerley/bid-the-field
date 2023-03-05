@@ -1,5 +1,4 @@
 export { default as AccessDenied } from './AccessDenied';
-export { default as AuctionHeader } from './AuctionHeader';
 export { default as BidModal } from './BidModal';
 export { default as BidRow } from './BidCard';
 export { default as Countdown } from './Countdown';

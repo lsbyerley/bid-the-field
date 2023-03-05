@@ -2,6 +2,11 @@
 // https://css-tricks.com/dealing-with-stale-props-and-states-in-reacts-functional-components/
 import { useRef, useState } from 'react';
 
+export interface AsyncRefConfig {
+  value: any;
+  isProp: boolean;
+}
+
 const useAsyncReference = (value, isProp = false) => {
   const ref = useRef(value);
   const [, forceRender] = useState(false);

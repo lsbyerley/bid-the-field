@@ -8,9 +8,9 @@ import isEmpty from 'just-is-empty';
 
 import type { Database } from '../../../db_types';
 
-type Auction = Database['public']['Tables']['auctions']['Row'];
-type Bid = Database['public']['Tables']['bids']['Row'];
-type Profile = Database['public']['Tables']['profiles']['Row'];
+export type Auction = Database['public']['Tables']['auctions']['Row'];
+export type Bid = Database['public']['Tables']['bids']['Row'];
+export type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export interface Player {
   id: string;
@@ -18,6 +18,10 @@ export interface Player {
   last_name: string;
   full_name: string;
   short_name: string;
+}
+
+export interface BasketballPlayer extends Player {
+  seed: number;
 }
 
 export interface BidWithProfile extends Bid {
