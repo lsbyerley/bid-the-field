@@ -1,12 +1,8 @@
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { round } from '../../lib/auctionUtils';
-import isEmpty from 'just-is-empty';
+import { submitBidFilter } from '../../lib/auctionUtils';
 import type { Player, Bid } from '@/lib/auctionUtils/auctionUtils';
-
-const MIN_BID = 1;
-const MAX_BID_AMOUNT = 500;
-const MIN_TO_OUTBID = 1.99;
+import toast from 'react-hot-toast';
 
 interface FormData {
   bidAmount: string | number;
@@ -22,8 +18,8 @@ interface BidModalArgs {
 
 const BidModal = ({
   isOpen = false,
-  setIsOpen = (open: boolean) => {},
-  onSubmit = (bidAmount: number, playerId: string) => {},
+  setIsOpen = () => {},
+  onSubmit = () => {},
   player,
   highestBid = null,
 }: BidModalArgs) => {
@@ -37,47 +33,16 @@ const BidModal = ({
 
   // TODO: add to auction utils and unit test
   const submitBid = async (formInput: FormData) => {
-    const { bidAmount } = formInput;
-    if (isEmpty(bidAmount) || isNaN(Number(bidAmount))) {
-      alert('Valid bid amount required');
-      return;
-    }
-
-    const numBid = Number(bidAmount);
-
-    // Round the bid amount to the nearest tenth decimal
-    const formattedBidAmount = round(numBid, 2);
-    const highBid = highestBid?.amount ? Number(highestBid.amount) : null;
-
-    if (formattedBidAmount <= 0) {
-      alert(`Bid must be higher than $0`);
-      return;
-    }
-    if (formattedBidAmount < MIN_BID) {
-      alert(`Minimum bid of $${MIN_BID} required.`);
-      return;
-    }
-    if (!highBid && formattedBidAmount > MAX_BID_AMOUNT) {
-      alert(
-        `A bid is capped at $${MAX_BID_AMOUNT} until the highest bid exceeds $${MAX_BID_AMOUNT}.`
+    try {
+      const filteredBid = submitBidFilter(
+        formInput.bidAmount,
+        highestBid.amount
       );
-      return;
+      onSubmit(filteredBid, player.id);
+    } catch (err) {
+      console.log('LOG: filteredBiderrr', err?.message);
+      toast.error(`Bid not accepted: ${err?.message}`);
     }
-    if (highBid && formattedBidAmount - highBid > MAX_BID_AMOUNT) {
-      alert(`Bid cannot exceed $${MAX_BID_AMOUNT}.`);
-      return;
-    }
-    if (highBid && formattedBidAmount <= highBid) {
-      alert(`Bid must be higher than $${highBid}.`);
-      return;
-    }
-    if (highBid && formattedBidAmount - highBid <= MIN_TO_OUTBID) {
-      alert(
-        `Bid must be atleast $${MIN_TO_OUTBID + 0.01} higher than $${highBid}.`
-      );
-      return;
-    }
-    onSubmit(formattedBidAmount, player.id);
     closeModal();
   };
 

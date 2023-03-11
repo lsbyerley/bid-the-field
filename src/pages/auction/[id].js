@@ -16,6 +16,7 @@ import {
 } from '@/lib/auctionUtils';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { addMinutes } from 'date-fns';
+import toast from 'react-hot-toast';
 
 // Components
 import Layout from '@/components/Layout';
@@ -274,7 +275,7 @@ const AuctionPage = ({
 
   const onSubmitBid = async (bidAmount, playerId) => {
     if (auctionOver) {
-      alert('Too late! auction has ended!');
+      toast.error('Too late! auction has ended!');
       return;
     }
     setBidSubmitLoading(true);
@@ -293,7 +294,7 @@ const AuctionPage = ({
     if (error) {
       setBidSubmitLoading(false);
       console.log('LOG: bid error', error);
-      alert('Error submitting bid: ', error?.message);
+      toast.error(`Error submitting bid: ${error?.message}`);
       return;
     }
 

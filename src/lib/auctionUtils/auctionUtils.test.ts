@@ -37,6 +37,49 @@ describe('auctionUtils', () => {
     });
   });
 
+  describe('submitBidFilter', () => {
+    // https://medium.com/@afolabiwaheed/how-to-test-a-function-thats-expected-to-throw-error-in-jest-2419cc7c6462
+    it('if bid is empty', () => {
+      expect(() => {
+        utils.submitBidFilter('', 0);
+      }).toThrow('Valid bid amount required.');
+    });
+    it('if bid is not a number', () => {
+      expect(() => {
+        utils.submitBidFilter('sdfg', 0);
+      }).toThrow('Valid bid amount required.');
+    });
+    it('if bid is negative', () => {
+      expect(() => {
+        utils.submitBidFilter(-5, 0);
+      }).toThrow('Minimum bid of $1 required.');
+    });
+    it('bid is higher than max bid when no high bid', () => {
+      expect(() => {
+        utils.submitBidFilter(101, null);
+      }).toThrow('Max per bid is capped at $100.');
+    });
+    it('bid is less than the minimum bid', () => {
+      expect(() => {
+        utils.submitBidFilter(49, 50);
+      }).toThrow('Bid must be higher than $50.');
+    });
+    it('bid is equal to high bid', () => {
+      expect(() => {
+        utils.submitBidFilter(50, 50);
+      }).toThrow('Bid must be higher than $50.');
+    });
+    it('bid is less than minimum to outbid a high bid', () => {
+      expect(() => {
+        utils.submitBidFilter(51, 50);
+      }).toThrow('Bid must be atleast $2 higher than $50.');
+    });
+    it('successful bid is returned', () => {
+      const bid = utils.submitBidFilter(53, 50);
+      expect(bid).toEqual(53);
+    });
+  });
+
   describe('getOwnerWinningBids', () => {
     it('should return winning bids of owner 1', () => {
       const ownerId = '1';

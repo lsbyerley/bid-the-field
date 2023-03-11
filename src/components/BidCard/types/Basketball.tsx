@@ -25,13 +25,15 @@ const BasketballBidCard = ({
   isPartOfField,
   disableTheFieldPlayer,
 }: BasketballBidCardArgs) => {
+  const highbidAmount = highestBid.amount ? highestBid.amount.toFixed(2) : 0;
+
   return (
     <div className='flex md:block'>
       <div className='flex items-center justify-between w-full p-3 space-x-6'>
         <div className='flex-1 truncate'>
           <div className='flex items-center space-x-3'>
             <span className='flex-shrink-0 inline-block px-2 py-0.5 text-base-100 text-sm font-medium bg-success rounded-full'>
-              ${highestBid?.amount || 0}
+              ${highbidAmount}
             </span>
             <h3 className='font-medium truncate max-w-[12rem]'>
               ({player.seed})&nbsp;{player.short_name}

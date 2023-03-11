@@ -8,6 +8,7 @@ import { usePanelbear } from '@panelbear/panelbear-nextjs';
 import Modal from '@/components/Modal';
 import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
+import { Toaster } from 'react-hot-toast';
 
 NProgress.configure({ showSpinner: false });
 
@@ -46,6 +47,7 @@ const MyApp = ({ Component, pageProps }) => {
           <Modal />
         </AppContextProvider>
       </ThemeProvider>
+      <Toaster />
     </SessionContextProvider>
   );
 };

@@ -12,4 +12,5 @@ export {
   secondsLeftStart,
   shouldDisableField,
   sortPlayersByHighestBid,
+  submitBidFilter,
 } from './auctionUtils';

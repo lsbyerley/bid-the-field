@@ -11,7 +11,6 @@ import type { Database } from '../../../db_types';
 export type Auction = Database['public']['Tables']['auctions']['Row'];
 export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
-
 export interface Player {
   id: string;
   first_name: string;
@@ -32,6 +31,10 @@ export interface PlayerWithHighBid extends Player {
   highestBid: Bid;
 }
 
+const MIN_BID = 1;
+const MAX_BID_AMOUNT = 100;
+const MIN_TO_OUTBID = 2;
+
 // Round a number to the decimal place passed in
 // https://www.jacklmoore.com/notes/rounding-in-javascript/
 export const round = (value: number, decimals: number) => {
@@ -39,8 +42,39 @@ export const round = (value: number, decimals: number) => {
   return Number(`${Math.round(newLocal)}e-${decimals}`);
 };
 
+export const submitBidFilter = (
+  bid: string | number,
+  highestBidAmount: number
+) => {
+  if (!bid || isNaN(Number(bid))) {
+    throw new Error('Valid bid amount required.');
+  }
+
+  const numBid = Number(bid);
+
+  // Round the bid amount to the nearest tenth decimal
+  const bidToReturn = round(numBid, 2);
+  const highBid = highestBidAmount ? Number(highestBidAmount) : null;
+
+  if (bidToReturn < MIN_BID) {
+    throw new Error(`Minimum bid of $${MIN_BID} required.`);
+  }
+  if (!highBid && bidToReturn > MAX_BID_AMOUNT) {
+    throw new Error(`Max per bid is capped at $${MAX_BID_AMOUNT}.`);
+  }
+  if (highBid && bidToReturn <= highBid) {
+    throw new Error(`Bid must be higher than $${highBid}.`);
+  }
+  if (highBid && bidToReturn - highBid < MIN_TO_OUTBID) {
+    throw new Error(
+      `Bid must be atleast $${MIN_TO_OUTBID} higher than $${highBid}.`
+    );
+  }
+
+  return bidToReturn;
+};
+
 // Given an array of bids and a user id, returns the user's winning bids
-// TODO: refactor this logic
 export const getOwnerWinningBids = (bids: Bid[], ownerId: string) => {
   const ownerBidsSorted = bids
     .filter((b) => `${b.owner_id}` === `${ownerId}`)
