@@ -220,7 +220,7 @@ describe('auctionUtils', () => {
     });
     it('should return empty object if player not found', () => {
       const playerId = '99';
-      expect(utils.getPlayerFromBid(playersData, playerId)).toEqual({});
+      expect(utils.getPlayerFromBid(playersData, playerId)).toEqual(undefined);
     });
   });
 

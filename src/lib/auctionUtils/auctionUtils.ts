@@ -11,6 +11,7 @@ import type { Database } from '../../../db_types';
 export type Auction = Database['public']['Tables']['auctions']['Row'];
 export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
+
 export interface Player {
   id: string;
   first_name: string;
@@ -198,9 +199,12 @@ export const getPlayerHighestBid = (auctionBids: Bid[], id: string) => {
 };
 
 // given an array of players and player id, returns the player name
-export const getPlayerFromBid = (playersData: Player[], playerId: string) => {
+export const getPlayerFromBid = (
+  playersData: Player[] | BasketballPlayer[],
+  playerId: string
+): Player | BasketballPlayer => {
   const player = playersData.find((p) => `${p.id}` === `${playerId}`);
-  return player ? player : {};
+  return player;
   // return `${player?.first_name} ${player?.last_name}`;
 };
 

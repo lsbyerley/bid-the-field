@@ -8,7 +8,7 @@ import {
 import { Layout, Placeholders } from '@/components';
 import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
 
-const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export default function Home() {
   const { isLoading, session, error } = useSessionContext();

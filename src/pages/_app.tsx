@@ -18,7 +18,7 @@ const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleStart = (url) => {
+    const handleStart = () => {
       NProgress.start();
     };
     const handleStop = () => {

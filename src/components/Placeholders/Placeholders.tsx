@@ -1,4 +1,4 @@
-const Placeholders = ({ number }) => {
+const Placeholders = ({ number }: { number: number }) => {
   const rows = [];
   for (let i = 0; i < number; i++) {
     rows.push(
@@ -22,7 +22,7 @@ const Placeholders = ({ number }) => {
       </div>
     );
   }
-  return rows;
+  return <>{rows}</>;
 };
 
 export default Placeholders;
