@@ -9,6 +9,7 @@ import {
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 export const getServerSideProps = async (ctx) => {
   // Create authenticated Supabase Client
@@ -60,7 +61,6 @@ const profile = ({ profile }) => {
   const { errors, isDirty, dirtyFields } = formState;
 
   const onSubmit = (data) => {
-    console.log('LOG: submit', data, dirtyFields);
     updateProfile(data);
   };
 
@@ -73,28 +73,14 @@ const profile = ({ profile }) => {
       .match({ id: user?.id });
 
     if (error) {
-      console.log('LOG: save profile error', error);
-      alert('There was an error saving your profile');
+      toast.error('There was an error saving your profile');
       reset();
       return;
     }
 
-    console.log('LOG: profile updated', data);
-    alert('Profile updated!');
+    toast.success('Profile updated!');
     router.reload();
   };
-
-  /* useEffect(() => {
-    const profileUpdateSubscription = supabaseClient
-      .from(`profiles:id=eq.${user?.id}`)
-      .on('UPDATE', (payload) => {
-        console.log('LOG: profile updated', payload);
-        // handleUpdateProfile(payload);
-      })
-      .subscribe();
-
-    return () => supabaseClient.removeSubscription(profileUpdateSubscription);
-  }, []); */
 
   if (!profile) {
     return (

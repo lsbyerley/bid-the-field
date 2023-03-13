@@ -70,23 +70,21 @@ export const getServerSideProps = async (ctx) => {
       .select('*');
 
     if (auctionError) {
-      console.log('LOG: auctionError', auctionError);
+      console.error('LOG: auctionError', auctionError);
     }
     if (bidsError) {
-      console.log('LOG: bidsError', bidsError);
+      console.error('LOG: bidsError', bidsError);
     }
     if (profilesError) {
-      console.log('LOG: profilesError', profilesError);
+      console.error('LOG: profilesError', profilesError);
     }
 
     let players;
     try {
       players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
     } catch (err) {
-      console.log('LOG: error importing players json file');
+      console.error('LOG: error importing players json file');
     }
-
-    //console.log('LOG: bids', bids);
 
     return {
       props: {
@@ -97,7 +95,7 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   } catch (error) {
-    console.log('LOG: server error', error);
+    console.error('LOG: getServerSideProps error', error);
     return {
       props: {
         profilesData: [],
@@ -144,9 +142,7 @@ const AuctionPage = ({
   // AUCTION END INTERVAL CHECK
   useIntervalWhen(
     () => {
-      console.log(
-        `LOG: interval auctionOver: ${isAuctionOver(auction.current)}`
-      );
+      console.log(`LOG: interval auctionOver: ${isAuctionOver(auction.current)}`);
       // if 60 seconds or less are left until auction ends, set interval check to quick interval
       if (
         intervalCheckEnd === DEFAULT_INTERVAL_CHECK &&
@@ -171,9 +167,7 @@ const AuctionPage = ({
   // AUCTION START INTERVAL CHECK
   useIntervalWhen(
     () => {
-      console.log(
-        `LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`
-      );
+      console.log(`LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`);
       // if 60 seconds or less are left to start the auction, set interval check to quick interval
       if (
         intervalCheckStart === DEFAULT_INTERVAL_CHECK &&
@@ -280,8 +274,6 @@ const AuctionPage = ({
     }
     setBidSubmitLoading(true);
 
-    // console.log('LOG: submit bit', bidAmount, user.id);
-
     const { data, error } = await supabaseClient.from('bids').insert([
       {
         auction_id: auction.current?.id,
@@ -293,7 +285,7 @@ const AuctionPage = ({
 
     if (error) {
       setBidSubmitLoading(false);
-      console.log('LOG: bid error', error);
+      console.error('LOG: onSubmitDid error', error);
       toast.error(`Error submitting bid: ${error?.message}`);
       return;
     }

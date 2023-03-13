@@ -25,7 +25,6 @@ export default function Home() {
         .order('start_date', { ascending: false });
 
       if (error) {
-        console.log('LOG: error fetching auctions', error.message);
         setAuctionsLoading(false);
         return;
       }
@@ -34,7 +33,6 @@ export default function Home() {
       setAuctions(data);
       setAuctionsLoading(false);
     } catch (error) {
-      console.log('LOG: error fetching auctions', error.message);
       setAuctionsLoading(false);
     }
   };

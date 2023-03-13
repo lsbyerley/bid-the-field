@@ -16,7 +16,6 @@ const Countdown = ({
 
   const seconds = useCountdown(timeToUse, {
     interval: 1000,
-    //onDown: (time) => console.log('onDown func', funcToCallOnEnd),
     onEnd: () => funcToCallOnEnd(true),
   });
 

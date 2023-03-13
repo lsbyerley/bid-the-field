@@ -26,7 +26,8 @@ const theFieldPlayer = {
   short_name: 'The Field',
 };
 
-export const fetchMasters = async (url) => {
+export const fetchMasters = async () => {
+  const url = 'https://www.masters.com/en_US/scores/feeds/2023/players/players.json';
   try {
     const playerRes = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla' },
@@ -186,7 +187,7 @@ export const fetchPgaChamp = async (url) => {
 // https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=480&YEAR=2022&format=json
 
 const run = async () => {
-  const players = await ncaamTourney();
+  const players = await fetchMasters();
   // 'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=033&YEAR=2022&format=json'
   // 'https://statdata-api-prod.pgatour.com/api/clientfile/Field?T_CODE=r&T_NUM=026&YEAR=2022&format=json'
   // 'https://www.theopen.com/api/QualifiedPlayersListingApi/GetPlayersByPageAndFilters'

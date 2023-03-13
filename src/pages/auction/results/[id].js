@@ -45,17 +45,17 @@ export const getServerSideProps = async (ctx) => {
       .eq('auction_id', params.id);
 
     if (auctionError) {
-      console.log('LOG: auctionError', auctionError.message);
+      console.error('LOG: auctionError', auctionError.message);
     }
     if (bidsError) {
-      console.log('LOG: bidsError', bidsError.message);
+      console.error('LOG: bidsError', bidsError.message);
     }
 
     let players;
     try {
       players = await import(`@/lib/player-pool/${auction.data_filename}.json`);
     } catch (err) {
-      console.log('LOG: error importing players json file');
+      console.error('LOG: error importing players json file');
     }
 
     return {
@@ -66,7 +66,7 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   } catch (error) {
-    console.log('LOG: server error', error);
+    console.error('LOG: getServerSideProps error:', error);
     return {
       props: {
         auctionData: {},

@@ -40,7 +40,6 @@ const BidModal = ({
       );
       onSubmit(filteredBid, player.id);
     } catch (err) {
-      console.log('LOG: filteredBiderrr', err?.message);
       toast.error(`Bid not accepted: ${err?.message}`);
     }
     closeModal();
