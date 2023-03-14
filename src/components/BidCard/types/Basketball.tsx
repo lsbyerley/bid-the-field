@@ -1,19 +1,5 @@
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
-import type {
-  BasketballPlayer,
-  BidWithProfile,
-} from '@/lib/auctionUtils/auctionUtils';
-
-export interface BasketballBidCardArgs {
-  isOpen: boolean;
-  player: BasketballPlayer;
-  highestBid: BidWithProfile;
-  biddingDisabled: boolean;
-  openBidModal: Function;
-  submitTenPercentBid: Function;
-  isPartOfField: boolean;
-  disableTheFieldPlayer: boolean;
-}
+import type { BasketballBidCardArgs } from '@/types';
 
 const BasketballBidCard = ({
   isOpen,

@@ -6,31 +6,14 @@ import {
 } from 'date-fns';
 import isEmpty from 'just-is-empty';
 
-import type { Database } from '../../../db_types';
-
-export type Auction = Database['public']['Tables']['auctions']['Row'];
-export type Bid = Database['public']['Tables']['bids']['Row'];
-export type Profile = Database['public']['Tables']['profiles']['Row'];
-
-export interface Player {
-  id: string;
-  first_name: string;
-  last_name: string;
-  full_name: string;
-  short_name: string;
-}
-
-export interface BasketballPlayer extends Player {
-  seed: number;
-}
-
-export interface BidWithProfile extends Bid {
-  profile: Profile;
-}
-
-export interface PlayerWithHighBid extends Player {
-  highestBid: Bid;
-}
+import type {
+  Auction,
+  Bid,
+  BidWithProfile,
+  Player,
+  BasketballPlayer,
+  PlayerWithHighBid,
+} from '@/types';
 
 const MIN_BID = 1;
 const MAX_BID_AMOUNT = 100;

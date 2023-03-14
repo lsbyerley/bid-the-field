@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "pkg:update:check": "ncu",
     "pkg:update:install": "ncu --upgrade; npm install",
     "playerscript": "node scripts/getPlayerData.mjs",

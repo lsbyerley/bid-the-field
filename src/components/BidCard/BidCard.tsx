@@ -2,20 +2,12 @@ import { useState } from 'react';
 import BidModal from '../BidModal';
 import { BasketballBidCard, GolfBidCard } from './types';
 import type {
-  PlayerWithHighBid,
+  BidCardArgs,
+  BasketballBidCardArgs,
+  GolfBidCardArgs,
   Bid,
   Player,
-} from '@/lib/auctionUtils/auctionUtils';
-import type { BasketballBidCardArgs } from './types/Basketball';
-import type { GolfBidCardArgs } from './types/Golf';
-
-interface BidCardArgs {
-  sport: string;
-  player: PlayerWithHighBid;
-  biddingDisabled: boolean;
-  disableTheField: boolean;
-  onSubmitBid: Function;
-}
+} from '@/types';
 
 const FIELD_PLAYER_ID = '999999';
 

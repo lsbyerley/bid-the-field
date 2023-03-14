@@ -1,20 +1,8 @@
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { submitBidFilter } from '../../lib/auctionUtils';
-import type { Player, Bid } from '@/lib/auctionUtils/auctionUtils';
+import { submitBidFilter } from '@/lib/auctionUtils';
+import type { BidModalArgs, BidModalFormData } from '@/types';
 import toast from 'react-hot-toast';
-
-interface FormData {
-  bidAmount: string | number;
-}
-
-interface BidModalArgs {
-  isOpen: boolean;
-  setIsOpen: Function;
-  onSubmit: Function;
-  player: Player;
-  highestBid: Bid;
-}
 
 const BidModal = ({
   isOpen = false,
@@ -32,7 +20,7 @@ const BidModal = ({
   };
 
   // TODO: add to auction utils and unit test
-  const submitBid = async (formInput: FormData) => {
+  const submitBid = async (formInput: BidModalFormData) => {
     try {
       const filteredBid = submitBidFilter(
         formInput.bidAmount,

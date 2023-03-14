@@ -1,4 +1,4 @@
-import type { Player, PlayerWithHighBid, BidWithProfile } from './auctionUtils';
+import type { Player, PlayerWithHighBid, BidWithProfile } from '@/types';
 
 export const defaultPlayerData = {
   first_name: '',
