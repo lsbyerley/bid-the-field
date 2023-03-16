@@ -11,6 +11,9 @@ import {
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
+const usernameRegex = /^[a-zA-Z0-9\s]+$/;
+const phoneRegex = /^[0-9]{10}$/;
+
 export const getServerSideProps = async (ctx) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
@@ -61,6 +64,14 @@ const profile = ({ profile }) => {
   const { errors, isDirty, dirtyFields } = formState;
 
   const onSubmit = (data) => {
+    if (!data.username || !data.username.match(usernameRegex)) {
+      toast.error('Invalid username');
+      return;
+    }
+    if(data.phone !== '' && !data.phone?.match(phoneRegex)) {
+      toast.error('Invalid phone number');
+      return;
+    }
     updateProfile(data);
   };
 
