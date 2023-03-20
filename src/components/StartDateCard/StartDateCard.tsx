@@ -2,20 +2,17 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-const EndDateCard = ({ auction, auctionOver }) => {
+import type { StartDateCardArgs } from '@/types';
+
+const StartDateCard = ({ auction, auctionStarted }: StartDateCardArgs) => {
   const asyncAuction = useAsyncReference(auction, true);
 
   return (
     <div className='rounded-lg card compact bg-base-100'>
-      <div className='relative justify-center card-body'>
-        {auctionOver && (
-          <div className='absolute badge badge-error badge-outline top-5 right-5'>
-            Bidding Over
-          </div>
-        )}
-        {!auctionOver && (
-          <div className='absolute badge badge-success badge-outline top-5 right-5'>
-            In Progress
+      <div className='justify-center card-body'>
+        {!auctionStarted && (
+          <div className='absolute badge badge-warning badge-outline top-5 right-5'>
+            Not Started
           </div>
         )}
         <div className='flex items-center'>
@@ -27,11 +24,11 @@ const EndDateCard = ({ auction, auctionOver }) => {
           </div>
           <div className='flex-1 w-0 ml-5'>
             <dl>
-              <dt className='text-sm font-medium truncate'>End Date</dt>
+              <dt className='text-sm font-medium truncate'>Start Date</dt>
               <dd>
                 <div className='font-medium '>
                   {format(
-                    new Date(asyncAuction.current.end_date),
+                    new Date(asyncAuction.current.start_date),
                     'LLL d, h:mm aaa'
                   )}
                 </div>
@@ -44,4 +41,4 @@ const EndDateCard = ({ auction, auctionOver }) => {
   );
 };
 
-export default EndDateCard;
+export default StartDateCard;

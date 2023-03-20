@@ -3,6 +3,8 @@ import useAsyncReference from '@/lib/useAsyncReference';
 import BidCard from '@/components/BidCard';
 import { sortPlayersByHighestBid } from '@/lib/auctionUtils';
 
+import type { BidFieldArgs, PlayerWithHighBid } from '@/types';
+
 const BidField = ({
   sport,
   playersData = [],
@@ -10,10 +12,9 @@ const BidField = ({
   biddingDisabled = false,
   disableTheField = false,
   onSubmitBid = () => {},
-}) => {
+}: BidFieldArgs) => {
   const asyncBids = useAsyncReference(bids, true);
 
-  // TODO: sort players data by highest bid
   const sortedPlayersByBid = useMemo(
     () => sortPlayersByHighestBid(playersData, asyncBids.current),
     [asyncBids.current]
@@ -25,13 +26,12 @@ const BidField = ({
         role='list'
         className='grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4'
       >
-        {sortedPlayersByBid.map((p) => {
+        {sortedPlayersByBid.map((p: PlayerWithHighBid) => {
           return (
             <BidCard
               sport={sport}
               key={p.id}
               player={p}
-              bids={asyncBids.current}
               biddingDisabled={biddingDisabled}
               disableTheField={disableTheField}
               onSubmitBid={onSubmitBid}

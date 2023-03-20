@@ -4,6 +4,13 @@ export type Auction = Database['public']['Tables']['auctions']['Row'];
 export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 
+export interface AsyncRefObject {
+  current: any;
+}
+export interface AsyncRefReturn {
+  ref: AsyncRefObject;
+  updateState: Function;
+}
 export interface Player {
   id: string;
   first_name: string;
@@ -27,6 +34,15 @@ export interface PlayerWithHighBid extends Player {
 export interface BidCardArgs {
   sport: string;
   player: PlayerWithHighBid;
+  biddingDisabled: boolean;
+  disableTheField: boolean;
+  onSubmitBid: Function;
+}
+
+export interface BidFieldArgs {
+  sport: string;
+  playersData: Player[] | BasketballPlayer[];
+  bids: Bid[];
   biddingDisabled: boolean;
   disableTheField: boolean;
   onSubmitBid: Function;
@@ -66,12 +82,28 @@ export interface BidModalArgs {
   highestBid: Bid;
 }
 
-export interface AsyncRefConfig {
-  value: any;
-  isProp: boolean;
-}
-
 export interface ResultsArgs {
   players: Player[] | BasketballPlayer[];
   bids: Bid[];
+}
+
+export interface StartDateCardArgs {
+  auction: Auction;
+  auctionStarted: boolean;
+}
+export interface EndDateCardArgs {
+  auction: Auction;
+  auctionOver: boolean;
+}
+
+export interface TotalPotArgs {
+  bids: Bid[];
+}
+
+export interface RulesPayoutsCardArgs {
+  auction: Auction;
+}
+
+export interface AuctionCardArgs {
+  auction: Auction;
 }

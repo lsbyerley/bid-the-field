@@ -1,7 +1,9 @@
 import { ScaleIcon } from '@heroicons/react/24/outline';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-const NameCard = ({ auction }) => {
+import type { AuctionCardArgs } from '@/types';
+
+const AuctionCard = ({ auction }: AuctionCardArgs) => {
   const asyncAuction = useAsyncReference(auction, true);
 
   return (
@@ -25,4 +27,4 @@ const NameCard = ({ auction }) => {
   );
 };
 
-export default NameCard;
+export default AuctionCard;

@@ -1,7 +1,9 @@
 import { useAppContext } from '@/AppContext';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-const RulesPayoutsCard = ({ auction }) => {
+import type { RulesPayoutsCardArgs } from '@/types';
+
+const RulesPayoutsCard = ({ auction }: RulesPayoutsCardArgs) => {
   const asyncAuction = useAsyncReference(auction, true);
   const { setModalOpen, setModalContent } = useAppContext();
 

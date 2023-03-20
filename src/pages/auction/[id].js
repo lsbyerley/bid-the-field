@@ -22,7 +22,7 @@ import toast from 'react-hot-toast';
 import Layout from '@/components/Layout';
 import OwnerWinningBids from '@/components/OwnerWinningBids';
 import TotalPot from '@/components/TotalPot';
-import NameCard from '@/components/NameCard';
+import AuctionCard from '@/components/AuctionCard';
 import StartDateCard from '@/components/StartDateCard';
 import EndDateCard from '@/components/EndDateCard';
 import RulesPayoutsCard from '@/components/RulesPayoutsCard';
@@ -142,7 +142,9 @@ const AuctionPage = ({
   // AUCTION END INTERVAL CHECK
   useIntervalWhen(
     () => {
-      console.log(`LOG: interval auctionOver: ${isAuctionOver(auction.current)}`);
+      console.log(
+        `LOG: interval auctionOver: ${isAuctionOver(auction.current)}`
+      );
       // if 60 seconds or less are left until auction ends, set interval check to quick interval
       if (
         intervalCheckEnd === DEFAULT_INTERVAL_CHECK &&
@@ -167,7 +169,9 @@ const AuctionPage = ({
   // AUCTION START INTERVAL CHECK
   useIntervalWhen(
     () => {
-      console.log(`LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`);
+      console.log(
+        `LOG: interval auctionStarted: ${hasAuctionStarted(auction.current)}`
+      );
       // if 60 seconds or less are left to start the auction, set interval check to quick interval
       if (
         intervalCheckStart === DEFAULT_INTERVAL_CHECK &&
@@ -360,7 +364,7 @@ const AuctionPage = ({
       </Head>
 
       <div className='grid grid-cols-1 gap-6 px-2 py-4 mx-auto max-w-7xl md:grid-cols-3 xl:px-0'>
-        <NameCard auction={auction.current} />
+        <AuctionCard auction={auction.current} />
         {!auctionStarted && (
           <StartDateCard
             auction={auction.current}
