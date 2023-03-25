@@ -182,7 +182,7 @@ const AuctionResultsPage = ({
             <div className='flex-none'>
               <Link
                 href={`/auction/${auction.current.id}`}
-                className='btn btn-sm'
+                className='btn btn-sm no-animation'
               >
                 View Auction
               </Link>

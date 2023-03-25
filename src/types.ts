@@ -11,15 +11,22 @@ export interface AsyncRefReturn {
   ref: AsyncRefObject;
   updateState: Function;
 }
+
+export interface GoogleSessionUser {
+  created_at: string;
+  email: string;
+  id: string;
+  name: string;
+  phone: string;
+  username: string;
+}
+
 export interface Player {
   id: string;
   first_name: string;
   last_name: string;
   full_name: string;
   short_name: string;
-}
-
-export interface BasketballPlayer extends Player {
   seed: number;
 }
 
@@ -41,7 +48,7 @@ export interface BidCardArgs {
 
 export interface BidFieldArgs {
   sport: string;
-  playersData: Player[] | BasketballPlayer[];
+  playersData: Player[];
   bids: Bid[];
   biddingDisabled: boolean;
   disableTheField: boolean;
@@ -50,7 +57,7 @@ export interface BidFieldArgs {
 
 export interface BasketballBidCardArgs {
   isOpen: boolean;
-  player: BasketballPlayer;
+  player: Player;
   highestBid: BidWithProfile;
   biddingDisabled: boolean;
   openBidModal: Function;
@@ -83,7 +90,7 @@ export interface BidModalArgs {
 }
 
 export interface ResultsArgs {
-  players: Player[] | BasketballPlayer[];
+  players: Player[];
   bids: Bid[];
 }
 
@@ -106,4 +113,23 @@ export interface RulesPayoutsCardArgs {
 
 export interface AuctionCardArgs {
   auction: Auction;
+}
+
+export interface OwnerWinningBidsArgs {
+  bids: Bid[];
+  user: GoogleSessionUser;
+  players: Player[];
+}
+
+export interface ResultsArgs {
+  bids: Bid[];
+  players: Player[];
+}
+
+export interface CountdownProps {
+  auction: Auction;
+  auctionStarted: boolean;
+  setAuctionStarted: Function;
+  auctionOver: boolean;
+  setAuctionOver: Function;
 }

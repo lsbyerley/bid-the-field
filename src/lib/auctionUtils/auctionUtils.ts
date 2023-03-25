@@ -11,7 +11,6 @@ import type {
   Bid,
   BidWithProfile,
   Player,
-  BasketballPlayer,
   PlayerWithHighBid,
 } from '@/types';
 
@@ -183,12 +182,11 @@ export const getPlayerHighestBid = (auctionBids: Bid[], id: string) => {
 
 // given an array of players and player id, returns the player name
 export const getPlayerFromBid = (
-  playersData: Player[] | BasketballPlayer[],
+  playersData: Player[],
   playerId: string
-): Player | BasketballPlayer => {
+): Player => {
   const player = playersData.find((p) => `${p.id}` === `${playerId}`);
   return player;
-  // return `${player?.first_name} ${player?.last_name}`;
 };
 
 export const hasAuctionStarted = (auction: Auction) => {

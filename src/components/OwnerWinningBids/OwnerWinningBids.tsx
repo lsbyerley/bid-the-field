@@ -1,11 +1,18 @@
 import { getOwnerWinningBids, getPlayerFromBid } from '@/lib/auctionUtils';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-const OwnerWinningBids = ({ bids = [], user = {}, players = [] }) => {
+import type { OwnerWinningBidsArgs, Bid } from '@/types';
+
+const OwnerWinningBids = ({
+  bids = [],
+  user,
+  players = [],
+}: OwnerWinningBidsArgs) => {
   const asyncBids = useAsyncReference(bids, true);
   const winningBids = getOwnerWinningBids(asyncBids.current, user?.id);
   const totalBidAmount = winningBids.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.amount,
+    (previousValue: number, currentValue: Bid) =>
+      previousValue + currentValue.amount,
     0
   );
 
@@ -21,7 +28,7 @@ const OwnerWinningBids = ({ bids = [], user = {}, players = [] }) => {
           </div>
 
           <dl className='mt-2 overflow-y-scroll divide-y max-h-72'>
-            {winningBids.map((bid) => {
+            {winningBids.map((bid: Bid) => {
               const player = getPlayerFromBid(players, bid.player_id);
               return (
                 <div
@@ -30,13 +37,11 @@ const OwnerWinningBids = ({ bids = [], user = {}, players = [] }) => {
                 >
                   <dt className=''>
                     {player.seed && `(${player.seed}) `}
-                    {player?.full_name ||
-                      player?.short_name ||
+                    {player.full_name ||
+                      player.short_name ||
                       `na:${bid.player_id}`}
                   </dt>
-                  <dd className=''>
-                    ${Number.parseFloat(bid.amount).toFixed(2)}
-                  </dd>
+                  <dd className=''>${bid.amount.toFixed(2)}</dd>
                 </div>
               );
             })}

@@ -1,6 +1,8 @@
 import { getAuctionResults, getPlayerFromBid } from '@/lib/auctionUtils';
 
-const Results = ({ bids = [], players = [] }) => {
+import type { ResultsArgs, Bid } from '@/types';
+
+const Results = ({ bids = [], players = [] }: ResultsArgs) => {
   const auctionResults = getAuctionResults(bids);
 
   return (
@@ -29,7 +31,7 @@ const Results = ({ bids = [], players = [] }) => {
                     </span>
                   </div>
                   <dl className='mt-2 overflow-y-scroll divide-y max-h-96'>
-                    {ownerResults.winningBids.map((bid) => {
+                    {ownerResults.winningBids.map((bid: Bid) => {
                       const player = getPlayerFromBid(players, bid.player_id);
                       return (
                         <div
@@ -42,9 +44,7 @@ const Results = ({ bids = [], players = [] }) => {
                               player?.short_name ||
                               `na:${bid.player_id}`}
                           </dt>
-                          <dd className=''>
-                            ${Number.parseFloat(bid.amount).toFixed(2)}
-                          </dd>
+                          <dd className=''>${bid.amount.toFixed(2)}</dd>
                         </div>
                       );
                     })}

@@ -1,13 +1,15 @@
 import { useCountdown } from 'rooks';
 import { secondsToHours, secondsToMinutes } from 'date-fns';
 
+import type { CountdownProps } from '@/types';
+
 const Countdown = ({
-  auction = {},
+  auction,
   auctionStarted,
   setAuctionStarted = () => {},
-  auctionOver,
+  // auctionOver,
   setAuctionOver = () => {},
-}) => {
+}: CountdownProps) => {
   const startTime = new Date(auction.start_date);
   const endTime = new Date(auction.end_date);
 
