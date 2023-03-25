@@ -4,6 +4,13 @@ export type Auction = Database['public']['Tables']['auctions']['Row'];
 export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 
+export interface AppContextVals {
+  modalOpen: boolean;
+  modalContent: string;
+  setModalOpen: Function;
+  setModalContent: Function;
+}
+
 export interface AsyncRefObject {
   current: any;
 }
@@ -132,4 +139,10 @@ export interface CountdownProps {
   setAuctionStarted: Function;
   auctionOver: boolean;
   setAuctionOver: Function;
+}
+
+export interface AuctionResultsPageProps {
+  auctionData: Auction;
+  bidsData: Bid[];
+  playersData: Player[];
 }

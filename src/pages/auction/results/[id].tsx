@@ -6,6 +6,10 @@ import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
+// types
+import { GetServerSideProps } from 'next';
+import type { AuctionResultsPageProps, Auction, Bid, Player } from '@/types';
+
 // Components
 import Layout from '@/components/Layout';
 import Results from '@/components/Results';
@@ -14,7 +18,11 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 // TODO: add live bids updating here?
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<{
+  auctionData: Auction;
+  bidsData: Bid[];
+  playersData: Player[];
+}> = async (ctx) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
   // Check if we have a session
@@ -78,10 +86,10 @@ export const getServerSideProps = async (ctx) => {
 };
 
 const AuctionResultsPage = ({
-  auctionData = {},
-  bidsData = [],
-  playersData = [],
-}) => {
+  auctionData,
+  bidsData,
+  playersData,
+}: AuctionResultsPageProps) => {
   const [bids] = useAsyncReference(bidsData);
   const [auction] = useAsyncReference(auctionData);
   const [auctionOver] = useState(() => isAuctionOver(auctionData));
