@@ -1,5 +1,7 @@
 import type { Database } from '../db_types';
 
+import { User } from '@supabase/auth-helpers-react';
+
 export type Auction = Database['public']['Tables']['auctions']['Row'];
 export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
@@ -18,16 +20,6 @@ export interface AsyncRefReturn {
   ref: AsyncRefObject;
   updateState: Function;
 }
-
-export interface GoogleSessionUser {
-  created_at: string;
-  email: string;
-  id: string;
-  name: string;
-  phone: string;
-  username: string;
-}
-
 export interface Player {
   id: string;
   first_name: string;
@@ -122,9 +114,9 @@ export interface AuctionCardArgs {
   auction: Auction;
 }
 
-export interface OwnerWinningBidsArgs {
+export interface OwnerWinningBidsProps {
   bids: Bid[];
-  user: GoogleSessionUser;
+  user: User;
   players: Player[];
 }
 
@@ -141,8 +133,19 @@ export interface CountdownProps {
   setAuctionOver: Function;
 }
 
+export interface AuctionPageProps {
+  profilesData: Profile[];
+  auctionData: Auction;
+  bidsData: Bid[];
+  playersData: Player[];
+}
+
 export interface AuctionResultsPageProps {
   auctionData: Auction;
   bidsData: Bid[];
   playersData: Player[];
+}
+
+export interface ProfilePageProps {
+  profile: Profile;
 }

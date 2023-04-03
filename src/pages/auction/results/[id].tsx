@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
@@ -7,7 +8,7 @@ import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 // types
-import { GetServerSideProps } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import type { AuctionResultsPageProps, Auction, Bid, Player } from '@/types';
 
 // Components
@@ -18,11 +19,7 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 // TODO: add live bids updating here?
 
-export const getServerSideProps: GetServerSideProps<{
-  auctionData: Auction;
-  bidsData: Bid[];
-  playersData: Player[];
-}> = async (ctx) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
   // Check if we have a session
@@ -85,7 +82,7 @@ export const getServerSideProps: GetServerSideProps<{
   }
 };
 
-const AuctionResultsPage = ({
+const AuctionResultsPage: NextPage = ({
   auctionData,
   bidsData,
   playersData,

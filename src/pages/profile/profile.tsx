@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -11,10 +12,12 @@ import {
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
+import { ProfilePageProps } from '@/types';
+
 const usernameRegex = /^[a-zA-Z0-9\s]+$/;
 const phoneRegex = /^[0-9]{10}$/;
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
   // Check if we have a session
@@ -43,12 +46,12 @@ export const getServerSideProps = async (ctx) => {
 
   return {
     props: {
-      profile: profile,
+      profile,
     },
   };
 };
 
-const profile = ({ profile }) => {
+const Profile: NextPage = ({ profile }: ProfilePageProps) => {
   const supabaseClient = useSupabaseClient();
   const { error, session } = useSessionContext();
   const user = session?.user;
@@ -68,7 +71,7 @@ const profile = ({ profile }) => {
       toast.error('Invalid username');
       return;
     }
-    if(data.phone !== '' && !data.phone?.match(phoneRegex)) {
+    if (data.phone !== '' && !data.phone?.match(phoneRegex)) {
       toast.error('Invalid phone number');
       return;
     }
@@ -373,4 +376,4 @@ const profile = ({ profile }) => {
   );
 };
 
-export default profile;
+export default Profile;

@@ -148,6 +148,13 @@
       "short_name": "B. Harman"
     },
     {
+      "id": "28089",
+      "first_name": "Jason",
+      "last_name": "Day",
+      "full_name": "Jason Day",
+      "short_name": "J. Day"
+    },
+    {
       "id": "28237",
       "first_name": "Rory",
       "last_name": "McIlroy",
@@ -302,6 +309,13 @@
       "short_name": "R. Henley"
     },
     {
+      "id": "34099",
+      "first_name": "Harris",
+      "last_name": "English",
+      "full_name": "Harris English",
+      "short_name": "H. English"
+    },
+    {
       "id": "34360",
       "first_name": "Patrick",
       "last_name": "Reed",
@@ -365,11 +379,25 @@
       "short_name": "H. Varner III"
     },
     {
+      "id": "37378",
+      "first_name": "Min Woo",
+      "last_name": "Lee",
+      "full_name": "Min Woo Lee",
+      "short_name": "M. Lee"
+    },
+    {
       "id": "37455",
       "first_name": "Si Woo",
       "last_name": "Kim",
       "full_name": "Si Woo Kim",
       "short_name": "S. Kim"
+    },
+    {
+      "id": "39546",
+      "first_name": "Keith",
+      "last_name": "Mitchell",
+      "full_name": "Keith Mitchell",
+      "short_name": "K. Mitchell"
     },
     {
       "id": "39971",
@@ -496,6 +524,13 @@
       "last_name": "Poston",
       "full_name": "J.T. Poston",
       "short_name": "J. Poston"
+    },
+    {
+      "id": "49947",
+      "first_name": "Taylor",
+      "last_name": "Moore",
+      "full_name": "Taylor Moore",
+      "short_name": "T. Moore"
     },
     {
       "id": "49960",

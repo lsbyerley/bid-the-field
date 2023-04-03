@@ -1,4 +1,6 @@
-const Maintenance = () => {
+import { NextPage } from 'next';
+
+const Maintenance: NextPage = () => {
   return (
     <>
       {/*

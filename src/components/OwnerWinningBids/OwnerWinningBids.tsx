@@ -1,16 +1,16 @@
 import { getOwnerWinningBids, getPlayerFromBid } from '@/lib/auctionUtils';
 import useAsyncReference from '@/lib/useAsyncReference';
 
-import type { OwnerWinningBidsArgs, Bid } from '@/types';
+import type { OwnerWinningBidsProps, Bid } from '@/types';
 
 const OwnerWinningBids = ({
   bids = [],
   user,
   players = [],
-}: OwnerWinningBidsArgs) => {
+}: OwnerWinningBidsProps) => {
   const asyncBids = useAsyncReference(bids, true);
   const winningBids = getOwnerWinningBids(asyncBids.current, user?.id);
-  const totalBidAmount = winningBids.reduce(
+  const totalBidAmount: number = winningBids.reduce(
     (previousValue: number, currentValue: Bid) =>
       previousValue + currentValue.amount,
     0
@@ -22,9 +22,7 @@ const OwnerWinningBids = ({
         <div>
           <div className='flex justify-between pb-2 mb-4 text-lg font-medium border-b'>
             <span className='mr-2 truncate text-info'>Your Winning Bids</span>
-            <span className='text-success'>
-              ${Number.parseFloat(totalBidAmount).toFixed(2)}
-            </span>
+            <span className='text-success'>${totalBidAmount.toFixed(2)}</span>
           </div>
 
           <dl className='mt-2 overflow-y-scroll divide-y max-h-72'>

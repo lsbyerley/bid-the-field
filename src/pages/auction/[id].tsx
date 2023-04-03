@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
@@ -29,11 +30,20 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 import BidField from '@/components/BidField';
 import Countdown from '@/components/Countdown';
 
+// types
+import { GetServerSideProps } from 'next';
+import { AuctionPageProps, Profile, Auction, Bid, Player } from '@/types';
+
 // CONSTANTS
 const DEFAULT_INTERVAL_CHECK = 10000; // 10 seconds in milliseconds
 const QUICK_INTERVAL_CHECK = 1000; // 1 second in milliseconds
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<{
+  profilesData: Profile[];
+  auctionData: Auction;
+  bidsData: Bid[];
+  playersData: Player[];
+}> = async (ctx) => {
   // Create authenticated Supabase Client
   const supabase = createServerSupabaseClient(ctx);
   // Check if we have a session
@@ -107,12 +117,12 @@ export const getServerSideProps = async (ctx) => {
   }
 };
 
-const AuctionPage = ({
-  profilesData = [],
-  auctionData = {},
-  bidsData = [],
-  playersData = [],
-}) => {
+const AuctionPage: NextPage = ({
+  profilesData,
+  auctionData,
+  bidsData,
+  playersData,
+}: AuctionPageProps) => {
   const { session } = useSessionContext();
   const supabaseClient = useSupabaseClient();
 
@@ -235,7 +245,9 @@ const AuctionPage = ({
       )
       .subscribe();
 
-    return () => supabaseClient.removeChannel(bidsSubscription);
+    return () => {
+      supabaseClient.removeChannel(bidsSubscription);
+    };
   }, [supabaseClient]);
 
   useEffect(() => {
@@ -256,7 +268,9 @@ const AuctionPage = ({
       )
       .subscribe();
 
-    return () => supabaseClient.removeChannel(auctionUpdateSubscription);
+    return () => {
+      supabaseClient.removeChannel(auctionUpdateSubscription);
+    };
   }, [supabaseClient]);
 
   const updateAuctionEndTime = async (minutesToAdd) => {
@@ -377,7 +391,7 @@ const AuctionPage = ({
 
         <OwnerWinningBids
           bids={bids.current}
-          user={session?.user}
+          user={session.user}
           players={playersData}
         />
         <RulesPayoutsCard auction={auction.current} />
