@@ -391,7 +391,7 @@ const AuctionPage: NextPage = ({
 
         <OwnerWinningBids
           bids={bids.current}
-          user={session.user}
+          user={session?.user}
           players={playersData}
         />
         <RulesPayoutsCard auction={auction.current} />

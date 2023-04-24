@@ -4,7 +4,6 @@ import AppContextProvider from '@/providers/AppContextProvider';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { ThemeProvider } from 'next-themes';
-import { usePanelbear } from '@panelbear/panelbear-nextjs';
 import Modal from '@/components/Modal';
 import { useRouter } from 'next/router';
 import NProgress from 'nprogress';
@@ -14,7 +13,6 @@ NProgress.configure({ showSpinner: false });
 
 const MyApp = ({ Component, pageProps }) => {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
-  usePanelbear(process.env.NEXT_PUBLIC_PANELBEAR_ID);
   const router = useRouter();
 
   useEffect(() => {
