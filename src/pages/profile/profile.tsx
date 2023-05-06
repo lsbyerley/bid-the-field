@@ -9,8 +9,12 @@ import {
   useSessionContext,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
-import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import {
+  ExclamationCircleIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import { getURL } from '@/lib/helpers';
 
 import { ProfilePageProps } from '@/types';
 
@@ -44,14 +48,22 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .eq('id', userId)
     .single();
 
+  // console.log('LOG: test', profile, userId, user);
+
+  const locationRes = await fetch(`${getURL()}/api/location`);
+  const locationData = await locationRes.json();
+
+  // console.log('LOG: loc', locationData, userId);
+
   return {
     props: {
       profile,
+      location: locationData,
     },
   };
 };
 
-const Profile: NextPage = ({ profile }: ProfilePageProps) => {
+const Profile: NextPage = ({ profile, location }: ProfilePageProps) => {
   const supabaseClient = useSupabaseClient();
   const { error, session } = useSessionContext();
   const user = session?.user;
@@ -129,6 +141,17 @@ const Profile: NextPage = ({ profile }: ProfilePageProps) => {
       </Head>
       <div className='py-12 mx-auto max-w-7xl sm:px-6 lg:px-8'>
         <div className='max-w-4xl mx-auto'>
+          <div className='flex justify-center items-center mb-2'>
+            <InformationCircleIcon
+              className='flex-shrink-0 w-6 h-6 stroke-info'
+              aria-hidden='true'
+            />
+            <div className='hidden invisible'>{JSON.stringify(location)}</div>
+            <span className='ml-2'>
+              👋 {location?.city || 'no city'},{' '}
+              {location?.region || 'no region'}
+            </span>
+          </div>
           <div className='px-4 py-12 overflow-hidden shadow bg-base-100 sm:rounded-lg sm:px-6 lg:px-8'>
             {/** START FORM */}
 
