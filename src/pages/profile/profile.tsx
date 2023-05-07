@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Link from 'next/link';
@@ -68,6 +69,19 @@ const Profile: NextPage = ({ profile, location }: ProfilePageProps) => {
   const { error, session } = useSessionContext();
   const user = session?.user;
   const router = useRouter();
+
+  useEffect(() => {
+    // setLoading(true)
+    fetch(`${getURL()}/api/location`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('LOG: useEffect loc', data);
+        // setData(data);
+      })
+      .finally(() => {
+        // setLoading(false);
+      });
+  }, []);
 
   const formOptions = {
     defaultValues: {
