@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 import { AppContextVals } from '@/types';
 
 export const defaultValues = {
+  isDev: false,
   modalOpen: false,
   modalContent: '',
   setModalOpen: () => {},
