@@ -7,6 +7,7 @@ import {
 } from '@supabase/auth-helpers-react';
 import { Layout, Placeholders } from '@/components';
 import { hasAuctionStarted, isAuctionOver } from '@/lib/auctionUtils';
+import { getURL } from '@/lib/helpers';
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -15,6 +16,19 @@ export default function Home() {
   const supabaseClient = useSupabaseClient();
   const [auctions, setAuctions] = useState([]);
   const [auctionsLoading, setAuctionsLoading] = useState(false);
+
+  useEffect(() => {
+    // setLoading(true)
+    fetch(`${getURL()}/api/location`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('LOG: useEffect loc', data);
+        // setData(data);
+      })
+      .finally(() => {
+        // setLoading(false);
+      });
+  }, []);
 
   const fetchAuctions = async () => {
     try {
