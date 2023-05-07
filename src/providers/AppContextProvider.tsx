@@ -8,6 +8,7 @@ const AppContextProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState(defaultValues.modalContent);
 
   const state = {
+    isDev: process.env.NODE_ENV === 'development',
     modalOpen,
     setModalOpen,
     modalContent,

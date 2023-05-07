@@ -1,4 +1,6 @@
 module.exports = {
+  reactStrictMode: true,
+  swcMinify: true,
   async redirects() {
     // https://gist.github.com/naotone/014038835854374917a73701ef195e3b
     const redirects = [];

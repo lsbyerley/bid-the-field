@@ -10,13 +10,10 @@ import {
   useSessionContext,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
-import {
-  ExclamationCircleIcon,
-  InformationCircleIcon,
-} from '@heroicons/react/24/outline';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import { getURL } from '@/lib/helpers';
-
+import { useAppContext } from '@/AppContext';
 import { ProfilePageProps } from '@/types';
 
 const usernameRegex = /^[a-zA-Z0-9\s]+$/;
@@ -57,22 +54,23 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 const Profile: NextPage = ({ profile }: ProfilePageProps) => {
+  const { isDev } = useAppContext();
   const [locData, setLocData] = useState(null);
+  const [locLoading, setLocDataLoading] = useState(false);
   const supabaseClient = useSupabaseClient();
   const { error, session } = useSessionContext();
   const user = session?.user;
   const router = useRouter();
 
   useEffect(() => {
-    // setLoading(true)
+    setLocDataLoading(true);
     fetch(`${getURL()}/api/location`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('LOG: useEffect loc', data);
         setLocData(data);
       })
       .finally(() => {
-        // setLoading(false);
+        setLocDataLoading(false);
       });
   }, []);
 
@@ -149,15 +147,14 @@ const Profile: NextPage = ({ profile }: ProfilePageProps) => {
       <div className='py-12 mx-auto max-w-7xl sm:px-6 lg:px-8'>
         <div className='max-w-4xl mx-auto'>
           <div className='flex justify-center items-center mb-2'>
-            <InformationCircleIcon
-              className='flex-shrink-0 w-6 h-6 stroke-info'
-              aria-hidden='true'
-            />
             <div className='hidden invisible'>{JSON.stringify(locData)}</div>
-            <span className='ml-2'>
-              👋 {locData?.city || 'no city'}, {locData?.region || 'no region'}
-            </span>
+            {(isDev || (locData?.city && locData?.region)) && (
+              <span className='ml-2'>
+                👋 {locData.city || '--'}, {locData.region || '--'}
+              </span>
+            )}
           </div>
+
           <div className='px-4 py-12 overflow-hidden shadow bg-base-100 sm:rounded-lg sm:px-6 lg:px-8'>
             {/** START FORM */}
 

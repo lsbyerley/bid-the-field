@@ -7,6 +7,7 @@ export type Bid = Database['public']['Tables']['bids']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export interface AppContextVals {
+  isDev: boolean;
   modalOpen: boolean;
   modalContent: string;
   setModalOpen: Function;
