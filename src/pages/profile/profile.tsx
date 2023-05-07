@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Link from 'next/link';
@@ -49,22 +49,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .eq('id', userId)
     .single();
 
-  // console.log('LOG: test', profile, userId, user);
-
-  const locationRes = await fetch(`${getURL()}/api/location`);
-  const locationData = await locationRes.json();
-
-  // console.log('LOG: loc', locationData, userId);
-
   return {
     props: {
       profile,
-      location: locationData,
     },
   };
 };
 
-const Profile: NextPage = ({ profile, location }: ProfilePageProps) => {
+const Profile: NextPage = ({ profile }: ProfilePageProps) => {
+  const [locData, setLocData] = useState(null);
   const supabaseClient = useSupabaseClient();
   const { error, session } = useSessionContext();
   const user = session?.user;
@@ -76,7 +69,7 @@ const Profile: NextPage = ({ profile, location }: ProfilePageProps) => {
       .then((res) => res.json())
       .then((data) => {
         console.log('LOG: useEffect loc', data);
-        // setData(data);
+        setLocData(data);
       })
       .finally(() => {
         // setLoading(false);
@@ -160,10 +153,9 @@ const Profile: NextPage = ({ profile, location }: ProfilePageProps) => {
               className='flex-shrink-0 w-6 h-6 stroke-info'
               aria-hidden='true'
             />
-            <div className='hidden invisible'>{JSON.stringify(location)}</div>
+            <div className='hidden invisible'>{JSON.stringify(locData)}</div>
             <span className='ml-2'>
-              👋 {location?.city || 'no city'},{' '}
-              {location?.region || 'no region'}
+              👋 {locData?.city || 'no city'}, {locData?.region || 'no region'}
             </span>
           </div>
           <div className='px-4 py-12 overflow-hidden shadow bg-base-100 sm:rounded-lg sm:px-6 lg:px-8'>

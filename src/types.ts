@@ -148,5 +148,4 @@ export interface AuctionResultsPageProps {
 
 export interface ProfilePageProps {
   profile: Profile;
-  location: any;
 }
