@@ -6,7 +6,7 @@ import {
   useSessionContext,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import { useIntervalWhen } from 'rooks';
 import {
   hasAuctionStarted,
@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<{
   playersData: Player[];
 }> = async (ctx) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },

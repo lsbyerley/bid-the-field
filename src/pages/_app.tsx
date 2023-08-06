@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/globals.css';
 import AppContextProvider from '@/providers/AppContextProvider';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { ThemeProvider } from 'next-themes';
 import Modal from '@/components/Modal';
@@ -12,7 +12,7 @@ import { Toaster } from 'react-hot-toast';
 NProgress.configure({ showSpinner: false });
 
 const MyApp = ({ Component, pageProps }) => {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
   const router = useRouter();
 
   useEffect(() => {

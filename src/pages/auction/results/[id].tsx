@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import useAsyncReference from '@/lib/useAsyncReference';
 import { isAuctionOver } from '@/lib/auctionUtils';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 // types
 import { GetServerSidePropsContext } from 'next';
-import type { AuctionResultsPageProps, Auction, Bid, Player } from '@/types';
+import type { AuctionResultsPageProps } from '@/types';
 
 // Components
 import Layout from '@/components/Layout';
@@ -21,7 +21,7 @@ import RulesPayoutsCard from '@/components/RulesPayoutsCard';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Create authenticated Supabase Client
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   // Check if we have a session
   const {
     data: { session },
@@ -165,24 +165,22 @@ const AuctionResultsPage: NextPage = ({
       <div className='px-2 py-4 mx-auto max-w-7xl'>
         {!auctionOver && (
           <div className='mb-8 rounded-lg alert bg-base-100'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              className='flex-shrink-0 w-6 h-6 stroke-info'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+              ></path>
+            </svg>
             <div>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                className='flex-shrink-0 w-6 h-6 stroke-info'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                ></path>
-              </svg>
-              <div>
-                <h3 className='font-bold'>Auction not over!</h3>
-                <div className='text-xs'>Auction is still in progress</div>
-              </div>
+              <h3 className='font-bold'>Auction not over!</h3>
+              <div className='text-xs'>Auction is still in progress</div>
             </div>
             <div className='flex-none'>
               <Link
