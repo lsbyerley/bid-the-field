@@ -33,7 +33,7 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <Link href='/' className='normal-case md:text-lg btn btn-sm btn-ghost'>
+        <Link href='/' className='normal-case md:text-lg btn btn-sm btn-ghost no-animation'>
           Bid The Field
         </Link>
       </div>
