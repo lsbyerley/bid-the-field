@@ -96,7 +96,6 @@ const AuctionResultsPage: NextPage = ({
       <Layout>
         <div className='px-2 py-4 mx-auto max-w-7xl xl:px-0'>
           <div className='mt-16 rounded-lg alert bg-base-100'>
-            <div>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -116,7 +115,7 @@ const AuctionResultsPage: NextPage = ({
                   Check the ID and try again or go to the home page.
                 </div>
               </div>
-            </div>
+            
             <div className='flex-none'>
               <Link href='/' className='btn btn-sm no-animation'>
                 Go Home

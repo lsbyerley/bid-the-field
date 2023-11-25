@@ -322,27 +322,26 @@ const AuctionPage: NextPage = ({
       <Layout>
         <div className='px-2 py-4 mx-auto max-w-7xl xl:px-0'>
           <div className='mt-16 rounded-lg alert bg-base-100'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              className='flex-shrink-0 w-6 h-6 stroke-info'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+              ></path>
+            </svg>
             <div>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                className='flex-shrink-0 w-6 h-6 stroke-info'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                ></path>
-              </svg>
-              <div>
-                <h3 className='font-bold'>Auction not found!</h3>
-                <div className='text-xs'>
-                  Check the ID and try again or go to the home page.
-                </div>
+              <h3 className='font-bold'>Auction not found!</h3>
+              <div className='text-xs'>
+                Check the ID and try again or go to the home page.
               </div>
             </div>
+
             <div className='flex-none'>
               <Link href='/' className='btn btn-sm'>
                 Go Home
@@ -420,7 +419,6 @@ const AuctionPage: NextPage = ({
         {!playersData ||
           (playersData.length === 0 && (
             <div className='shadow-lg alert'>
-              <div>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='flex-shrink-0 w-6 h-6 stroke-current'
@@ -438,7 +436,6 @@ const AuctionPage: NextPage = ({
                   Player pool not available yet for this auction. File:{' '}
                   {auctionData?.data_filename}
                 </span>
-              </div>
             </div>
           ))}
       </div>
