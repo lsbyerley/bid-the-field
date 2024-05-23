@@ -24,7 +24,7 @@ const Countdown = ({
   const hours = secondsToHours(seconds);
   const minutes = secondsToMinutes(seconds);
 
-  const getHoursText = (hours) => {
+  const getHoursText = (hours: number) => {
     const hourText = hours > 1 ? 'hours' : 'hour';
 
     return (
@@ -34,7 +34,7 @@ const Countdown = ({
     );
   };
 
-  const getMinutesText = (minutes) => {
+  const getMinutesText = (minutes: number) => {
     const minutesText = minutes > 1 ? 'minutes' : 'minute';
     return (
       <span className='text-success'>
@@ -43,7 +43,7 @@ const Countdown = ({
     );
   };
 
-  const getSecondsText = (seconds) => {
+  const getSecondsText = (seconds: number) => {
     const secondsText = seconds > 1 ? 'seconds' : 'second';
     return (
       <span className='text-warning'>
