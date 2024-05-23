@@ -1,5 +1,5 @@
 import { Fragment, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, TransitionChild } from '@headlessui/react';
 import { useAppContext } from '@/AppContext';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -23,7 +23,7 @@ const Modal = () => {
         open={modalOpen}
       >
         <div className='modal modal-open'>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -32,10 +32,10 @@ const Modal = () => {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Dialog.Overlay className='fixed inset-0 bg-black/30' />
-          </Transition.Child>
+            <div className='fixed inset-0 bg-black/30'  aria-hidden='true' />
+          </TransitionChild>
 
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0 scale-95'
@@ -58,7 +58,7 @@ const Modal = () => {
                 />
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>

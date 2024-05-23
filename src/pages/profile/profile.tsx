@@ -40,7 +40,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   // Run queries with RLS on the server
   // TODO: setup RLS https://supabase.com/docs/guides/auth/managing-user-data
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', userId)
