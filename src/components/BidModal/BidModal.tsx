@@ -1,5 +1,5 @@
 import { useState, Fragment, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { submitBidFilter } from '@/lib/auctionUtils';
 import type { BidModalArgs, BidModalFormData } from '@/types';
 import toast from 'react-hot-toast';
@@ -43,7 +43,7 @@ const BidModal = ({
         open={isOpen}
       >
         <div className='modal modal-open'>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0'
@@ -52,10 +52,10 @@ const BidModal = ({
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Dialog.Overlay className='fixed inset-0 bg-black/30' />
-          </Transition.Child>
+            <div className='fixed inset-0 bg-black/30' aria-hidden='true' />
+          </TransitionChild>
 
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter='ease-out duration-300'
             enterFrom='opacity-0 scale-95'
@@ -71,12 +71,12 @@ const BidModal = ({
               >
                 ✕
               </button>
-              <Dialog.Title
+              <DialogTitle
                 as='h3'
                 className='mt-5 text-lg font-medium leading-6'
               >
                 Bid for {player?.first_name} {player?.last_name}
-              </Dialog.Title>
+              </DialogTitle>
               <div className='mt-2'>
                 <div>
                   <label
@@ -126,7 +126,7 @@ const BidModal = ({
                 </button>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>
