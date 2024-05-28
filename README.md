@@ -1,8 +1,3 @@
-## Getting Started
+# Bid the Field
 
-Run the development server:
-
-```bash
-npm install
-npm run dev
-```
+Side project used to bid on sports teams or players in an auction style format
