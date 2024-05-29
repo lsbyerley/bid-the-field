@@ -39,7 +39,7 @@ const Results = ({ bids = [], players = [] }: ResultsArgs) => {
                           className='flex justify-between py-3 text-sm font-medium'
                         >
                           <dt className=''>
-                            {player.seed && `(${player.seed}) `}
+                            {player?.seed && `(${player.seed}) `}
                             {player?.full_name ||
                               player?.short_name ||
                               `na:${bid.player_id}`}
