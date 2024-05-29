@@ -11,7 +11,7 @@ const Results = ({ bids = [], players = [] }: ResultsArgs) => {
         {Object.keys(auctionResults).map((owner) => {
           const ownerResults = auctionResults[owner];
           const totalBidAmount = ownerResults.winningBids.reduce(
-            (total, bid) => total + bid.amount,
+            (total: number, bid: Bid) => total + bid.amount,
             0
           );
           return (
